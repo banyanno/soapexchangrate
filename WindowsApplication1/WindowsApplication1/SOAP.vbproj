@@ -97,6 +97,14 @@
     <Compile Include="FormEncryption.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="helper\DS_Helper.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_Helper.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="helper\DS_Helper.vb">
+      <DependentUpon>DS_Helper.xsd</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -171,6 +179,17 @@
     <None Include="Service References\Calculator1\Service11.disco" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="helper\DS_Helper.xsc">
+      <DependentUpon>DS_Helper.xsd</DependentUpon>
+    </None>
+    <None Include="helper\DS_Helper.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_Helper.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="helper\DS_Helper.xss">
+      <DependentUpon>DS_Helper.xsd</DependentUpon>
+    </None>
     <None Include="Resources\1319703246_Gear.png" />
   </ItemGroup>
   <ItemGroup>

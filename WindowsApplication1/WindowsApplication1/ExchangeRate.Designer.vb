@@ -26,27 +26,18 @@ Partial Class ExchangeRate
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ExchangeRate))
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.id = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.country = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.We_By = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.We_Sell = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.rate = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.GridClientEnvelopeRequest = New System.Windows.Forms.DataGridView
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.TabControl1 = New System.Windows.Forms.TabControl
         Me.ClientInfo = New System.Windows.Forms.TabPage
+        Me.BtnSubRequest = New System.Windows.Forms.Button
+        Me.BtnAddRequest = New System.Windows.Forms.Button
         Me.ChCertificate = New System.Windows.Forms.CheckBox
         Me.SslKeyBrowse = New System.Windows.Forms.Button
         Me.SslKey = New System.Windows.Forms.TextBox
         Me.Label10 = New System.Windows.Forms.Label
-        Me.BtnXMLSoapFormat = New System.Windows.Forms.Button
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.SplitContainer2 = New System.Windows.Forms.SplitContainer
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.TxtEncryped = New System.Windows.Forms.TextBox
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox
-        Me.txtToken = New System.Windows.Forms.TextBox
+        Me.TxtPlandText = New System.Windows.Forms.TextBox
         Me.TxtForeignAmount = New System.Windows.Forms.TextBox
         Me.TxtSpreadType = New System.Windows.Forms.TextBox
         Me.TxtCurrencyCode = New System.Windows.Forms.TextBox
@@ -62,7 +53,6 @@ Partial Class ExchangeRate
         Me.Label5 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.txtXMLFormate = New System.Windows.Forms.TextBox
         Me.Button1 = New System.Windows.Forms.Button
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Button2 = New System.Windows.Forms.Button
@@ -79,18 +69,25 @@ Partial Class ExchangeRate
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox
+        Me.TxtLocalAmount = New System.Windows.Forms.TextBox
         Me.Label9 = New System.Windows.Forms.Label
-        Me.TxtSoapAction = New System.Windows.Forms.TextBox
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TxtDenomination = New System.Windows.Forms.TextBox
+        Me.Label11 = New System.Windows.Forms.Label
+        Me.BrandID = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.CurrencyCode = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ForiegnAmount = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.LocationAmount = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DenominationMix = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.XmlGetBuyQuote = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.xmlEnvelopgetSellQuate = New System.Windows.Forms.DataGridViewTextBoxColumn
+        CType(Me.GridClientEnvelopeRequest, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.ClientInfo.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
-        Me.SplitContainer2.Panel1.SuspendLayout()
-        Me.SplitContainer2.Panel2.SuspendLayout()
-        Me.SplitContainer2.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -98,15 +95,18 @@ Partial Class ExchangeRate
         Me.GroupBox4.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox5.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'GridClientEnvelopeRequest
         '
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.id, Me.country, Me.Unit, Me.We_By, Me.We_Sell, Me.rate})
-        Me.DataGridView1.Location = New System.Drawing.Point(480, 63)
-        Me.DataGridView1.Name = "DataGridView1"
+        Me.GridClientEnvelopeRequest.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GridClientEnvelopeRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GridClientEnvelopeRequest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.BrandID, Me.UserID, Me.CurrencyCode, Me.ForiegnAmount, Me.LocationAmount, Me.DenominationMix, Me.XmlGetBuyQuote, Me.xmlEnvelopgetSellQuate})
+        Me.GridClientEnvelopeRequest.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GridClientEnvelopeRequest.Location = New System.Drawing.Point(3, 16)
+        Me.GridClientEnvelopeRequest.Name = "GridClientEnvelopeRequest"
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -114,47 +114,9 @@ Partial Class ExchangeRate
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.DataGridView1.Size = New System.Drawing.Size(236, 102)
-        Me.DataGridView1.TabIndex = 1
-        Me.DataGridView1.Visible = False
-        '
-        'id
-        '
-        Me.id.DataPropertyName = "id"
-        Me.id.HeaderText = "id"
-        Me.id.Name = "id"
-        Me.id.Visible = False
-        '
-        'country
-        '
-        Me.country.DataPropertyName = "country"
-        Me.country.HeaderText = "Country"
-        Me.country.Name = "country"
-        '
-        'Unit
-        '
-        Me.Unit.DataPropertyName = "Unit"
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        '
-        'We_By
-        '
-        Me.We_By.DataPropertyName = "We_By"
-        Me.We_By.HeaderText = "We By"
-        Me.We_By.Name = "We_By"
-        '
-        'We_Sell
-        '
-        Me.We_Sell.DataPropertyName = "We_Sell"
-        Me.We_Sell.HeaderText = "We Sell"
-        Me.We_Sell.Name = "We_Sell"
-        '
-        'rate
-        '
-        Me.rate.DataPropertyName = "rate"
-        Me.rate.HeaderText = "Rate"
-        Me.rate.Name = "rate"
+        Me.GridClientEnvelopeRequest.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.GridClientEnvelopeRequest.Size = New System.Drawing.Size(1389, 119)
+        Me.GridClientEnvelopeRequest.TabIndex = 1
         '
         'GroupBox1
         '
@@ -162,7 +124,7 @@ Partial Class ExchangeRate
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1184, 345)
+        Me.GroupBox1.Size = New System.Drawing.Size(1395, 316)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Client Request Quote"
@@ -174,17 +136,15 @@ Partial Class ExchangeRate
         Me.TabControl1.Location = New System.Drawing.Point(3, 16)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1178, 326)
+        Me.TabControl1.Size = New System.Drawing.Size(1389, 297)
         Me.TabControl1.TabIndex = 8
         '
         'ClientInfo
         '
-        Me.ClientInfo.Controls.Add(Me.ChCertificate)
-        Me.ClientInfo.Controls.Add(Me.SslKeyBrowse)
-        Me.ClientInfo.Controls.Add(Me.SslKey)
-        Me.ClientInfo.Controls.Add(Me.Label10)
-        Me.ClientInfo.Controls.Add(Me.BtnXMLSoapFormat)
-        Me.ClientInfo.Controls.Add(Me.GroupBox2)
+        Me.ClientInfo.Controls.Add(Me.GroupBox6)
+        Me.ClientInfo.Controls.Add(Me.GroupBox5)
+        Me.ClientInfo.Controls.Add(Me.BtnSubRequest)
+        Me.ClientInfo.Controls.Add(Me.BtnAddRequest)
         Me.ClientInfo.Controls.Add(Me.TxtForeignAmount)
         Me.ClientInfo.Controls.Add(Me.TxtSpreadType)
         Me.ClientInfo.Controls.Add(Me.TxtCurrencyCode)
@@ -202,16 +162,38 @@ Partial Class ExchangeRate
         Me.ClientInfo.Location = New System.Drawing.Point(4, 22)
         Me.ClientInfo.Name = "ClientInfo"
         Me.ClientInfo.Padding = New System.Windows.Forms.Padding(3)
-        Me.ClientInfo.Size = New System.Drawing.Size(1170, 300)
+        Me.ClientInfo.Size = New System.Drawing.Size(1381, 271)
         Me.ClientInfo.TabIndex = 0
         Me.ClientInfo.Tag = "Client Info"
-        Me.ClientInfo.Text = "Client Info"
+        Me.ClientInfo.Text = "Client In formation With Buy Quat"
         Me.ClientInfo.UseVisualStyleBackColor = True
+        '
+        'BtnSubRequest
+        '
+        Me.BtnSubRequest.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnSubRequest.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnSubRequest.Location = New System.Drawing.Point(567, 237)
+        Me.BtnSubRequest.Name = "BtnSubRequest"
+        Me.BtnSubRequest.Size = New System.Drawing.Size(62, 31)
+        Me.BtnSubRequest.TabIndex = 59
+        Me.BtnSubRequest.Text = "-"
+        Me.BtnSubRequest.UseVisualStyleBackColor = True
+        '
+        'BtnAddRequest
+        '
+        Me.BtnAddRequest.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.BtnAddRequest.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnAddRequest.Location = New System.Drawing.Point(499, 238)
+        Me.BtnAddRequest.Name = "BtnAddRequest"
+        Me.BtnAddRequest.Size = New System.Drawing.Size(62, 30)
+        Me.BtnAddRequest.TabIndex = 58
+        Me.BtnAddRequest.Text = "+"
+        Me.BtnAddRequest.UseVisualStyleBackColor = True
         '
         'ChCertificate
         '
         Me.ChCertificate.AutoSize = True
-        Me.ChCertificate.Location = New System.Drawing.Point(652, 8)
+        Me.ChCertificate.Location = New System.Drawing.Point(15, 19)
         Me.ChCertificate.Name = "ChCertificate"
         Me.ChCertificate.Size = New System.Drawing.Size(239, 30)
         Me.ChCertificate.TabIndex = 57
@@ -221,7 +203,7 @@ Partial Class ExchangeRate
         '
         'SslKeyBrowse
         '
-        Me.SslKeyBrowse.Location = New System.Drawing.Point(1005, 48)
+        Me.SslKeyBrowse.Location = New System.Drawing.Point(368, 59)
         Me.SslKeyBrowse.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.SslKeyBrowse.Name = "SslKeyBrowse"
         Me.SslKeyBrowse.Size = New System.Drawing.Size(29, 24)
@@ -232,7 +214,7 @@ Partial Class ExchangeRate
         'SslKey
         '
         Me.SslKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SslKey.Location = New System.Drawing.Point(748, 46)
+        Me.SslKey.Location = New System.Drawing.Point(111, 57)
         Me.SslKey.Name = "SslKey"
         Me.SslKey.Size = New System.Drawing.Size(251, 26)
         Me.SslKey.TabIndex = 55
@@ -240,100 +222,39 @@ Partial Class ExchangeRate
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(649, 54)
+        Me.Label10.Location = New System.Drawing.Point(12, 65)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(96, 13)
         Me.Label10.TabIndex = 16
         Me.Label10.Text = "Client Cert for SSL:"
-        '
-        'BtnXMLSoapFormat
-        '
-        Me.BtnXMLSoapFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnXMLSoapFormat.ForeColor = System.Drawing.Color.Red
-        Me.BtnXMLSoapFormat.Location = New System.Drawing.Point(470, 99)
-        Me.BtnXMLSoapFormat.Name = "BtnXMLSoapFormat"
-        Me.BtnXMLSoapFormat.Size = New System.Drawing.Size(156, 26)
-        Me.BtnXMLSoapFormat.TabIndex = 8
-        Me.BtnXMLSoapFormat.Text = "Generat XML Soap Format"
-        Me.BtnXMLSoapFormat.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
         Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.SplitContainer2)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 125)
+        Me.GroupBox2.Controls.Add(Me.TxtPlandText)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 93)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(1153, 168)
+        Me.GroupBox2.Size = New System.Drawing.Size(447, 142)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Key Token"
         '
-        'SplitContainer2
+        'TxtPlandText
         '
-        Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer2.Location = New System.Drawing.Point(3, 16)
-        Me.SplitContainer2.Name = "SplitContainer2"
-        '
-        'SplitContainer2.Panel1
-        '
-        Me.SplitContainer2.Panel1.Controls.Add(Me.GroupBox5)
-        '
-        'SplitContainer2.Panel2
-        '
-        Me.SplitContainer2.Panel2.Controls.Add(Me.GroupBox6)
-        Me.SplitContainer2.Size = New System.Drawing.Size(1147, 149)
-        Me.SplitContainer2.SplitterDistance = 543
-        Me.SplitContainer2.TabIndex = 17
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.TxtEncryped)
-        Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox5.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(543, 149)
-        Me.GroupBox5.TabIndex = 1
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Plain / Encrypted Text"
-        '
-        'TxtEncryped
-        '
-        Me.TxtEncryped.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TxtEncryped.Location = New System.Drawing.Point(3, 16)
-        Me.TxtEncryped.Multiline = True
-        Me.TxtEncryped.Name = "TxtEncryped"
-        Me.TxtEncryped.Size = New System.Drawing.Size(537, 130)
-        Me.TxtEncryped.TabIndex = 0
-        Me.TxtEncryped.Text = resources.GetString("TxtEncryped.Text")
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.txtToken)
-        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox6.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(600, 149)
-        Me.GroupBox6.TabIndex = 17
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Result of Encrypted"
-        '
-        'txtToken
-        '
-        Me.txtToken.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtToken.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtToken.Location = New System.Drawing.Point(3, 16)
-        Me.txtToken.Multiline = True
-        Me.txtToken.Name = "txtToken"
-        Me.txtToken.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtToken.Size = New System.Drawing.Size(594, 130)
-        Me.txtToken.TabIndex = 16
+        Me.TxtPlandText.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TxtPlandText.Location = New System.Drawing.Point(3, 16)
+        Me.TxtPlandText.Multiline = True
+        Me.TxtPlandText.Name = "TxtPlandText"
+        Me.TxtPlandText.Size = New System.Drawing.Size(441, 123)
+        Me.TxtPlandText.TabIndex = 0
+        Me.TxtPlandText.Text = resources.GetString("TxtPlandText.Text")
         '
         'TxtForeignAmount
         '
         Me.TxtForeignAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtForeignAmount.Location = New System.Drawing.Point(396, 69)
+        Me.TxtForeignAmount.Location = New System.Drawing.Point(396, 95)
         Me.TxtForeignAmount.Name = "TxtForeignAmount"
         Me.TxtForeignAmount.Size = New System.Drawing.Size(230, 23)
         Me.TxtForeignAmount.TabIndex = 13
@@ -341,7 +262,7 @@ Partial Class ExchangeRate
         'TxtSpreadType
         '
         Me.TxtSpreadType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSpreadType.Location = New System.Drawing.Point(396, 37)
+        Me.TxtSpreadType.Location = New System.Drawing.Point(396, 63)
         Me.TxtSpreadType.Name = "TxtSpreadType"
         Me.TxtSpreadType.Size = New System.Drawing.Size(230, 23)
         Me.TxtSpreadType.TabIndex = 12
@@ -349,7 +270,7 @@ Partial Class ExchangeRate
         'TxtCurrencyCode
         '
         Me.TxtCurrencyCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtCurrencyCode.Location = New System.Drawing.Point(396, 6)
+        Me.TxtCurrencyCode.Location = New System.Drawing.Point(396, 32)
         Me.TxtCurrencyCode.Name = "TxtCurrencyCode"
         Me.TxtCurrencyCode.Size = New System.Drawing.Size(230, 23)
         Me.TxtCurrencyCode.TabIndex = 11
@@ -357,7 +278,7 @@ Partial Class ExchangeRate
         'TxtUserID
         '
         Me.TxtUserID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtUserID.Location = New System.Drawing.Point(108, 99)
+        Me.TxtUserID.Location = New System.Drawing.Point(108, 125)
         Me.TxtUserID.Name = "TxtUserID"
         Me.TxtUserID.Size = New System.Drawing.Size(189, 23)
         Me.TxtUserID.TabIndex = 10
@@ -365,7 +286,7 @@ Partial Class ExchangeRate
         'TxtTransactionType
         '
         Me.TxtTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtTransactionType.Location = New System.Drawing.Point(108, 67)
+        Me.TxtTransactionType.Location = New System.Drawing.Point(108, 93)
         Me.TxtTransactionType.Name = "TxtTransactionType"
         Me.TxtTransactionType.Size = New System.Drawing.Size(189, 23)
         Me.TxtTransactionType.TabIndex = 9
@@ -373,7 +294,7 @@ Partial Class ExchangeRate
         'TxtBranchID
         '
         Me.TxtBranchID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtBranchID.Location = New System.Drawing.Point(108, 36)
+        Me.TxtBranchID.Location = New System.Drawing.Point(108, 62)
         Me.TxtBranchID.Name = "TxtBranchID"
         Me.TxtBranchID.Size = New System.Drawing.Size(189, 23)
         Me.TxtBranchID.TabIndex = 8
@@ -381,7 +302,7 @@ Partial Class ExchangeRate
         'TxtClientID
         '
         Me.TxtClientID.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtClientID.Location = New System.Drawing.Point(108, 6)
+        Me.TxtClientID.Location = New System.Drawing.Point(108, 32)
         Me.TxtClientID.Name = "TxtClientID"
         Me.TxtClientID.Size = New System.Drawing.Size(189, 23)
         Me.TxtClientID.TabIndex = 7
@@ -389,7 +310,7 @@ Partial Class ExchangeRate
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 16)
+        Me.Label1.Location = New System.Drawing.Point(10, 42)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(50, 13)
         Me.Label1.TabIndex = 0
@@ -398,7 +319,7 @@ Partial Class ExchangeRate
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(305, 79)
+        Me.Label7.Location = New System.Drawing.Point(305, 105)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(84, 13)
         Me.Label7.TabIndex = 6
@@ -407,7 +328,7 @@ Partial Class ExchangeRate
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 46)
+        Me.Label2.Location = New System.Drawing.Point(10, 72)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(58, 13)
         Me.Label2.TabIndex = 1
@@ -416,7 +337,7 @@ Partial Class ExchangeRate
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(305, 47)
+        Me.Label6.Location = New System.Drawing.Point(305, 73)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(71, 13)
         Me.Label6.TabIndex = 5
@@ -425,7 +346,7 @@ Partial Class ExchangeRate
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 77)
+        Me.Label3.Location = New System.Drawing.Point(10, 103)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(93, 13)
         Me.Label3.TabIndex = 2
@@ -434,7 +355,7 @@ Partial Class ExchangeRate
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(305, 16)
+        Me.Label5.Location = New System.Drawing.Point(305, 42)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(80, 13)
         Me.Label5.TabIndex = 4
@@ -443,7 +364,7 @@ Partial Class ExchangeRate
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 109)
+        Me.Label4.Location = New System.Drawing.Point(10, 135)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(46, 13)
         Me.Label4.TabIndex = 3
@@ -451,28 +372,14 @@ Partial Class ExchangeRate
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.txtXMLFormate)
-        Me.GroupBox3.Controls.Add(Me.DataGridView1)
+        Me.GroupBox3.Controls.Add(Me.GridClientEnvelopeRequest)
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(555, 170)
+        Me.GroupBox3.Size = New System.Drawing.Size(1395, 138)
         Me.GroupBox3.TabIndex = 3
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "SOAP Request to send to container"
-        '
-        'txtXMLFormate
-        '
-        Me.txtXMLFormate.BackColor = System.Drawing.SystemColors.Window
-        Me.txtXMLFormate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtXMLFormate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtXMLFormate.ForeColor = System.Drawing.Color.Blue
-        Me.txtXMLFormate.Location = New System.Drawing.Point(3, 16)
-        Me.txtXMLFormate.Multiline = True
-        Me.txtXMLFormate.Name = "txtXMLFormate"
-        Me.txtXMLFormate.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtXMLFormate.Size = New System.Drawing.Size(549, 151)
-        Me.txtXMLFormate.TabIndex = 2
         '
         'Button1
         '
@@ -482,7 +389,7 @@ Partial Class ExchangeRate
         Me.Button1.ForeColor = System.Drawing.Color.Blue
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button1.ImageList = Me.ImageList1
-        Me.Button1.Location = New System.Drawing.Point(903, 560)
+        Me.Button1.Location = New System.Drawing.Point(1114, 560)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(182, 27)
         Me.Button1.TabIndex = 9
@@ -503,7 +410,7 @@ Partial Class ExchangeRate
         Me.Button2.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.Blue
-        Me.Button2.Location = New System.Drawing.Point(1091, 560)
+        Me.Button2.Location = New System.Drawing.Point(1302, 560)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(87, 27)
         Me.Button2.TabIndex = 10
@@ -515,7 +422,7 @@ Partial Class ExchangeRate
         Me.Label8.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.Color.Blue
-        Me.Label8.Location = New System.Drawing.Point(9, 533)
+        Me.Label8.Location = New System.Drawing.Point(9, 568)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(100, 13)
         Me.Label8.TabIndex = 6
@@ -527,9 +434,9 @@ Partial Class ExchangeRate
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtSOAPURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TxtSOAPURL.ForeColor = System.Drawing.Color.Blue
-        Me.TxtSOAPURL.Location = New System.Drawing.Point(115, 527)
+        Me.TxtSOAPURL.Location = New System.Drawing.Point(115, 560)
         Me.TxtSOAPURL.Name = "TxtSOAPURL"
-        Me.TxtSOAPURL.Size = New System.Drawing.Size(782, 26)
+        Me.TxtSOAPURL.Size = New System.Drawing.Size(993, 26)
         Me.TxtSOAPURL.TabIndex = 7
         '
         'SplitContainer1
@@ -537,8 +444,9 @@ Partial Class ExchangeRate
         Me.SplitContainer1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 351)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 322)
         Me.SplitContainer1.Name = "SplitContainer1"
+        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'SplitContainer1.Panel1
         '
@@ -547,8 +455,8 @@ Partial Class ExchangeRate
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.GroupBox4)
-        Me.SplitContainer1.Size = New System.Drawing.Size(1184, 170)
-        Me.SplitContainer1.SplitterDistance = 555
+        Me.SplitContainer1.Size = New System.Drawing.Size(1395, 230)
+        Me.SplitContainer1.SplitterDistance = 138
         Me.SplitContainer1.TabIndex = 8
         '
         'GroupBox4
@@ -558,7 +466,7 @@ Partial Class ExchangeRate
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox4.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(625, 170)
+        Me.GroupBox4.Size = New System.Drawing.Size(1395, 88)
         Me.GroupBox4.TabIndex = 4
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "SOAP Response"
@@ -574,7 +482,7 @@ Partial Class ExchangeRate
         Me.TxtSOAPRespond.Name = "TxtSOAPRespond"
         Me.TxtSOAPRespond.ReadOnly = True
         Me.TxtSOAPRespond.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TxtSOAPRespond.Size = New System.Drawing.Size(619, 151)
+        Me.TxtSOAPRespond.Size = New System.Drawing.Size(1389, 69)
         Me.TxtSOAPRespond.TabIndex = 2
         '
         'DataGridView2
@@ -637,35 +545,126 @@ Partial Class ExchangeRate
         '
         Me.ErrorProvider1.ContainerControl = Me
         '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.ChCertificate)
+        Me.GroupBox5.Controls.Add(Me.Label10)
+        Me.GroupBox5.Controls.Add(Me.SslKey)
+        Me.GroupBox5.Controls.Add(Me.GroupBox2)
+        Me.GroupBox5.Controls.Add(Me.SslKeyBrowse)
+        Me.GroupBox5.Location = New System.Drawing.Point(710, 6)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(459, 241)
+        Me.GroupBox5.TabIndex = 60
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Security Information"
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.TxtDenomination)
+        Me.GroupBox6.Controls.Add(Me.Label11)
+        Me.GroupBox6.Controls.Add(Me.TxtLocalAmount)
+        Me.GroupBox6.Controls.Add(Me.Label9)
+        Me.GroupBox6.Location = New System.Drawing.Point(6, 163)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(622, 68)
+        Me.GroupBox6.TabIndex = 61
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Sell Quat Information"
+        '
+        'TxtLocalAmount
+        '
+        Me.TxtLocalAmount.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtLocalAmount.Location = New System.Drawing.Point(104, 25)
+        Me.TxtLocalAmount.Name = "TxtLocalAmount"
+        Me.TxtLocalAmount.Size = New System.Drawing.Size(230, 23)
+        Me.TxtLocalAmount.TabIndex = 15
+        '
         'Label9
         '
-        Me.Label9.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label9.AutoSize = True
-        Me.Label9.ForeColor = System.Drawing.Color.Blue
-        Me.Label9.Location = New System.Drawing.Point(36, 569)
+        Me.Label9.Location = New System.Drawing.Point(14, 35)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(72, 13)
-        Me.Label9.TabIndex = 9
-        Me.Label9.Text = "SOAP Action:"
+        Me.Label9.Size = New System.Drawing.Size(75, 13)
+        Me.Label9.TabIndex = 14
+        Me.Label9.Text = "Local Amount:"
         '
-        'TxtSoapAction
+        'TxtDenomination
         '
-        Me.TxtSoapAction.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtSoapAction.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtSoapAction.ForeColor = System.Drawing.Color.Blue
-        Me.TxtSoapAction.Location = New System.Drawing.Point(114, 561)
-        Me.TxtSoapAction.Name = "TxtSoapAction"
-        Me.TxtSoapAction.Size = New System.Drawing.Size(783, 26)
-        Me.TxtSoapAction.TabIndex = 8
+        Me.TxtDenomination.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtDenomination.Location = New System.Drawing.Point(450, 25)
+        Me.TxtDenomination.Name = "TxtDenomination"
+        Me.TxtDenomination.Size = New System.Drawing.Size(158, 23)
+        Me.TxtDenomination.TabIndex = 17
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(350, 35)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(94, 13)
+        Me.Label11.TabIndex = 16
+        Me.Label11.Text = "Denomination Mix:"
+        '
+        'BrandID
+        '
+        Me.BrandID.DataPropertyName = "BrandID"
+        Me.BrandID.HeaderText = "Brand ID"
+        Me.BrandID.Name = "BrandID"
+        '
+        'UserID
+        '
+        Me.UserID.DataPropertyName = "UserID"
+        Me.UserID.HeaderText = "User ID"
+        Me.UserID.Name = "UserID"
+        '
+        'CurrencyCode
+        '
+        Me.CurrencyCode.DataPropertyName = "CurrencyCode"
+        Me.CurrencyCode.HeaderText = "Currency Code"
+        Me.CurrencyCode.Name = "CurrencyCode"
+        Me.CurrencyCode.Width = 130
+        '
+        'ForiegnAmount
+        '
+        Me.ForiegnAmount.DataPropertyName = "ForeigAmount"
+        Me.ForiegnAmount.HeaderText = "Foriegn Amount"
+        Me.ForiegnAmount.Name = "ForiegnAmount"
+        Me.ForiegnAmount.Width = 130
+        '
+        'LocationAmount
+        '
+        Me.LocationAmount.DataPropertyName = "LocalAmount"
+        Me.LocationAmount.HeaderText = "Location Amount"
+        Me.LocationAmount.Name = "LocationAmount"
+        Me.LocationAmount.Width = 150
+        '
+        'DenominationMix
+        '
+        Me.DenominationMix.DataPropertyName = "Denomination"
+        Me.DenominationMix.HeaderText = "Denomination Mix"
+        Me.DenominationMix.Name = "DenominationMix"
+        Me.DenominationMix.Width = 150
+        '
+        'XmlGetBuyQuote
+        '
+        Me.XmlGetBuyQuote.DataPropertyName = "XMLGetBuyQuate"
+        Me.XmlGetBuyQuote.HeaderText = " Get Buy Quote"
+        Me.XmlGetBuyQuote.Name = "XmlGetBuyQuote"
+        Me.XmlGetBuyQuote.Width = 150
+        '
+        'xmlEnvelopgetSellQuate
+        '
+        Me.xmlEnvelopgetSellQuate.DataPropertyName = "XMLGetSellQuate"
+        Me.xmlEnvelopgetSellQuate.HeaderText = " Get Sell Quate"
+        Me.xmlEnvelopgetSellQuate.Name = "xmlEnvelopgetSellQuate"
+        Me.xmlEnvelopgetSellQuate.Width = 150
         '
         'ExchangeRate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1184, 590)
-        Me.Controls.Add(Me.TxtSoapAction)
-        Me.Controls.Add(Me.Label9)
+        Me.ClientSize = New System.Drawing.Size(1395, 590)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.TxtSOAPURL)
         Me.Controls.Add(Me.Label8)
@@ -675,21 +674,14 @@ Partial Class ExchangeRate
         Me.Name = "ExchangeRate"
         Me.Text = "Exchange Rate"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GridClientEnvelopeRequest, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.ClientInfo.ResumeLayout(False)
         Me.ClientInfo.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
-        Me.SplitContainer2.Panel1.ResumeLayout(False)
-        Me.SplitContainer2.Panel2.ResumeLayout(False)
-        Me.SplitContainer2.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
+        Me.GroupBox2.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.ResumeLayout(False)
@@ -697,18 +689,16 @@ Partial Class ExchangeRate
         Me.GroupBox4.PerformLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+    Friend WithEvents GridClientEnvelopeRequest As System.Windows.Forms.DataGridView
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents id As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents country As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Unit As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents We_By As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents We_Sell As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents rate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
@@ -726,14 +716,11 @@ Partial Class ExchangeRate
     Friend WithEvents TxtBranchID As System.Windows.Forms.TextBox
     Friend WithEvents TxtClientID As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents txtToken As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents txtXMLFormate As System.Windows.Forms.TextBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents TxtSOAPURL As System.Windows.Forms.TextBox
-    Friend WithEvents BtnXMLSoapFormat As System.Windows.Forms.Button
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
@@ -749,11 +736,22 @@ Partial Class ExchangeRate
     Public WithEvents SslKeyBrowse As System.Windows.Forms.Button
     Public WithEvents SslKey As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents TxtSoapAction As System.Windows.Forms.TextBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents ChCertificate As System.Windows.Forms.CheckBox
-    Friend WithEvents SplitContainer2 As System.Windows.Forms.SplitContainer
-    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
-    Friend WithEvents TxtEncryped As System.Windows.Forms.TextBox
+    Friend WithEvents TxtPlandText As System.Windows.Forms.TextBox
+    Friend WithEvents BtnSubRequest As System.Windows.Forms.Button
+    Friend WithEvents BtnAddRequest As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents TxtDenomination As System.Windows.Forms.TextBox
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents TxtLocalAmount As System.Windows.Forms.TextBox
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents BrandID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents UserID As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents CurrencyCode As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ForiegnAmount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LocationAmount As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents DenominationMix As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents XmlGetBuyQuote As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents xmlEnvelopgetSellQuate As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

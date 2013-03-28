@@ -1,0 +1,38 @@
+C:\Project7\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe.config
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.xml
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\Project7\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\Project7\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\Project7\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.ExchangeRate.resources
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Form1.resources
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
+C:\Project7\WindowsApplication1\WindowsApplication1\obj\Debug\SOAP.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe.config
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.exe
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.xml
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.pdb
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.exe
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.pdb
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\bin\Debug\WindowsApplication1.xml
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.ExchangeRate.resources
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Form1.resources
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.Resources.resources
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\SOAP.vbproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\WindowsApplication1\WindowsApplication1\obj\Debug\WindowsApplication1.FormEncryption.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\BofA Global Foreign Currency Message Exchange.exe.config
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\BofA Global Foreign Currency Message Exchange.exe
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\BofA Global Foreign Currency Message Exchange.pdb
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\BofA Global Foreign Currency Message Exchange.xml
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\ResolveAssemblyReference.cache
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.ExchangeRate.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.Form1.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.FormEncryption.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.Resources.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\SOAP.vbproj.GenerateResource.Cache
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.exe
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.xml
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.pdb

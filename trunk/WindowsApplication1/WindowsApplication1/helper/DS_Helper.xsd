@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DS_Helper" targetNamespace="http://tempuri.org/DS_Helper.xsd" xmlns:mstns="http://tempuri.org/DS_Helper.xsd" xmlns="http://tempuri.org/DS_Helper.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DS_Helper" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DS_Helper" msprop:Generator_UserDSName="DS_Helper" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ClientRequestSOAP" msprop:Generator_UserTableName="ClientRequestSOAP" msprop:Generator_RowDeletedName="ClientRequestSOAPRowDeleted" msprop:Generator_TableClassName="ClientRequestSOAPDataTable" msprop:Generator_RowChangedName="ClientRequestSOAPRowChanged" msprop:Generator_RowClassName="ClientRequestSOAPRow" msprop:Generator_RowChangingName="ClientRequestSOAPRowChanging" msprop:Generator_RowEvArgName="ClientRequestSOAPRowChangeEvent" msprop:Generator_RowEvHandlerName="ClientRequestSOAPRowChangeEventHandler" msprop:Generator_TablePropName="ClientRequestSOAP" msprop:Generator_TableVarName="tableClientRequestSOAP" msprop:Generator_RowDeletingName="ClientRequestSOAPRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="BrandID" msprop:Generator_UserColumnName="BrandID" msprop:Generator_ColumnPropNameInRow="BrandID" msprop:Generator_ColumnVarNameInTable="columnBrandID" msprop:Generator_ColumnPropNameInTable="BrandIDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="UserID" msprop:Generator_UserColumnName="UserID" msprop:Generator_ColumnPropNameInRow="UserID" msprop:Generator_ColumnVarNameInTable="columnUserID" msprop:Generator_ColumnPropNameInTable="UserIDColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CurrencyCode" msprop:Generator_UserColumnName="CurrencyCode" msprop:Generator_ColumnPropNameInRow="CurrencyCode" msprop:Generator_ColumnVarNameInTable="columnCurrencyCode" msprop:Generator_ColumnPropNameInTable="CurrencyCodeColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ForeigAmount" msprop:Generator_UserColumnName="ForeigAmount" msprop:Generator_ColumnPropNameInRow="ForeigAmount" msprop:Generator_ColumnVarNameInTable="columnForeigAmount" msprop:Generator_ColumnPropNameInTable="ForeigAmountColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="LocalAmount" msprop:Generator_UserColumnName="LocalAmount" msprop:Generator_ColumnPropNameInRow="LocalAmount" msprop:Generator_ColumnVarNameInTable="columnLocalAmount" msprop:Generator_ColumnPropNameInTable="LocalAmountColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Denomination" msprop:Generator_UserColumnName="Denomination" msprop:Generator_ColumnPropNameInRow="Denomination" msprop:Generator_ColumnVarNameInTable="columnDenomination" msprop:Generator_ColumnPropNameInTable="DenominationColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="XMLGetBuyQuate" msprop:Generator_UserColumnName="XMLGetBuyQuate" msprop:Generator_ColumnPropNameInRow="XMLGetBuyQuate" msprop:Generator_ColumnVarNameInTable="columnXMLGetBuyQuate" msprop:Generator_ColumnPropNameInTable="XMLGetBuyQuateColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="XMLGetSellQuate" msprop:Generator_UserColumnName="XMLGetSellQuate" msprop:Generator_ColumnPropNameInRow="XMLGetSellQuate" msprop:Generator_ColumnVarNameInTable="columnXMLGetSellQuate" msprop:Generator_ColumnPropNameInTable="XMLGetSellQuateColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

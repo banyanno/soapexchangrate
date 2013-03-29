@@ -107,8 +107,14 @@ Public Class ExchangeRate
         Return "<?xml version=""1.0"" encoding=""UTF-8""?>" & xml.ToString
     End Function
     Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-
-        'PostTotal(TxtSOAPURL.Text, txtXMLFormate.Text, TxtSoapAction.Text)
+        Dim I As Int16 = 0
+        For Each dRow As DataRow In TblXMLSOAPClient.Rows
+            I = I + 1
+            MessageBox.Show(dRow("XMLGetBuyQuate"))
+            PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate"), "C:\getBuyQuoteRespond" & I & ".XML")
+            PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), "C:\getSellQuoteRespond" & I & ".XML")
+        Next
+        ' txtXMLFormate.Text)
     End Sub
     Function CertificateValidationCallBack( _
         ByVal sender As Object, _
@@ -118,7 +124,7 @@ Public Class ExchangeRate
 ) As Boolean
         Return True
     End Function
-    Private Sub PostTotal(ByVal m_URL As String, ByVal m_PostMessage As String, ByVal SoapAction As String)
+    Private Sub PostTotal(ByVal m_URL As String, ByVal m_PostMessage As String, ByVal FileName As String)
 
         Try
             ServicePointManager.Expect100Continue = True
@@ -133,12 +139,12 @@ Public Class ExchangeRate
                 Dim certs As X509Certificate2 = New X509Certificate2(SslKey.Text, "singpost2013")
                 Req.ClientCertificates.Add(certs)
             End If
-           
+
             ' Req.Headers.Add("SOAPAction", "http://tempuri.org/HelloWorld")
-            Req.Headers.Add("SOAPAction", SoapAction)
+            'Req.Headers.Add("SOAPAction", SoapAction)
 
 
-         
+
             Dim objStream As New System.IO.StreamWriter(Req.GetRequestStream(), System.Text.Encoding.UTF8)
             objStream.Write(m_PostMessage, 0, m_PostMessage.Length)
             objStream.Close()
@@ -151,8 +157,8 @@ Public Class ExchangeRate
             Dim ret As String
             Dim sr As System.IO.StreamReader = New IO.StreamReader(SourceStream)
             ret = sr.ReadToEnd
-            objXML.Save("C:\getBuyQuoteRespond.xml")
-            Dim xml As XElement = XElement.Load("C:\getBuyQuoteRespond.xml")
+            objXML.Save(FileName)
+            Dim xml As XElement = XElement.Load(FileName)
             TxtSOAPRespond.Text = xml.ToString
         Catch ex As Exception
             MsgBox(ex.Message)

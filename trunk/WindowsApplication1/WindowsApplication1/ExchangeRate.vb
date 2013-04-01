@@ -87,8 +87,8 @@ Public Class ExchangeRate
         docXML.DocumentElement.AppendChild(soapHeaser)
         Dim soapBody As XmlElement = docXML.CreateElement("soap", "Body", docXML.DocumentElement.NamespaceURI)
         docXML.DocumentElement.AppendChild(soapBody)
-        Dim soapQuote As XmlElement = docXML.CreateElement("soap", "getBuyQuote", String.Empty)
-        Dim strQuote As String = "<msgName>getBuyQuote</msgName>" + _
+        Dim soapQuote As XmlElement = docXML.CreateElement("soap", "getSellQuote", String.Empty)
+        Dim strQuote As String = "<msgName>getSellQuote</msgName>" + _
                         "<ClientID>" & TxtClientID.Text & "</ClientID>" + _
                         "<branchID>" & TxtBranchID.Text & "</branchID>" + _
                         "<tranType>" & TxtTransactionType.Text & "</tranType>" + _

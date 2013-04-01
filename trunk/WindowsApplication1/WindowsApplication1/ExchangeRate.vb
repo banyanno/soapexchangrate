@@ -98,7 +98,7 @@ Public Class ExchangeRate
                         "<foreignAmount>" & TxtForeignAmount.Text & "</foreignAmount>" + _
                         "<localAmount>" & TxtLocalAmount.Text & "</localAmount>" + _
                         "<denominationMix>" & TxtDenomination.Text & "</denominationMix>" + _
-                        "<requestSecToken>" & Encrypt(TxtPlandTextGetBuyQuot.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"
+                        "<requestSecToken>" & Encrypt(TxtPlanTextOfGetSell.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"
         soapQuote.InnerXml = strQuote
         soapQuote.SetAttribute("xmlns", "http://api.ws.ba.com")
         soapBody.AppendChild(soapQuote)
@@ -110,9 +110,9 @@ Public Class ExchangeRate
         Dim I As Int16 = 0
         For Each dRow As DataRow In TblXMLSOAPClient.Rows
             I = I + 1
-            MessageBox.Show(dRow("XMLGetBuyQuate"))
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate"), "C:\getBuyQuoteRespond" & I & ".XML")
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), "C:\getSellQuoteRespond" & I & ".XML")
+            MessageBox.Show(dRow("XMLGetBuyQuate") & vbCrLf & vbCrLf & dRow("XMLGetSellQuate"))
         Next
         ' txtXMLFormate.Text)
     End Sub

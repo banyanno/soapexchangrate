@@ -206,4 +206,9 @@ Public Class ExchangeRate
         Dim plainBytes = Encoding.UTF8.GetBytes(plainText)
         Return Convert.ToBase64String(Encrpt(plainBytes, GetRijndaelManaged(key)))
     End Function
+
+    Private Sub BtnSubRequest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSubRequest.Click
+        TblXMLSOAPClient.Rows(0).Delete()
+        TblXMLSOAPClient.AcceptChanges()
+    End Sub
 End Class

@@ -110,9 +110,9 @@ Public Class ExchangeRate
         Dim I As Int16 = 0
         For Each dRow As DataRow In TblXMLSOAPClient.Rows
             I = I + 1
-            PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate"), "C:\getBuyQuoteRespond" & I & ".XML")
-            PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), "C:\getSellQuoteRespond" & I & ".XML")
-            MessageBox.Show(dRow("XMLGetBuyQuate") & vbCrLf & vbCrLf & dRow("XMLGetSellQuate"))
+            PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, "C:\getBuyQuoteRespond" & I & ".XML")
+            'PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), "C:\getSellQuoteRespond" & I & ".XML")
+            'MessageBox.Show(dRow("XMLGetBuyQuate") & vbCrLf & vbCrLf & dRow("XMLGetSellQuate"))
         Next
         ' txtXMLFormate.Text)
     End Sub

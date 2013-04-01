@@ -95,7 +95,7 @@ Public Class ExchangeRate
                         "<userID>" & TxtUserID.Text & "</userID>" + _
                         "<currCode>" & TxtCurrencyCode.Text & "</currCode>" + _
                         "<spreadType>" & TxtSpreadType.Text & "</spreadType>" + _
-                        "<foreignAmount>" & TxtForeignAmount.Text & "</foreignAmount>" + _
+                        "<foreignAmount>" & TxtForeignAmountSell.Text & "</foreignAmount>" + _
                         "<localAmount>" & TxtLocalAmount.Text & "</localAmount>" + _
                         "<denominationMix>" & TxtDenomination.Text & "</denominationMix>" + _
                         "<requestSecToken>" & Encrypt(TxtPlanTextOfGetSell.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"

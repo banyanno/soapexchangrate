@@ -23,7 +23,7 @@ Partial Class ExchangeRate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ExchangeRate))
         Me.GridClientEnvelopeRequest = New System.Windows.Forms.DataGridView
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
@@ -98,14 +98,14 @@ Partial Class ExchangeRate
         Me.GridClientEnvelopeRequest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GridClientEnvelopeRequest.Location = New System.Drawing.Point(3, 16)
         Me.GridClientEnvelopeRequest.Name = "GridClientEnvelopeRequest"
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.GridClientEnvelopeRequest.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.GridClientEnvelopeRequest.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.GridClientEnvelopeRequest.Size = New System.Drawing.Size(1389, 119)
         Me.GridClientEnvelopeRequest.TabIndex = 1
         '
@@ -163,7 +163,7 @@ Partial Class ExchangeRate
         '
         Me.BtnSubRequest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BtnSubRequest.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSubRequest.Location = New System.Drawing.Point(567, 237)
+        Me.BtnSubRequest.Location = New System.Drawing.Point(567, 234)
         Me.BtnSubRequest.Name = "BtnSubRequest"
         Me.BtnSubRequest.Size = New System.Drawing.Size(62, 31)
         Me.BtnSubRequest.TabIndex = 59
@@ -174,7 +174,7 @@ Partial Class ExchangeRate
         '
         Me.BtnAddRequest.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BtnAddRequest.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAddRequest.Location = New System.Drawing.Point(499, 238)
+        Me.BtnAddRequest.Location = New System.Drawing.Point(499, 235)
         Me.BtnAddRequest.Name = "BtnAddRequest"
         Me.BtnAddRequest.Size = New System.Drawing.Size(62, 30)
         Me.BtnAddRequest.TabIndex = 58
@@ -429,6 +429,7 @@ Partial Class ExchangeRate
         Me.TxtSOAPURL.Name = "TxtSOAPURL"
         Me.TxtSOAPURL.Size = New System.Drawing.Size(993, 26)
         Me.TxtSOAPURL.TabIndex = 7
+        Me.TxtSOAPURL.Text = "https://api.globalforeigncurrency.com:443/demo-api/services/QuoteGenerator"
         '
         'SplitContainer1
         '

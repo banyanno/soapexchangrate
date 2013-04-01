@@ -141,7 +141,7 @@ Public Class ExchangeRate
             End If
 
             ' Req.Headers.Add("SOAPAction", "http://tempuri.org/HelloWorld")
-            'Req.Headers.Add("SOAPAction", SoapAction)
+            Req.Headers.Add("SOAPAction", "")
 
 
 

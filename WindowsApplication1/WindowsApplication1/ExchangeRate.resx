@@ -141,16 +141,6 @@
   <metadata name="xmlEnvelopgetSellQuate.UserAddedColumn" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <data name="TxtPlandText.Text" xml:space="preserve">
-    <value>&lt;token&gt;
- &lt;timestamp&gt;2005-09-06T16:55:34.127GMT&lt;/timestamp&gt;
-&lt;msgName&gt;getBuyInit&lt;/msgName&gt;
-&lt;clientID&gt;123456&lt;/clientID&gt;
-&lt;branchID&gt;main&lt;/branchID&gt;
-&lt;userID&gt;user4567&lt;/userID&gt;
-&lt;randomStr&gt;AyeH7i61Kd&lt;/randomStr&gt;
-&lt;/token&gt;</value>
-  </data>
   <metadata name="ImageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

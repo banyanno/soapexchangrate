@@ -64,7 +64,7 @@ Public Class ExchangeRate
                         "<currCode>" & TxtCurrencyCode.Text & "</currCode>" + _
                         "<spreadType>" & TxtSpreadType.Text & "</spreadType>" + _
                         "<foreignAmount>" & TxtForeignAmount.Text & "</foreignAmount>" + _
-                        "<requestSecToken>" & Encrypt(TxtPlandText.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"
+                        "<requestSecToken>" & Encrypt(TxtPlandTextGetBuyQuot.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"
         soapQuote.InnerXml = strQuote
         soapQuote.SetAttribute("xmlns", "http://api.ws.ba.com")
         soapBody.AppendChild(soapQuote)
@@ -98,7 +98,7 @@ Public Class ExchangeRate
                         "<foreignAmount>" & TxtForeignAmount.Text & "</foreignAmount>" + _
                         "<localAmount>" & TxtLocalAmount.Text & "</localAmount>" + _
                         "<denominationMix>" & TxtDenomination.Text & "</denominationMix>" + _
-                        "<requestSecToken>" & Encrypt(TxtPlandText.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"
+                        "<requestSecToken>" & Encrypt(TxtPlandTextGetBuyQuot.Text.Trim, "Bmw$dD5fx&g46GQ1") & "</requestSecToken>"
         soapQuote.InnerXml = strQuote
         soapQuote.SetAttribute("xmlns", "http://api.ws.ba.com")
         soapBody.AppendChild(soapQuote)
@@ -180,7 +180,8 @@ Public Class ExchangeRate
     End Sub
 
     Private Sub ExchangeRate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        TxtPlandTextGetBuyQuot.Text = GenerateKeyToken("getBuyQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
+        TxtPlanTextOfGetSell.Text = GenerateKeyToken("getSellQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
     End Sub
 
     Function GetRijndaelManaged(ByVal secretKey As String) As RijndaelManaged
@@ -210,5 +211,32 @@ Public Class ExchangeRate
     Private Sub BtnSubRequest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnSubRequest.Click
         TblXMLSOAPClient.Rows(0).Delete()
         TblXMLSOAPClient.AcceptChanges()
+    End Sub
+    Public Function GenerateKeyToken(ByVal QuotFunction As String, ByVal ClientID As String, ByVal BranchID As String, ByVal UserID As String) As String
+        Dim XMLString As String
+        XMLString = "<token> " & vbCrLf & _
+                        "<timestamp>" & Now.ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss.fff'GMT'") & "</timestamp>" & vbCrLf & _
+                        "<msgName>" & QuotFunction & "</msgName>" & vbCrLf & _
+                        "<clientID>" & ClientID & "</clientID>" & vbCrLf & _
+                        "<branchID>" & BranchID & "</branchID>" & vbCrLf & _
+                        "<userID>" & UserID & "</userID>" & vbCrLf & _
+                        "<randomStr>AyeH7i61Kd</randomStr>" & vbCrLf & _
+                    "</token>"
+        Return XMLString
+    End Function
+
+    Private Sub TxtClientID_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TxtClientID.TextChanged
+        TxtPlandTextGetBuyQuot.Text = GenerateKeyToken("getBuyQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
+        TxtPlanTextOfGetSell.Text = GenerateKeyToken("getSellQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
+    End Sub
+
+    Private Sub TxtBranchID_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TxtBranchID.TextChanged
+        TxtPlandTextGetBuyQuot.Text = GenerateKeyToken("getBuyQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
+        TxtPlanTextOfGetSell.Text = GenerateKeyToken("getSellQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
+    End Sub
+
+    Private Sub TxtUserID_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TxtUserID.TextChanged
+        TxtPlandTextGetBuyQuot.Text = GenerateKeyToken("getBuyQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
+        TxtPlanTextOfGetSell.Text = GenerateKeyToken("getSellQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
     End Sub
 End Class

@@ -23,6 +23,8 @@ Partial Class ExchangeRate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ExchangeRate))
         Me.GridClientEnvelopeRequest = New System.Windows.Forms.DataGridView
@@ -36,7 +38,7 @@ Partial Class ExchangeRate
         Me.SslKey = New System.Windows.Forms.TextBox
         Me.Label10 = New System.Windows.Forms.Label
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.TxtPlandText = New System.Windows.Forms.TextBox
+        Me.TxtPlandTextGetBuyQuot = New System.Windows.Forms.TextBox
         Me.TxtForeignAmount = New System.Windows.Forms.TextBox
         Me.TxtSpreadType = New System.Windows.Forms.TextBox
         Me.TxtCurrencyCode = New System.Windows.Forms.TextBox
@@ -75,6 +77,8 @@ Partial Class ExchangeRate
         Me.DenominationMix = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.XmlGetBuyQuote = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.xmlEnvelopgetSellQuate = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox
+        Me.TxtPlanTextOfGetSell = New System.Windows.Forms.TextBox
         CType(Me.GridClientEnvelopeRequest, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -88,13 +92,30 @@ Partial Class ExchangeRate
         CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox5.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.SuspendLayout()
         '
         'GridClientEnvelopeRequest
         '
         Me.GridClientEnvelopeRequest.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.GridClientEnvelopeRequest.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.GridClientEnvelopeRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridClientEnvelopeRequest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.BrandID, Me.UserID, Me.CurrencyCode, Me.ForiegnAmount, Me.LocationAmount, Me.DenominationMix, Me.XmlGetBuyQuote, Me.xmlEnvelopgetSellQuate})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.GridClientEnvelopeRequest.DefaultCellStyle = DataGridViewCellStyle2
         Me.GridClientEnvelopeRequest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GridClientEnvelopeRequest.Location = New System.Drawing.Point(3, 16)
         Me.GridClientEnvelopeRequest.Name = "GridClientEnvelopeRequest"
@@ -194,7 +215,7 @@ Partial Class ExchangeRate
         '
         'SslKeyBrowse
         '
-        Me.SslKeyBrowse.Location = New System.Drawing.Point(368, 59)
+        Me.SslKeyBrowse.Location = New System.Drawing.Point(311, 59)
         Me.SslKeyBrowse.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.SslKeyBrowse.Name = "SslKeyBrowse"
         Me.SslKeyBrowse.Size = New System.Drawing.Size(29, 24)
@@ -207,7 +228,7 @@ Partial Class ExchangeRate
         Me.SslKey.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SslKey.Location = New System.Drawing.Point(111, 57)
         Me.SslKey.Name = "SslKey"
-        Me.SslKey.Size = New System.Drawing.Size(251, 26)
+        Me.SslKey.Size = New System.Drawing.Size(195, 26)
         Me.SslKey.TabIndex = 55
         '
         'Label10
@@ -224,23 +245,23 @@ Partial Class ExchangeRate
         Me.GroupBox2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox2.Controls.Add(Me.TxtPlandText)
+        Me.GroupBox2.Controls.Add(Me.TxtPlandTextGetBuyQuot)
         Me.GroupBox2.Location = New System.Drawing.Point(6, 93)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(447, 142)
+        Me.GroupBox2.Size = New System.Drawing.Size(363, 142)
         Me.GroupBox2.TabIndex = 14
         Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Key Token"
+        Me.GroupBox2.Text = "Key Token GetBuyQuote"
         '
-        'TxtPlandText
+        'TxtPlandTextGetBuyQuot
         '
-        Me.TxtPlandText.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TxtPlandText.Location = New System.Drawing.Point(3, 16)
-        Me.TxtPlandText.Multiline = True
-        Me.TxtPlandText.Name = "TxtPlandText"
-        Me.TxtPlandText.Size = New System.Drawing.Size(441, 123)
-        Me.TxtPlandText.TabIndex = 0
-        Me.TxtPlandText.Text = resources.GetString("TxtPlandText.Text")
+        Me.TxtPlandTextGetBuyQuot.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TxtPlandTextGetBuyQuot.Location = New System.Drawing.Point(3, 16)
+        Me.TxtPlandTextGetBuyQuot.Multiline = True
+        Me.TxtPlandTextGetBuyQuot.Name = "TxtPlandTextGetBuyQuot"
+        Me.TxtPlandTextGetBuyQuot.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TxtPlandTextGetBuyQuot.Size = New System.Drawing.Size(357, 123)
+        Me.TxtPlandTextGetBuyQuot.TabIndex = 0
         '
         'TxtForeignAmount
         '
@@ -482,14 +503,15 @@ Partial Class ExchangeRate
         '
         'GroupBox5
         '
+        Me.GroupBox5.Controls.Add(Me.GroupBox7)
         Me.GroupBox5.Controls.Add(Me.ChCertificate)
         Me.GroupBox5.Controls.Add(Me.Label10)
         Me.GroupBox5.Controls.Add(Me.SslKey)
         Me.GroupBox5.Controls.Add(Me.GroupBox2)
         Me.GroupBox5.Controls.Add(Me.SslKeyBrowse)
-        Me.GroupBox5.Location = New System.Drawing.Point(710, 6)
+        Me.GroupBox5.Location = New System.Drawing.Point(642, 6)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(459, 241)
+        Me.GroupBox5.Size = New System.Drawing.Size(733, 241)
         Me.GroupBox5.TabIndex = 60
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Security Information"
@@ -595,6 +617,29 @@ Partial Class ExchangeRate
         Me.xmlEnvelopgetSellQuate.Name = "xmlEnvelopgetSellQuate"
         Me.xmlEnvelopgetSellQuate.Width = 150
         '
+        'GroupBox7
+        '
+        Me.GroupBox7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GroupBox7.Controls.Add(Me.TxtPlanTextOfGetSell)
+        Me.GroupBox7.Location = New System.Drawing.Point(381, 93)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(346, 142)
+        Me.GroupBox7.TabIndex = 58
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Key Token GetSellQuote"
+        '
+        'TxtPlanTextOfGetSell
+        '
+        Me.TxtPlanTextOfGetSell.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TxtPlanTextOfGetSell.Location = New System.Drawing.Point(3, 16)
+        Me.TxtPlanTextOfGetSell.Multiline = True
+        Me.TxtPlanTextOfGetSell.Name = "TxtPlanTextOfGetSell"
+        Me.TxtPlanTextOfGetSell.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.TxtPlanTextOfGetSell.Size = New System.Drawing.Size(340, 123)
+        Me.TxtPlanTextOfGetSell.TabIndex = 0
+        '
         'ExchangeRate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -627,6 +672,8 @@ Partial Class ExchangeRate
         Me.GroupBox5.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -664,7 +711,7 @@ Partial Class ExchangeRate
     Public WithEvents SslKey As System.Windows.Forms.TextBox
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents ChCertificate As System.Windows.Forms.CheckBox
-    Friend WithEvents TxtPlandText As System.Windows.Forms.TextBox
+    Friend WithEvents TxtPlandTextGetBuyQuot As System.Windows.Forms.TextBox
     Friend WithEvents BtnSubRequest As System.Windows.Forms.Button
     Friend WithEvents BtnAddRequest As System.Windows.Forms.Button
     Friend WithEvents GroupBox6 As System.Windows.Forms.GroupBox
@@ -681,4 +728,6 @@ Partial Class ExchangeRate
     Friend WithEvents DenominationMix As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents XmlGetBuyQuote As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents xmlEnvelopgetSellQuate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
+    Friend WithEvents TxtPlanTextOfGetSell As System.Windows.Forms.TextBox
 End Class

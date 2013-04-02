@@ -112,7 +112,7 @@ Public Class ExchangeRate
             I = I + 1
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
-            MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell" & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
+            MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell " & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
         Next
 
     End Sub
@@ -130,6 +130,7 @@ Public Class ExchangeRate
             ServicePointManager.Expect100Continue = True
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
             ServicePointManager.ServerCertificateValidationCallback = New RemoteCertificateValidationCallback(AddressOf CertificateValidationCallBack)
+
             Dim Req As Net.HttpWebRequest = Net.HttpWebRequest.Create(m_URL)
             Req.Method = "POST"
             Req.ContentType = "text/xml; charset=""utf-8"""
@@ -160,6 +161,7 @@ Public Class ExchangeRate
             objXML.Save(FileName)
             Dim xml As XElement = XElement.Load(FileName)
             TxtSOAPRespond.Text = xml.ToString
+            sr.Close()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -240,10 +242,7 @@ Public Class ExchangeRate
         TxtPlanTextOfGetSell.Text = GenerateKeyToken("getSellQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
-        'MessageBox.Show(Application.StartupPath)
-        MsgBox(GetValueLocalAmount("C:\getBuyQuoteRespond1.XML"))
-    End Sub
+   
     Function GetValueLocalAmount(ByVal XmlPartRespons As String) As String
         Using reader As XmlReader = XmlReader.Create(XmlPartRespons)
             While reader.Read

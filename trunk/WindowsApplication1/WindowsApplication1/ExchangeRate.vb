@@ -108,11 +108,14 @@ Public Class ExchangeRate
     End Function
     Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim I As Int16 = 0
+        Dim ArrValue(TblXMLSOAPClient.Rows.Count) As String
         For Each dRow As DataRow In TblXMLSOAPClient.Rows
             I = I + 1
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
-            MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell " & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
+            'MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell " & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
+            ArrValue(I - 1) = GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
+            MsgBox(ArrValue(I - 1) & "  curr code  " & dRow("CurrencyCode") & "  ForeigAmount " & dRow("ForeigAmount"))
         Next
 
     End Sub
@@ -160,7 +163,7 @@ Public Class ExchangeRate
             ret = sr.ReadToEnd
             objXML.Save(FileName)
             Dim xml As XElement = XElement.Load(FileName)
-            TxtSOAPRespond.Text = xml.ToString
+            'TxtSOAPRespond.Text = xml.ToString
             sr.Close()
         Catch ex As Exception
             MsgBox(ex.Message)

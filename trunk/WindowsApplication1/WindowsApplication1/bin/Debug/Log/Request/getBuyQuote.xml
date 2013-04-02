@@ -1,0 +1,23 @@
+<soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header />
+  <soap:Body>
+    <getBuyQuote xmlns="http://api.ws.ba.com">
+      <msgName>getBuyQuote</msgName>
+      <ClientID>
+      </ClientID>
+      <branchID>
+      </branchID>
+      <tranType>
+      </tranType>
+      <userID>
+      </userID>
+      <currCode>
+      </currCode>
+      <spreadType>
+      </spreadType>
+      <foreignAmount>
+      </foreignAmount>
+      <requestSecToken>KbptBXZuykAPj9lFyMaK/nB/kkZdVG7smd01zgwFgT6fV6i0QzjrcDhdJYKpqXn1eV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0OZYzViH4QZyi49+9ZKOYXJlMCIhOkN7DHak26RXuGRZgOEoWcj3aYiEz4XA7UVo5VXSxQ+JRBal+MY1XAFbWXT4y5bE77iQkr42wTyWQpVHrRf6mDLru2G62fvbXmsPi6FtMdc3opcUbC8e4K9ke1g==</requestSecToken>
+    </getBuyQuote>
+  </soap:Body>
+</soap:Envelope>

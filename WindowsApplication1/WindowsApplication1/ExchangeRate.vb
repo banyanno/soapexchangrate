@@ -13,7 +13,7 @@ Imports Microsoft.Web.Services3.Security
 Imports Microsoft.Web.Services3.Security.Tokens
 Imports System.Security.Cryptography
 Imports System.Net.Security
-
+Imports System.Xml.XPath
 Public Class ExchangeRate
 
     Dim TblXMLSOAPClient As DataTable = New DS_Helper.ClientRequestSOAPDataTable
@@ -68,8 +68,8 @@ Public Class ExchangeRate
         soapQuote.InnerXml = strQuote
         soapQuote.SetAttribute("xmlns", "http://api.ws.ba.com")
         soapBody.AppendChild(soapQuote)
-        docXML.Save("C:\getBuyQuote.xml")
-        Dim xml As XElement = XElement.Load("C:\getBuyQuote.xml")
+        docXML.Save(Application.StartupPath & "\Log\Request\getBuyQuote.xml")
+        Dim xml As XElement = XElement.Load(Application.StartupPath & "\Log\Request\getBuyQuote.xml")
         Return "<?xml version=""1.0"" encoding=""UTF-8""?>" & xml.ToString
     End Function
     Function GeneratXMLSoapGetSellQuat() As String
@@ -102,19 +102,19 @@ Public Class ExchangeRate
         soapQuote.InnerXml = strQuote
         soapQuote.SetAttribute("xmlns", "http://api.ws.ba.com")
         soapBody.AppendChild(soapQuote)
-        docXML.Save("C:\getSellQuote.xml")
-        Dim xml As XElement = XElement.Load("C:\getSellQuote.xml")
+        docXML.Save(Application.StartupPath & "\Log\Request\getSellQuote.xml")
+        Dim xml As XElement = XElement.Load(Application.StartupPath & "\Log\Request\getSellQuote.xml")
         Return "<?xml version=""1.0"" encoding=""UTF-8""?>" & xml.ToString
     End Function
     Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim I As Int16 = 0
         For Each dRow As DataRow In TblXMLSOAPClient.Rows
             I = I + 1
-            PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, "C:\getBuyQuoteRespond" & I & ".XML")
-            PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), "C:\getSellQuoteRespond" & I & ".XML")
-            'MessageBox.Show(dRow("XMLGetBuyQuate") & vbCrLf & vbCrLf & dRow("XMLGetSellQuate"))
+            PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
+            PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
+            MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell" & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
         Next
-        ' txtXMLFormate.Text)
+
     End Sub
     Function CertificateValidationCallBack( _
         ByVal sender As Object, _
@@ -239,4 +239,38 @@ Public Class ExchangeRate
         TxtPlandTextGetBuyQuot.Text = GenerateKeyToken("getBuyQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
         TxtPlanTextOfGetSell.Text = GenerateKeyToken("getSellQuote", TxtClientID.Text, TxtBranchID.Text, TxtUserID.Text)
     End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        'MessageBox.Show(Application.StartupPath)
+        MsgBox(GetValueLocalAmount("C:\getBuyQuoteRespond1.XML"))
+    End Sub
+    Function GetValueLocalAmount(ByVal XmlPartRespons As String) As String
+        Using reader As XmlReader = XmlReader.Create(XmlPartRespons)
+            While reader.Read
+                If reader.IsStartElement Then
+                    '  MessageBox.Show("Start Elelem")
+                    If reader.Name = "p88:msgResult" Then
+                        If reader.Read Then
+                            If reader.Value.Trim = "Ok" Then
+                                While reader.Read
+                                    If reader.Name = "p88:localAmount" Then
+                                        If reader.Read Then
+                                            ' MessageBox.Show("Text Node: {0}" & reader.Value.Trim)
+                                            Return reader.Value.Trim
+                                        End If
+                                    End If
+                                End While
+                               
+                            End If
+                            If reader.Value.Trim = "Fail" Then
+                                Return "N.A"
+                            End If
+                        End If
+                    End If
+
+                End If
+            End While
+            reader.Close()
+        End Using
+    End Function
 End Class

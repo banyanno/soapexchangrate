@@ -1,0 +1,27 @@
+<soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header />
+  <soap:Body>
+    <getSellQuote xmlns="http://api.ws.ba.com">
+      <msgName>getSellQuote</msgName>
+      <ClientID>
+      </ClientID>
+      <branchID>
+      </branchID>
+      <tranType>
+      </tranType>
+      <userID>
+      </userID>
+      <currCode>
+      </currCode>
+      <spreadType>
+      </spreadType>
+      <foreignAmount>
+      </foreignAmount>
+      <localAmount>
+      </localAmount>
+      <denominationMix>
+      </denominationMix>
+      <requestSecToken>KbptBXZuykAPj9lFyMaK/nB/kkZdVG7smd01zgwFgT6fV6i0QzjrcDhdJYKpqXn1eV0FTJwG9nRuFXXbaMbsKruqrR1n7xAUXC3camNWagY+En7vOMQxsuMIkk022JMnRy4zUE/kYuuNeadM5RlynypdGEv1P4trPhbGv+ehpB2cXlOLYF0Pk47VhGT4iQk42O7JjH4HLMIDqSIe4TOgcJ9/P+BzOIABliAv+Udqm5e5PRz/+eD65ECeDQ7IbSdQCuZDpq3AQxE18Ytrur/owA==</requestSecToken>
+    </getSellQuote>
+  </soap:Body>
+</soap:Envelope>

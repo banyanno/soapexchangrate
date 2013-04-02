@@ -270,6 +270,12 @@ Partial Public Class DS_Helper
         
         Private columnUserID As Global.System.Data.DataColumn
         
+        Private columnIMG As Global.System.Data.DataColumn
+        
+        Private columnCurrencyLabel As Global.System.Data.DataColumn
+        
+        Private columnUSD As Global.System.Data.DataColumn
+        
         Private columnCurrencyCode As Global.System.Data.DataColumn
         
         Private columnForeigAmount As Global.System.Data.DataColumn
@@ -325,6 +331,27 @@ Partial Public Class DS_Helper
         Public ReadOnly Property UserIDColumn() As Global.System.Data.DataColumn
             Get
                 Return Me.columnUserID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMGColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMG
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CurrencyLabelColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCurrencyLabel
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property USDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnUSD
             End Get
         End Property
         
@@ -399,9 +426,9 @@ Partial Public Class DS_Helper
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
-        Public Overloads Function AddClientRequestSOAPRow(ByVal BrandID As String, ByVal UserID As String, ByVal CurrencyCode As String, ByVal ForeigAmount As String, ByVal LocalAmount As String, ByVal Denomination As String, ByVal XMLGetBuyQuate As String, ByVal XMLGetSellQuate As String) As ClientRequestSOAPRow
+        Public Overloads Function AddClientRequestSOAPRow(ByVal BrandID As String, ByVal UserID As String, ByVal IMG As String, ByVal CurrencyLabel As String, ByVal USD As String, ByVal CurrencyCode As String, ByVal ForeigAmount As String, ByVal LocalAmount As String, ByVal Denomination As String, ByVal XMLGetBuyQuate As String, ByVal XMLGetSellQuate As String) As ClientRequestSOAPRow
             Dim rowClientRequestSOAPRow As ClientRequestSOAPRow = CType(Me.NewRow,ClientRequestSOAPRow)
-            Dim columnValuesArray() As Object = New Object() {BrandID, UserID, CurrencyCode, ForeigAmount, LocalAmount, Denomination, XMLGetBuyQuate, XMLGetSellQuate}
+            Dim columnValuesArray() As Object = New Object() {BrandID, UserID, IMG, CurrencyLabel, USD, CurrencyCode, ForeigAmount, LocalAmount, Denomination, XMLGetBuyQuate, XMLGetSellQuate}
             rowClientRequestSOAPRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowClientRequestSOAPRow)
             Return rowClientRequestSOAPRow
@@ -423,6 +450,9 @@ Partial Public Class DS_Helper
         Friend Sub InitVars()
             Me.columnBrandID = MyBase.Columns("BrandID")
             Me.columnUserID = MyBase.Columns("UserID")
+            Me.columnIMG = MyBase.Columns("IMG")
+            Me.columnCurrencyLabel = MyBase.Columns("CurrencyLabel")
+            Me.columnUSD = MyBase.Columns("USD")
             Me.columnCurrencyCode = MyBase.Columns("CurrencyCode")
             Me.columnForeigAmount = MyBase.Columns("ForeigAmount")
             Me.columnLocalAmount = MyBase.Columns("LocalAmount")
@@ -437,6 +467,12 @@ Partial Public Class DS_Helper
             MyBase.Columns.Add(Me.columnBrandID)
             Me.columnUserID = New Global.System.Data.DataColumn("UserID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnUserID)
+            Me.columnIMG = New Global.System.Data.DataColumn("IMG", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIMG)
+            Me.columnCurrencyLabel = New Global.System.Data.DataColumn("CurrencyLabel", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCurrencyLabel)
+            Me.columnUSD = New Global.System.Data.DataColumn("USD", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnUSD)
             Me.columnCurrencyCode = New Global.System.Data.DataColumn("CurrencyCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnCurrencyCode)
             Me.columnForeigAmount = New Global.System.Data.DataColumn("ForeigAmount", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -613,6 +649,48 @@ Partial Public Class DS_Helper
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property IMG() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableClientRequestSOAP.IMGColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'IMG' in table 'ClientRequestSOAP' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableClientRequestSOAP.IMGColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CurrencyLabel() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableClientRequestSOAP.CurrencyLabelColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CurrencyLabel' in table 'ClientRequestSOAP' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableClientRequestSOAP.CurrencyLabelColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property USD() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableClientRequestSOAP.USDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'USD' in table 'ClientRequestSOAP' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableClientRequestSOAP.USDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property CurrencyCode() As String
             Get
                 Try 
@@ -714,6 +792,36 @@ Partial Public Class DS_Helper
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Sub SetUserIDNull()
             Me(Me.tableClientRequestSOAP.UserIDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsIMGNull() As Boolean
+            Return Me.IsNull(Me.tableClientRequestSOAP.IMGColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetIMGNull()
+            Me(Me.tableClientRequestSOAP.IMGColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCurrencyLabelNull() As Boolean
+            Return Me.IsNull(Me.tableClientRequestSOAP.CurrencyLabelColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCurrencyLabelNull()
+            Me(Me.tableClientRequestSOAP.CurrencyLabelColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsUSDNull() As Boolean
+            Return Me.IsNull(Me.tableClientRequestSOAP.USDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetUSDNull()
+            Me(Me.tableClientRequestSOAP.USDColumn) = Global.System.Convert.DBNull
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _

@@ -17,7 +17,7 @@
       </spreadType>
       <foreignAmount>
       </foreignAmount>
-      <requestSecToken>KbptBXZuykAPj9lFyMaK/nB/kkZdVG7smd01zgwFgT6fV6i0QzjrcDhdJYKpqXn1eV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0OZYzViH4QZyi49+9ZKOYXJlMCIhOkN7DHak26RXuGRZgOEoWcj3aYiEz4XA7UVo5VXSxQ+JRBal+MY1XAFbWXT4y5bE77iQkr42wTyWQpVHrRf6mDLru2G62fvbXmsPi6FtMdc3opcUbC8e4K9ke1g==</requestSecToken>
+      <requestSecToken>KbptBXZuykAPj9lFyMaK/nB/kkZdVG7smd01zgwFgT5TA2T/DtQrSkmaBELyrKtmeV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0OZYzViH4QZyi49+9ZKOYXJlMCIhOkN7DHak26RXuGRZgOEoWcj3aYiEz4XA7UVo5VXSxQ+JRBal+MY1XAFbWXT4y5bE77iQkr42wTyWQpVHrRf6mDLru2G62fvbXmsPi6FtMdc3opcUbC8e4K9ke1g==</requestSecToken>
     </getBuyQuote>
   </soap:Body>
 </soap:Envelope>

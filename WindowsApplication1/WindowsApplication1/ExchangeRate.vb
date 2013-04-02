@@ -116,9 +116,9 @@ Public Class ExchangeRate
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
             'MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell " & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
-            ArrValue(I - 1) = GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
+            ArrValue(I - 1) = dRow("CurrencyCode") & "," & dRow("CurrencyCode") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
             'MsgBox(ArrValue(I - 1) & "  curr code  " & dRow("CurrencyCode") & "  ForeigAmount " & dRow("ForeigAmount"))
-            objWriter.WriteLine(ArrValue(I - 1), dRow("CurrencyCode"), dRow("ForeigAmount"))
+            objWriter.WriteLine(ArrValue(I - 1))
         Next
         objWriter.Close()
     End Sub

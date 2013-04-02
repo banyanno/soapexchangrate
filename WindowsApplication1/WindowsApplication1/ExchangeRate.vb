@@ -109,15 +109,18 @@ Public Class ExchangeRate
     Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim I As Int16 = 0
         Dim ArrValue(TblXMLSOAPClient.Rows.Count) As String
+        Dim fileName As String = Application.StartupPath & "\Log\Result\Result.txt"
+        Dim objWriter As New System.IO.StreamWriter(fileName)
         For Each dRow As DataRow In TblXMLSOAPClient.Rows
             I = I + 1
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
             'MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell " & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
             ArrValue(I - 1) = GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
-            MsgBox(ArrValue(I - 1) & "  curr code  " & dRow("CurrencyCode") & "  ForeigAmount " & dRow("ForeigAmount"))
+            'MsgBox(ArrValue(I - 1) & "  curr code  " & dRow("CurrencyCode") & "  ForeigAmount " & dRow("ForeigAmount"))
+            objWriter.WriteLine(ArrValue(I - 1), dRow("CurrencyCode"), dRow("ForeigAmount"))
         Next
-
+        objWriter.Close()
     End Sub
     Function CertificateValidationCallBack( _
         ByVal sender As Object, _

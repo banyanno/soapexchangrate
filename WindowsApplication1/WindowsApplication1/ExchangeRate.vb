@@ -24,6 +24,9 @@ Public Class ExchangeRate
         DRow.Item("CurrencyCode") = TxtCurrencyCode.Text
         DRow.Item("ForeigAmount") = TxtForeignAmount.Text
         DRow.Item("LocalAmount") = TxtLocalAmount.Text
+        DRow.Item("IMG") = TxtIMG.Text
+        DRow.Item("CurrencyLabel") = TxtCurrencyLabel.Text
+        DRow.Item("USD") = TxtUSD.Text
         DRow.Item("Denomination") = TxtDenomination.Text
         DRow.Item("XMLGetBuyQuate") = GetXMLSoapGetBuyQuat().Trim
         DRow.Item("XMLGetSellQuate") = GeneratXMLSoapGetSellQuat().Trim
@@ -116,7 +119,7 @@ Public Class ExchangeRate
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetBuyQuate").ToString.Trim, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML")
             PostTotal(TxtSOAPURL.Text, dRow("XMLGetSellQuate"), Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
             'MsgBox(GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & " : Value of  Sell " & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML"))
-            ArrValue(I - 1) = dRow("CurrencyCode") & "," & dRow("CurrencyCode") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
+            ArrValue(I - 1) = dRow("IMG") & "," & dRow("CurrencyLabel") & "," & dRow("CurrencyCode") & "," & dRow("USD") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
             'MsgBox(ArrValue(I - 1) & "  curr code  " & dRow("CurrencyCode") & "  ForeigAmount " & dRow("ForeigAmount"))
             objWriter.WriteLine(ArrValue(I - 1))
         Next

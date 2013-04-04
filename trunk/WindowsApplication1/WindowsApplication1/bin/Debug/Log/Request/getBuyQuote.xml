@@ -3,15 +3,21 @@
   <soap:Body>
     <getBuyQuote xmlns="http://api.ws.ba.com">
       <msgName>getBuyQuote</msgName>
-      <ClientID>23423</ClientID>
-      <branchID>234</branchID>
+      <ClientID>
+      </ClientID>
+      <branchID>
+      </branchID>
       <tranType>
       </tranType>
-      <userID>23423</userID>
-      <currCode>342</currCode>
-      <spreadType>34</spreadType>
-      <foreignAmount>34</foreignAmount>
-      <requestSecToken>KbptBXZuykAPj9lFyMaK/nB/kkZdVG7smd01zgwFgT6BUN63XzxsLj2ZjyegSRm4eV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0sENNAeSKXQWhsyok5yBszUqLQlh23EQfBDFtDztjm/4Z6m3hdgb92GUYV3LCICvgGd9rNaYxn7A6w/8OnpfkX+wWRAl1/86AGvrwJsE/GDJmWd7gUYCmSmUHZXCfU4ISxIDHGvIbfHpzVPWwpqa0h3uX3WxbVSHzLW8AXMwWM2k=</requestSecToken>
+      <userID>
+      </userID>
+      <currCode>
+      </currCode>
+      <spreadType>
+      </spreadType>
+      <foreignAmount>
+      </foreignAmount>
+      <requestSecToken>KbptBXZuykAPj9lFyMaK/kpukd6gW7W1ginIMVPYzZyqPabnpkxYOdiuI03MWySeeV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0OZYzViH4QZyi49+9ZKOYXJlMCIhOkN7DHak26RXuGRZgOEoWcj3aYiEz4XA7UVo5VXSxQ+JRBal+MY1XAFbWXT4y5bE77iQkr42wTyWQpVHrRf6mDLru2G62fvbXmsPi6FtMdc3opcUbC8e4K9ke1g==</requestSecToken>
     </getBuyQuote>
   </soap:Body>
 </soap:Envelope>

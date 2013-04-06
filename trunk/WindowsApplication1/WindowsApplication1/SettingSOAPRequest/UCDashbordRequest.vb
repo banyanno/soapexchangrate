@@ -17,7 +17,7 @@ Imports System.Xml.XPath
 
 Public Class UCDashbordRequest
     Dim DA_RATE_SETTING As New DS_HelperTableAdapters.REQUEST_SETTINGTableAdapter
-
+    Dim URLCert As String = ""
     Private Sub LoadSetting()
         GridSOAPRequstSetting.DataSource = DA_RATE_SETTING.GetData
     End Sub
@@ -123,8 +123,8 @@ Public Class UCDashbordRequest
                 Dim ValueOfSell As String = GeneratXMLSoapGetSellQuat(drow("CLIENT_ID"), drow("BRANCH_ID"), drow("TRANSACTION_TYPE"), drow("USER_ID"), drow("CURRENCY_CODE"), drow("SPREAD_TYPE"), drow("FOREIGN_AMOUNT_SELL"), drow("LOCAL_AMOUNT"), drow("DENOMINATION"), Encrypt(KeySell.Trim, "Bmw$dD5fx&g46GQ1"))
 
                 'Do send Message
-                PostTotal("https://api.globalforeigncurrency.com:443/demo-api/services/QuoteGenerator", ValueOfBuy, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML", drow("PATH_CERTIFICATE"))
-                PostTotal("https://api.globalforeigncurrency.com:443/demo-api/services/QuoteGenerator", ValueOfSell, Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML", drow("PATH_CERTIFICATE"))
+                PostTotal("https://api.globalforeigncurrency.com:443/demo-api/services/QuoteGenerator", ValueOfBuy, Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML", URLCert)
+                PostTotal("https://api.globalforeigncurrency.com:443/demo-api/services/QuoteGenerator", ValueOfSell, Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML", URLCert)
 
                 'Write result to text file
                 'ArrValue(I - 1) = drow("IMG_MESSAGE") & "," & drow("CURRENCY_LABEL") & "," & drow("CURRENCY_CODE") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getBuyQuoteRespond" & I & ".XML") & "," & GetValueLocalAmount(Application.StartupPath & "\Log\Responds\getSellQuoteRespond" & I & ".XML")
@@ -221,7 +221,12 @@ Public Class UCDashbordRequest
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-        SendingRequest()
+        If URLCert = "" Then
+            MessageBox.Show("Please select certificate?")
+        Else
+            SendingRequest()
+        End If
+
     End Sub
 
 
@@ -275,4 +280,14 @@ Public Class UCDashbordRequest
 ) As Boolean
         Return True
     End Function
+
+    Private Sub BtnFindCertificate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnFindCertificate.Click
+        Dim Dlg As New OpenFileDialog
+        Dim Res As DialogResult
+        Dlg.DefaultExt = ".cer"
+        Res = Dlg.ShowDialog()
+        If Res = DialogResult.OK And Dlg.FileName.Length > 0 Then
+            URLCert = Dlg.FileName
+        End If
+    End Sub
 End Class

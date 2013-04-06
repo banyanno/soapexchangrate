@@ -3,21 +3,14 @@
   <soap:Body>
     <getBuyQuote xmlns="http://api.ws.ba.com">
       <msgName>getBuyQuote</msgName>
-      <ClientID>
-      </ClientID>
-      <branchID>
-      </branchID>
-      <tranType>
-      </tranType>
-      <userID>
-      </userID>
-      <currCode>
-      </currCode>
-      <spreadType>
-      </spreadType>
-      <foreignAmount>
-      </foreignAmount>
-      <requestSecToken>KbptBXZuykAPj9lFyMaK/kpukd6gW7W1ginIMVPYzZyqPabnpkxYOdiuI03MWySeeV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0OZYzViH4QZyi49+9ZKOYXJlMCIhOkN7DHak26RXuGRZgOEoWcj3aYiEz4XA7UVo5VXSxQ+JRBal+MY1XAFbWXT4y5bE77iQkr42wTyWQpVHrRf6mDLru2G62fvbXmsPi6FtMdc3opcUbC8e4K9ke1g==</requestSecToken>
+      <ClientID>500056</ClientID>
+      <branchID>12</branchID>
+      <tranType>NON-INVENTORY</tranType>
+      <userID>CHINATOWN</userID>
+      <currCode>USD</currCode>
+      <spreadType>STANDARD</spreadType>
+      <foreignAmount>909.00</foreignAmount>
+      <requestSecToken>KbptBXZuykAPj9lFyMaK/nLzmN5e0/zlnPv84ZFRffb1PX4exhxF4lmVvompD+1weV0FTJwG9nRuFXXbaMbsKtyoft2pVvFb3+DJe/euoytdiFCvQYPZcoHulymJFOD0lrAj6f1OK4P5buFqR3X7fFR1kABs8U9ulp42y8QQdxLfXQHYH6VBvrP8hR9Xz0C1n+/N8E52hcTrZipaRShW0E/4WMJ/oetVGGuvxbnKciqffz/gcziAAZYgL/lHapuXuT0c//ng+uRAng0OyG0nUArmQ6atwEMRNfGLa7q/6MA=</requestSecToken>
     </getBuyQuote>
   </soap:Body>
 </soap:Envelope>

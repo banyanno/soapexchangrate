@@ -36,3 +36,17 @@ D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\SO
 D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.exe
 D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.xml
 D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.pdb
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.Common.v3.dll
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.UI.v3.dll
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.UI.v3.xml
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.MainExchangRate.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\BofA Global Foreign Currency Message Exchange.exe.licenses
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.ButtonBar.v3.dll
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.ButtonBar.v3.xml
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.SetingSOAPMessage.resources
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.Ribbon.v3.dll
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.Ribbon.v3.xml
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Data.v3.dll
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.GridEX.v3.dll
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\bin\Debug\Janus.Windows.GridEX.v3.xml
+D:\GoogleSVN\BOAExchangRate\WindowsApplication1\WindowsApplication1\obj\Debug\MessageExchange.UCDashbordRequest.resources

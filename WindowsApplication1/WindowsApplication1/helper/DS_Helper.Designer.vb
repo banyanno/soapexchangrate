@@ -26,6 +26,10 @@ Option Explicit On
 Partial Public Class DS_Helper
     Inherits Global.System.Data.DataSet
     
+    Private tableREQUEST_SETTING As REQUEST_SETTINGDataTable
+    
+    Private tableSCHEDULE As SCHEDULEDataTable
+    
     Private tableClientRequestSOAP As ClientRequestSOAPDataTable
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
@@ -55,6 +59,12 @@ Partial Public Class DS_Helper
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
+            If (Not (ds.Tables("REQUEST_SETTING")) Is Nothing) Then
+                MyBase.Tables.Add(New REQUEST_SETTINGDataTable(ds.Tables("REQUEST_SETTING")))
+            End If
+            If (Not (ds.Tables("SCHEDULE")) Is Nothing) Then
+                MyBase.Tables.Add(New SCHEDULEDataTable(ds.Tables("SCHEDULE")))
+            End If
             If (Not (ds.Tables("ClientRequestSOAP")) Is Nothing) Then
                 MyBase.Tables.Add(New ClientRequestSOAPDataTable(ds.Tables("ClientRequestSOAP")))
             End If
@@ -74,6 +84,24 @@ Partial Public Class DS_Helper
         AddHandler MyBase.Tables.CollectionChanged, schemaChangedHandler
         AddHandler Me.Relations.CollectionChanged, schemaChangedHandler
     End Sub
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property REQUEST_SETTING() As REQUEST_SETTINGDataTable
+        Get
+            Return Me.tableREQUEST_SETTING
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property SCHEDULE() As SCHEDULEDataTable
+        Get
+            Return Me.tableSCHEDULE
+        End Get
+    End Property
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.ComponentModel.Browsable(false),  _
@@ -143,6 +171,12 @@ Partial Public Class DS_Helper
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet
             ds.ReadXml(reader)
+            If (Not (ds.Tables("REQUEST_SETTING")) Is Nothing) Then
+                MyBase.Tables.Add(New REQUEST_SETTINGDataTable(ds.Tables("REQUEST_SETTING")))
+            End If
+            If (Not (ds.Tables("SCHEDULE")) Is Nothing) Then
+                MyBase.Tables.Add(New SCHEDULEDataTable(ds.Tables("SCHEDULE")))
+            End If
             If (Not (ds.Tables("ClientRequestSOAP")) Is Nothing) Then
                 MyBase.Tables.Add(New ClientRequestSOAPDataTable(ds.Tables("ClientRequestSOAP")))
             End If
@@ -175,6 +209,18 @@ Partial Public Class DS_Helper
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
+        Me.tableREQUEST_SETTING = CType(MyBase.Tables("REQUEST_SETTING"),REQUEST_SETTINGDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableREQUEST_SETTING) Is Nothing) Then
+                Me.tableREQUEST_SETTING.InitVars
+            End If
+        End If
+        Me.tableSCHEDULE = CType(MyBase.Tables("SCHEDULE"),SCHEDULEDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableSCHEDULE) Is Nothing) Then
+                Me.tableSCHEDULE.InitVars
+            End If
+        End If
         Me.tableClientRequestSOAP = CType(MyBase.Tables("ClientRequestSOAP"),ClientRequestSOAPDataTable)
         If (initTable = true) Then
             If (Not (Me.tableClientRequestSOAP) Is Nothing) Then
@@ -190,9 +236,23 @@ Partial Public Class DS_Helper
         Me.Namespace = "http://tempuri.org/DS_Helper.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
+        Me.tableREQUEST_SETTING = New REQUEST_SETTINGDataTable
+        MyBase.Tables.Add(Me.tableREQUEST_SETTING)
+        Me.tableSCHEDULE = New SCHEDULEDataTable
+        MyBase.Tables.Add(Me.tableSCHEDULE)
         Me.tableClientRequestSOAP = New ClientRequestSOAPDataTable
         MyBase.Tables.Add(Me.tableClientRequestSOAP)
     End Sub
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializeREQUEST_SETTING() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+    Private Function ShouldSerializeSCHEDULE() As Boolean
+        Return false
+    End Function
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
     Private Function ShouldSerializeClientRequestSOAP() As Boolean
@@ -255,7 +315,787 @@ Partial Public Class DS_Helper
         Return type
     End Function
     
+    Public Delegate Sub REQUEST_SETTINGRowChangeEventHandler(ByVal sender As Object, ByVal e As REQUEST_SETTINGRowChangeEvent)
+    
+    Public Delegate Sub SCHEDULERowChangeEventHandler(ByVal sender As Object, ByVal e As SCHEDULERowChangeEvent)
+    
     Public Delegate Sub ClientRequestSOAPRowChangeEventHandler(ByVal sender As Object, ByVal e As ClientRequestSOAPRowChangeEvent)
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class REQUEST_SETTINGDataTable
+        Inherits Global.System.Data.TypedTableBase(Of REQUEST_SETTINGRow)
+        
+        Private columnREQUEST_ID As Global.System.Data.DataColumn
+        
+        Private columnCLIENT_ID As Global.System.Data.DataColumn
+        
+        Private columnBRANCH_ID As Global.System.Data.DataColumn
+        
+        Private columnUSER_ID As Global.System.Data.DataColumn
+        
+        Private columnTRANSACTION_TYPE As Global.System.Data.DataColumn
+        
+        Private columnCURRENCY_LABEL As Global.System.Data.DataColumn
+        
+        Private columnCURRENCY_CODE As Global.System.Data.DataColumn
+        
+        Private columnSPREAD_TYPE As Global.System.Data.DataColumn
+        
+        Private columnFOREIGN_AMOUNT As Global.System.Data.DataColumn
+        
+        Private columnREQUEST_BUYQUATE As Global.System.Data.DataColumn
+        
+        Private columnREQUEST_SELLQUATE As Global.System.Data.DataColumn
+        
+        Private columnTOKEN_XML_BUYQUATE As Global.System.Data.DataColumn
+        
+        Private columnTOKEN_XML_SELLQUATE As Global.System.Data.DataColumn
+        
+        Private columnTOKEN_ENCODING_BUYQUATE As Global.System.Data.DataColumn
+        
+        Private columnTOKEN_ENCODING_SELLQUATE As Global.System.Data.DataColumn
+        
+        Private columnFOREIGN_AMOUNT_SELL As Global.System.Data.DataColumn
+        
+        Private columnLOCAL_AMOUNT As Global.System.Data.DataColumn
+        
+        Private columnDENOMINATION As Global.System.Data.DataColumn
+        
+        Private columnPATH_CERTIFICATE As Global.System.Data.DataColumn
+        
+        Private columnIMG_MESSAGE As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "REQUEST_SETTING"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property REQUEST_IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnREQUEST_ID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CLIENT_IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCLIENT_ID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property BRANCH_IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnBRANCH_ID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property USER_IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnUSER_ID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TRANSACTION_TYPEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTRANSACTION_TYPE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CURRENCY_LABELColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCURRENCY_LABEL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property CURRENCY_CODEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCURRENCY_CODE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SPREAD_TYPEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSPREAD_TYPE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property FOREIGN_AMOUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFOREIGN_AMOUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property REQUEST_BUYQUATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnREQUEST_BUYQUATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property REQUEST_SELLQUATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnREQUEST_SELLQUATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TOKEN_XML_BUYQUATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTOKEN_XML_BUYQUATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TOKEN_XML_SELLQUATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTOKEN_XML_SELLQUATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TOKEN_ENCODING_BUYQUATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTOKEN_ENCODING_BUYQUATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property TOKEN_ENCODING_SELLQUATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnTOKEN_ENCODING_SELLQUATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property FOREIGN_AMOUNT_SELLColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFOREIGN_AMOUNT_SELL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property LOCAL_AMOUNTColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLOCAL_AMOUNT
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property DENOMINATIONColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDENOMINATION
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property PATH_CERTIFICATEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPATH_CERTIFICATE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property IMG_MESSAGEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIMG_MESSAGE
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As REQUEST_SETTINGRow
+            Get
+                Return CType(Me.Rows(index),REQUEST_SETTINGRow)
+            End Get
+        End Property
+        
+        Public Event REQUEST_SETTINGRowChanging As REQUEST_SETTINGRowChangeEventHandler
+        
+        Public Event REQUEST_SETTINGRowChanged As REQUEST_SETTINGRowChangeEventHandler
+        
+        Public Event REQUEST_SETTINGRowDeleting As REQUEST_SETTINGRowChangeEventHandler
+        
+        Public Event REQUEST_SETTINGRowDeleted As REQUEST_SETTINGRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddREQUEST_SETTINGRow(ByVal row As REQUEST_SETTINGRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddREQUEST_SETTINGRow( _
+                    ByVal CLIENT_ID As Decimal,  _
+                    ByVal BRANCH_ID As Decimal,  _
+                    ByVal USER_ID As String,  _
+                    ByVal TRANSACTION_TYPE As String,  _
+                    ByVal CURRENCY_LABEL As String,  _
+                    ByVal CURRENCY_CODE As String,  _
+                    ByVal SPREAD_TYPE As String,  _
+                    ByVal FOREIGN_AMOUNT As Decimal,  _
+                    ByVal REQUEST_BUYQUATE As String,  _
+                    ByVal REQUEST_SELLQUATE As String,  _
+                    ByVal TOKEN_XML_BUYQUATE As String,  _
+                    ByVal TOKEN_XML_SELLQUATE As String,  _
+                    ByVal TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal FOREIGN_AMOUNT_SELL As Decimal,  _
+                    ByVal LOCAL_AMOUNT As Decimal,  _
+                    ByVal DENOMINATION As String,  _
+                    ByVal PATH_CERTIFICATE As String,  _
+                    ByVal IMG_MESSAGE As String) As REQUEST_SETTINGRow
+            Dim rowREQUEST_SETTINGRow As REQUEST_SETTINGRow = CType(Me.NewRow,REQUEST_SETTINGRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, CLIENT_ID, BRANCH_ID, USER_ID, TRANSACTION_TYPE, CURRENCY_LABEL, CURRENCY_CODE, SPREAD_TYPE, FOREIGN_AMOUNT, REQUEST_BUYQUATE, REQUEST_SELLQUATE, TOKEN_XML_BUYQUATE, TOKEN_XML_SELLQUATE, TOKEN_ENCODING_BUYQUATE, TOKEN_ENCODING_SELLQUATE, FOREIGN_AMOUNT_SELL, LOCAL_AMOUNT, DENOMINATION, PATH_CERTIFICATE, IMG_MESSAGE}
+            rowREQUEST_SETTINGRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowREQUEST_SETTINGRow)
+            Return rowREQUEST_SETTINGRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function FindByREQUEST_ID(ByVal REQUEST_ID As Decimal) As REQUEST_SETTINGRow
+            Return CType(Me.Rows.Find(New Object() {REQUEST_ID}),REQUEST_SETTINGRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As REQUEST_SETTINGDataTable = CType(MyBase.Clone,REQUEST_SETTINGDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New REQUEST_SETTINGDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnREQUEST_ID = MyBase.Columns("REQUEST_ID")
+            Me.columnCLIENT_ID = MyBase.Columns("CLIENT_ID")
+            Me.columnBRANCH_ID = MyBase.Columns("BRANCH_ID")
+            Me.columnUSER_ID = MyBase.Columns("USER_ID")
+            Me.columnTRANSACTION_TYPE = MyBase.Columns("TRANSACTION_TYPE")
+            Me.columnCURRENCY_LABEL = MyBase.Columns("CURRENCY_LABEL")
+            Me.columnCURRENCY_CODE = MyBase.Columns("CURRENCY_CODE")
+            Me.columnSPREAD_TYPE = MyBase.Columns("SPREAD_TYPE")
+            Me.columnFOREIGN_AMOUNT = MyBase.Columns("FOREIGN_AMOUNT")
+            Me.columnREQUEST_BUYQUATE = MyBase.Columns("REQUEST_BUYQUATE")
+            Me.columnREQUEST_SELLQUATE = MyBase.Columns("REQUEST_SELLQUATE")
+            Me.columnTOKEN_XML_BUYQUATE = MyBase.Columns("TOKEN_XML_BUYQUATE")
+            Me.columnTOKEN_XML_SELLQUATE = MyBase.Columns("TOKEN_XML_SELLQUATE")
+            Me.columnTOKEN_ENCODING_BUYQUATE = MyBase.Columns("TOKEN_ENCODING_BUYQUATE")
+            Me.columnTOKEN_ENCODING_SELLQUATE = MyBase.Columns("TOKEN_ENCODING_SELLQUATE")
+            Me.columnFOREIGN_AMOUNT_SELL = MyBase.Columns("FOREIGN_AMOUNT_SELL")
+            Me.columnLOCAL_AMOUNT = MyBase.Columns("LOCAL_AMOUNT")
+            Me.columnDENOMINATION = MyBase.Columns("DENOMINATION")
+            Me.columnPATH_CERTIFICATE = MyBase.Columns("PATH_CERTIFICATE")
+            Me.columnIMG_MESSAGE = MyBase.Columns("IMG_MESSAGE")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnREQUEST_ID = New Global.System.Data.DataColumn("REQUEST_ID", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnREQUEST_ID)
+            Me.columnCLIENT_ID = New Global.System.Data.DataColumn("CLIENT_ID", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCLIENT_ID)
+            Me.columnBRANCH_ID = New Global.System.Data.DataColumn("BRANCH_ID", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnBRANCH_ID)
+            Me.columnUSER_ID = New Global.System.Data.DataColumn("USER_ID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnUSER_ID)
+            Me.columnTRANSACTION_TYPE = New Global.System.Data.DataColumn("TRANSACTION_TYPE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTRANSACTION_TYPE)
+            Me.columnCURRENCY_LABEL = New Global.System.Data.DataColumn("CURRENCY_LABEL", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCURRENCY_LABEL)
+            Me.columnCURRENCY_CODE = New Global.System.Data.DataColumn("CURRENCY_CODE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCURRENCY_CODE)
+            Me.columnSPREAD_TYPE = New Global.System.Data.DataColumn("SPREAD_TYPE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSPREAD_TYPE)
+            Me.columnFOREIGN_AMOUNT = New Global.System.Data.DataColumn("FOREIGN_AMOUNT", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFOREIGN_AMOUNT)
+            Me.columnREQUEST_BUYQUATE = New Global.System.Data.DataColumn("REQUEST_BUYQUATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnREQUEST_BUYQUATE)
+            Me.columnREQUEST_SELLQUATE = New Global.System.Data.DataColumn("REQUEST_SELLQUATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnREQUEST_SELLQUATE)
+            Me.columnTOKEN_XML_BUYQUATE = New Global.System.Data.DataColumn("TOKEN_XML_BUYQUATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTOKEN_XML_BUYQUATE)
+            Me.columnTOKEN_XML_SELLQUATE = New Global.System.Data.DataColumn("TOKEN_XML_SELLQUATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTOKEN_XML_SELLQUATE)
+            Me.columnTOKEN_ENCODING_BUYQUATE = New Global.System.Data.DataColumn("TOKEN_ENCODING_BUYQUATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTOKEN_ENCODING_BUYQUATE)
+            Me.columnTOKEN_ENCODING_SELLQUATE = New Global.System.Data.DataColumn("TOKEN_ENCODING_SELLQUATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnTOKEN_ENCODING_SELLQUATE)
+            Me.columnFOREIGN_AMOUNT_SELL = New Global.System.Data.DataColumn("FOREIGN_AMOUNT_SELL", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFOREIGN_AMOUNT_SELL)
+            Me.columnLOCAL_AMOUNT = New Global.System.Data.DataColumn("LOCAL_AMOUNT", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLOCAL_AMOUNT)
+            Me.columnDENOMINATION = New Global.System.Data.DataColumn("DENOMINATION", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDENOMINATION)
+            Me.columnPATH_CERTIFICATE = New Global.System.Data.DataColumn("PATH_CERTIFICATE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPATH_CERTIFICATE)
+            Me.columnIMG_MESSAGE = New Global.System.Data.DataColumn("IMG_MESSAGE", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIMG_MESSAGE)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnREQUEST_ID}, true))
+            Me.columnREQUEST_ID.AutoIncrement = true
+            Me.columnREQUEST_ID.AutoIncrementSeed = -1
+            Me.columnREQUEST_ID.AutoIncrementStep = -1
+            Me.columnREQUEST_ID.AllowDBNull = false
+            Me.columnREQUEST_ID.ReadOnly = true
+            Me.columnREQUEST_ID.Unique = true
+            Me.columnTRANSACTION_TYPE.MaxLength = 50
+            Me.columnCURRENCY_LABEL.MaxLength = 50
+            Me.columnCURRENCY_CODE.MaxLength = 50
+            Me.columnSPREAD_TYPE.MaxLength = 50
+            Me.columnREQUEST_BUYQUATE.MaxLength = 500
+            Me.columnREQUEST_SELLQUATE.MaxLength = 500
+            Me.columnTOKEN_XML_BUYQUATE.MaxLength = 200
+            Me.columnTOKEN_XML_SELLQUATE.MaxLength = 200
+            Me.columnTOKEN_ENCODING_BUYQUATE.MaxLength = 200
+            Me.columnTOKEN_ENCODING_SELLQUATE.MaxLength = 200
+            Me.columnDENOMINATION.MaxLength = 50
+            Me.columnPATH_CERTIFICATE.MaxLength = 150
+            Me.columnIMG_MESSAGE.MaxLength = 50
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewREQUEST_SETTINGRow() As REQUEST_SETTINGRow
+            Return CType(Me.NewRow,REQUEST_SETTINGRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New REQUEST_SETTINGRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(REQUEST_SETTINGRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.REQUEST_SETTINGRowChangedEvent) Is Nothing) Then
+                RaiseEvent REQUEST_SETTINGRowChanged(Me, New REQUEST_SETTINGRowChangeEvent(CType(e.Row,REQUEST_SETTINGRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.REQUEST_SETTINGRowChangingEvent) Is Nothing) Then
+                RaiseEvent REQUEST_SETTINGRowChanging(Me, New REQUEST_SETTINGRowChangeEvent(CType(e.Row,REQUEST_SETTINGRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.REQUEST_SETTINGRowDeletedEvent) Is Nothing) Then
+                RaiseEvent REQUEST_SETTINGRowDeleted(Me, New REQUEST_SETTINGRowChangeEvent(CType(e.Row,REQUEST_SETTINGRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.REQUEST_SETTINGRowDeletingEvent) Is Nothing) Then
+                RaiseEvent REQUEST_SETTINGRowDeleting(Me, New REQUEST_SETTINGRowChangeEvent(CType(e.Row,REQUEST_SETTINGRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveREQUEST_SETTINGRow(ByVal row As REQUEST_SETTINGRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As DS_Helper = New DS_Helper
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "REQUEST_SETTINGDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class SCHEDULEDataTable
+        Inherits Global.System.Data.TypedTableBase(Of SCHEDULERow)
+        
+        Private columnSCHEDULE_ID As Global.System.Data.DataColumn
+        
+        Private columnSTART_TIME As Global.System.Data.DataColumn
+        
+        Private columnEND_TIME As Global.System.Data.DataColumn
+        
+        Private columnINTERVAL As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "SCHEDULE"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property SCHEDULE_IDColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSCHEDULE_ID
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property START_TIMEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnSTART_TIME
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property END_TIMEColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEND_TIME
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property INTERVALColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnINTERVAL
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As SCHEDULERow
+            Get
+                Return CType(Me.Rows(index),SCHEDULERow)
+            End Get
+        End Property
+        
+        Public Event SCHEDULERowChanging As SCHEDULERowChangeEventHandler
+        
+        Public Event SCHEDULERowChanged As SCHEDULERowChangeEventHandler
+        
+        Public Event SCHEDULERowDeleting As SCHEDULERowChangeEventHandler
+        
+        Public Event SCHEDULERowDeleted As SCHEDULERowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Sub AddSCHEDULERow(ByVal row As SCHEDULERow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overloads Function AddSCHEDULERow(ByVal START_TIME As Date, ByVal END_TIME As Date, ByVal INTERVAL As Decimal) As SCHEDULERow
+            Dim rowSCHEDULERow As SCHEDULERow = CType(Me.NewRow,SCHEDULERow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, START_TIME, END_TIME, INTERVAL}
+            rowSCHEDULERow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowSCHEDULERow)
+            Return rowSCHEDULERow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function FindBySCHEDULE_ID(ByVal SCHEDULE_ID As Decimal) As SCHEDULERow
+            Return CType(Me.Rows.Find(New Object() {SCHEDULE_ID}),SCHEDULERow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As SCHEDULEDataTable = CType(MyBase.Clone,SCHEDULEDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New SCHEDULEDataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub InitVars()
+            Me.columnSCHEDULE_ID = MyBase.Columns("SCHEDULE_ID")
+            Me.columnSTART_TIME = MyBase.Columns("START_TIME")
+            Me.columnEND_TIME = MyBase.Columns("END_TIME")
+            Me.columnINTERVAL = MyBase.Columns("INTERVAL")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitClass()
+            Me.columnSCHEDULE_ID = New Global.System.Data.DataColumn("SCHEDULE_ID", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSCHEDULE_ID)
+            Me.columnSTART_TIME = New Global.System.Data.DataColumn("START_TIME", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnSTART_TIME)
+            Me.columnEND_TIME = New Global.System.Data.DataColumn("END_TIME", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEND_TIME)
+            Me.columnINTERVAL = New Global.System.Data.DataColumn("INTERVAL", GetType(Decimal), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnINTERVAL)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnSCHEDULE_ID}, true))
+            Me.columnSCHEDULE_ID.AutoIncrement = true
+            Me.columnSCHEDULE_ID.AutoIncrementSeed = -1
+            Me.columnSCHEDULE_ID.AutoIncrementStep = -1
+            Me.columnSCHEDULE_ID.AllowDBNull = false
+            Me.columnSCHEDULE_ID.ReadOnly = true
+            Me.columnSCHEDULE_ID.Unique = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function NewSCHEDULERow() As SCHEDULERow
+            Return CType(Me.NewRow,SCHEDULERow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New SCHEDULERow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(SCHEDULERow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.SCHEDULERowChangedEvent) Is Nothing) Then
+                RaiseEvent SCHEDULERowChanged(Me, New SCHEDULERowChangeEvent(CType(e.Row,SCHEDULERow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.SCHEDULERowChangingEvent) Is Nothing) Then
+                RaiseEvent SCHEDULERowChanging(Me, New SCHEDULERowChangeEvent(CType(e.Row,SCHEDULERow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.SCHEDULERowDeletedEvent) Is Nothing) Then
+                RaiseEvent SCHEDULERowDeleted(Me, New SCHEDULERowChangeEvent(CType(e.Row,SCHEDULERow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.SCHEDULERowDeletingEvent) Is Nothing) Then
+                RaiseEvent SCHEDULERowDeleting(Me, New SCHEDULERowChangeEvent(CType(e.Row,SCHEDULERow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub RemoveSCHEDULERow(ByVal row As SCHEDULERow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence
+            Dim ds As DS_Helper = New DS_Helper
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "SCHEDULEDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -609,6 +1449,588 @@ Partial Public Class DS_Helper
     '''Represents strongly named DataRow class.
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class REQUEST_SETTINGRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableREQUEST_SETTING As REQUEST_SETTINGDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableREQUEST_SETTING = CType(Me.Table,REQUEST_SETTINGDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property REQUEST_ID() As Decimal
+            Get
+                Return CType(Me(Me.tableREQUEST_SETTING.REQUEST_IDColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.REQUEST_IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CLIENT_ID() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.CLIENT_IDColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CLIENT_ID' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.CLIENT_IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property BRANCH_ID() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.BRANCH_IDColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'BRANCH_ID' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.BRANCH_IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property USER_ID() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.USER_IDColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'USER_ID' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.USER_IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TRANSACTION_TYPE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.TRANSACTION_TYPEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TRANSACTION_TYPE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.TRANSACTION_TYPEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CURRENCY_LABEL() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.CURRENCY_LABELColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CURRENCY_LABEL' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.CURRENCY_LABELColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property CURRENCY_CODE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.CURRENCY_CODEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CURRENCY_CODE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.CURRENCY_CODEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property SPREAD_TYPE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.SPREAD_TYPEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'SPREAD_TYPE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.SPREAD_TYPEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property FOREIGN_AMOUNT() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.FOREIGN_AMOUNTColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FOREIGN_AMOUNT' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.FOREIGN_AMOUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property REQUEST_BUYQUATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.REQUEST_BUYQUATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'REQUEST_BUYQUATE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.REQUEST_BUYQUATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property REQUEST_SELLQUATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.REQUEST_SELLQUATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'REQUEST_SELLQUATE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.REQUEST_SELLQUATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TOKEN_XML_BUYQUATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.TOKEN_XML_BUYQUATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TOKEN_XML_BUYQUATE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.TOKEN_XML_BUYQUATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TOKEN_XML_SELLQUATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.TOKEN_XML_SELLQUATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TOKEN_XML_SELLQUATE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.TOKEN_XML_SELLQUATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TOKEN_ENCODING_BUYQUATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.TOKEN_ENCODING_BUYQUATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TOKEN_ENCODING_BUYQUATE' in table 'REQUEST_SETTING' is DBNu"& _ 
+                            "ll.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.TOKEN_ENCODING_BUYQUATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property TOKEN_ENCODING_SELLQUATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.TOKEN_ENCODING_SELLQUATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'TOKEN_ENCODING_SELLQUATE' in table 'REQUEST_SETTING' is DBN"& _ 
+                            "ull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.TOKEN_ENCODING_SELLQUATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property FOREIGN_AMOUNT_SELL() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.FOREIGN_AMOUNT_SELLColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'FOREIGN_AMOUNT_SELL' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.FOREIGN_AMOUNT_SELLColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property LOCAL_AMOUNT() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.LOCAL_AMOUNTColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LOCAL_AMOUNT' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.LOCAL_AMOUNTColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property DENOMINATION() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.DENOMINATIONColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'DENOMINATION' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.DENOMINATIONColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property PATH_CERTIFICATE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.PATH_CERTIFICATEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PATH_CERTIFICATE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.PATH_CERTIFICATEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property IMG_MESSAGE() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableREQUEST_SETTING.IMG_MESSAGEColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'IMG_MESSAGE' in table 'REQUEST_SETTING' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableREQUEST_SETTING.IMG_MESSAGEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCLIENT_IDNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.CLIENT_IDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCLIENT_IDNull()
+            Me(Me.tableREQUEST_SETTING.CLIENT_IDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsBRANCH_IDNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.BRANCH_IDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetBRANCH_IDNull()
+            Me(Me.tableREQUEST_SETTING.BRANCH_IDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsUSER_IDNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.USER_IDColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetUSER_IDNull()
+            Me(Me.tableREQUEST_SETTING.USER_IDColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTRANSACTION_TYPENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.TRANSACTION_TYPEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTRANSACTION_TYPENull()
+            Me(Me.tableREQUEST_SETTING.TRANSACTION_TYPEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCURRENCY_LABELNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.CURRENCY_LABELColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCURRENCY_LABELNull()
+            Me(Me.tableREQUEST_SETTING.CURRENCY_LABELColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsCURRENCY_CODENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.CURRENCY_CODEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetCURRENCY_CODENull()
+            Me(Me.tableREQUEST_SETTING.CURRENCY_CODEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsSPREAD_TYPENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.SPREAD_TYPEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetSPREAD_TYPENull()
+            Me(Me.tableREQUEST_SETTING.SPREAD_TYPEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsFOREIGN_AMOUNTNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.FOREIGN_AMOUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetFOREIGN_AMOUNTNull()
+            Me(Me.tableREQUEST_SETTING.FOREIGN_AMOUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsREQUEST_BUYQUATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.REQUEST_BUYQUATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetREQUEST_BUYQUATENull()
+            Me(Me.tableREQUEST_SETTING.REQUEST_BUYQUATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsREQUEST_SELLQUATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.REQUEST_SELLQUATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetREQUEST_SELLQUATENull()
+            Me(Me.tableREQUEST_SETTING.REQUEST_SELLQUATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTOKEN_XML_BUYQUATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.TOKEN_XML_BUYQUATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTOKEN_XML_BUYQUATENull()
+            Me(Me.tableREQUEST_SETTING.TOKEN_XML_BUYQUATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTOKEN_XML_SELLQUATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.TOKEN_XML_SELLQUATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTOKEN_XML_SELLQUATENull()
+            Me(Me.tableREQUEST_SETTING.TOKEN_XML_SELLQUATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTOKEN_ENCODING_BUYQUATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.TOKEN_ENCODING_BUYQUATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTOKEN_ENCODING_BUYQUATENull()
+            Me(Me.tableREQUEST_SETTING.TOKEN_ENCODING_BUYQUATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsTOKEN_ENCODING_SELLQUATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.TOKEN_ENCODING_SELLQUATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetTOKEN_ENCODING_SELLQUATENull()
+            Me(Me.tableREQUEST_SETTING.TOKEN_ENCODING_SELLQUATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsFOREIGN_AMOUNT_SELLNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.FOREIGN_AMOUNT_SELLColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetFOREIGN_AMOUNT_SELLNull()
+            Me(Me.tableREQUEST_SETTING.FOREIGN_AMOUNT_SELLColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsLOCAL_AMOUNTNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.LOCAL_AMOUNTColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetLOCAL_AMOUNTNull()
+            Me(Me.tableREQUEST_SETTING.LOCAL_AMOUNTColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsDENOMINATIONNull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.DENOMINATIONColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetDENOMINATIONNull()
+            Me(Me.tableREQUEST_SETTING.DENOMINATIONColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsPATH_CERTIFICATENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.PATH_CERTIFICATEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetPATH_CERTIFICATENull()
+            Me(Me.tableREQUEST_SETTING.PATH_CERTIFICATEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsIMG_MESSAGENull() As Boolean
+            Return Me.IsNull(Me.tableREQUEST_SETTING.IMG_MESSAGEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetIMG_MESSAGENull()
+            Me(Me.tableREQUEST_SETTING.IMG_MESSAGEColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Partial Public Class SCHEDULERow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableSCHEDULE As SCHEDULEDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableSCHEDULE = CType(Me.Table,SCHEDULEDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property SCHEDULE_ID() As Decimal
+            Get
+                Return CType(Me(Me.tableSCHEDULE.SCHEDULE_IDColumn),Decimal)
+            End Get
+            Set
+                Me(Me.tableSCHEDULE.SCHEDULE_IDColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property START_TIME() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableSCHEDULE.START_TIMEColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'START_TIME' in table 'SCHEDULE' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSCHEDULE.START_TIMEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property END_TIME() As Date
+            Get
+                Try 
+                    Return CType(Me(Me.tableSCHEDULE.END_TIMEColumn),Date)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'END_TIME' in table 'SCHEDULE' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSCHEDULE.END_TIMEColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property INTERVAL() As Decimal
+            Get
+                Try 
+                    Return CType(Me(Me.tableSCHEDULE.INTERVALColumn),Decimal)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'INTERVAL' in table 'SCHEDULE' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableSCHEDULE.INTERVALColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsSTART_TIMENull() As Boolean
+            Return Me.IsNull(Me.tableSCHEDULE.START_TIMEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetSTART_TIMENull()
+            Me(Me.tableSCHEDULE.START_TIMEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsEND_TIMENull() As Boolean
+            Return Me.IsNull(Me.tableSCHEDULE.END_TIMEColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetEND_TIMENull()
+            Me(Me.tableSCHEDULE.END_TIMEColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Function IsINTERVALNull() As Boolean
+            Return Me.IsNull(Me.tableSCHEDULE.INTERVALColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub SetINTERVALNull()
+            Me(Me.tableSCHEDULE.INTERVALColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
     Partial Public Class ClientRequestSOAPRow
         Inherits Global.System.Data.DataRow
         
@@ -889,6 +2311,72 @@ Partial Public Class DS_Helper
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class REQUEST_SETTINGRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As REQUEST_SETTINGRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As REQUEST_SETTINGRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As REQUEST_SETTINGRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+    Public Class SCHEDULERowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As SCHEDULERow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New(ByVal row As SCHEDULERow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Row() As SCHEDULERow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
     Public Class ClientRequestSOAPRowChangeEvent
         Inherits Global.System.EventArgs
         
@@ -918,3 +2406,2368 @@ Partial Public Class DS_Helper
         End Property
     End Class
 End Class
+
+Namespace DS_HelperTableAdapters
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class REQUEST_SETTINGTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "REQUEST_SETTING"
+            tableMapping.ColumnMappings.Add("REQUEST_ID", "REQUEST_ID")
+            tableMapping.ColumnMappings.Add("CLIENT_ID", "CLIENT_ID")
+            tableMapping.ColumnMappings.Add("BRANCH_ID", "BRANCH_ID")
+            tableMapping.ColumnMappings.Add("USER_ID", "USER_ID")
+            tableMapping.ColumnMappings.Add("TRANSACTION_TYPE", "TRANSACTION_TYPE")
+            tableMapping.ColumnMappings.Add("CURRENCY_LABEL", "CURRENCY_LABEL")
+            tableMapping.ColumnMappings.Add("CURRENCY_CODE", "CURRENCY_CODE")
+            tableMapping.ColumnMappings.Add("SPREAD_TYPE", "SPREAD_TYPE")
+            tableMapping.ColumnMappings.Add("FOREIGN_AMOUNT", "FOREIGN_AMOUNT")
+            tableMapping.ColumnMappings.Add("REQUEST_BUYQUATE", "REQUEST_BUYQUATE")
+            tableMapping.ColumnMappings.Add("REQUEST_SELLQUATE", "REQUEST_SELLQUATE")
+            tableMapping.ColumnMappings.Add("TOKEN_XML_BUYQUATE", "TOKEN_XML_BUYQUATE")
+            tableMapping.ColumnMappings.Add("TOKEN_XML_SELLQUATE", "TOKEN_XML_SELLQUATE")
+            tableMapping.ColumnMappings.Add("TOKEN_ENCODING_BUYQUATE", "TOKEN_ENCODING_BUYQUATE")
+            tableMapping.ColumnMappings.Add("TOKEN_ENCODING_SELLQUATE", "TOKEN_ENCODING_SELLQUATE")
+            tableMapping.ColumnMappings.Add("FOREIGN_AMOUNT_SELL", "FOREIGN_AMOUNT_SELL")
+            tableMapping.ColumnMappings.Add("LOCAL_AMOUNT", "LOCAL_AMOUNT")
+            tableMapping.ColumnMappings.Add("DENOMINATION", "DENOMINATION")
+            tableMapping.ColumnMappings.Add("PATH_CERTIFICATE", "PATH_CERTIFICATE")
+            tableMapping.ColumnMappings.Add("IMG_MESSAGE", "IMG_MESSAGE")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [REQUEST_SETTING] WHERE (([REQUEST_ID] = @Original_REQUEST_ID) AND (("& _ 
+                "@IsNull_CLIENT_ID = 1 AND [CLIENT_ID] IS NULL) OR ([CLIENT_ID] = @Original_CLIEN"& _ 
+                "T_ID)) AND ((@IsNull_BRANCH_ID = 1 AND [BRANCH_ID] IS NULL) OR ([BRANCH_ID] = @O"& _ 
+                "riginal_BRANCH_ID)) AND ((@IsNull_USER_ID = 1 AND [USER_ID] IS NULL) OR ([USER_I"& _ 
+                "D] = @Original_USER_ID)) AND ((@IsNull_TRANSACTION_TYPE = 1 AND [TRANSACTION_TYP"& _ 
+                "E] IS NULL) OR ([TRANSACTION_TYPE] = @Original_TRANSACTION_TYPE)) AND ((@IsNull_"& _ 
+                "CURRENCY_LABEL = 1 AND [CURRENCY_LABEL] IS NULL) OR ([CURRENCY_LABEL] = @Origina"& _ 
+                "l_CURRENCY_LABEL)) AND ((@IsNull_CURRENCY_CODE = 1 AND [CURRENCY_CODE] IS NULL) "& _ 
+                "OR ([CURRENCY_CODE] = @Original_CURRENCY_CODE)) AND ((@IsNull_SPREAD_TYPE = 1 AN"& _ 
+                "D [SPREAD_TYPE] IS NULL) OR ([SPREAD_TYPE] = @Original_SPREAD_TYPE)) AND ((@IsNu"& _ 
+                "ll_FOREIGN_AMOUNT = 1 AND [FOREIGN_AMOUNT] IS NULL) OR ([FOREIGN_AMOUNT] = @Orig"& _ 
+                "inal_FOREIGN_AMOUNT)) AND ((@IsNull_REQUEST_BUYQUATE = 1 AND [REQUEST_BUYQUATE] "& _ 
+                "IS NULL) OR ([REQUEST_BUYQUATE] = @Original_REQUEST_BUYQUATE)) AND ((@IsNull_REQ"& _ 
+                "UEST_SELLQUATE = 1 AND [REQUEST_SELLQUATE] IS NULL) OR ([REQUEST_SELLQUATE] = @O"& _ 
+                "riginal_REQUEST_SELLQUATE)) AND ((@IsNull_TOKEN_XML_BUYQUATE = 1 AND [TOKEN_XML_"& _ 
+                "BUYQUATE] IS NULL) OR ([TOKEN_XML_BUYQUATE] = @Original_TOKEN_XML_BUYQUATE)) AND"& _ 
+                " ((@IsNull_TOKEN_XML_SELLQUATE = 1 AND [TOKEN_XML_SELLQUATE] IS NULL) OR ([TOKEN"& _ 
+                "_XML_SELLQUATE] = @Original_TOKEN_XML_SELLQUATE)) AND ((@IsNull_TOKEN_ENCODING_B"& _ 
+                "UYQUATE = 1 AND [TOKEN_ENCODING_BUYQUATE] IS NULL) OR ([TOKEN_ENCODING_BUYQUATE]"& _ 
+                " = @Original_TOKEN_ENCODING_BUYQUATE)) AND ((@IsNull_TOKEN_ENCODING_SELLQUATE = "& _ 
+                "1 AND [TOKEN_ENCODING_SELLQUATE] IS NULL) OR ([TOKEN_ENCODING_SELLQUATE] = @Orig"& _ 
+                "inal_TOKEN_ENCODING_SELLQUATE)) AND ((@IsNull_FOREIGN_AMOUNT_SELL = 1 AND [FOREI"& _ 
+                "GN_AMOUNT_SELL] IS NULL) OR ([FOREIGN_AMOUNT_SELL] = @Original_FOREIGN_AMOUNT_SE"& _ 
+                "LL)) AND ((@IsNull_LOCAL_AMOUNT = 1 AND [LOCAL_AMOUNT] IS NULL) OR ([LOCAL_AMOUN"& _ 
+                "T] = @Original_LOCAL_AMOUNT)) AND ((@IsNull_DENOMINATION = 1 AND [DENOMINATION] "& _ 
+                "IS NULL) OR ([DENOMINATION] = @Original_DENOMINATION)) AND ((@IsNull_PATH_CERTIF"& _ 
+                "ICATE = 1 AND [PATH_CERTIFICATE] IS NULL) OR ([PATH_CERTIFICATE] = @Original_PAT"& _ 
+                "H_CERTIFICATE)) AND ((@IsNull_IMG_MESSAGE = 1 AND [IMG_MESSAGE] IS NULL) OR ([IM"& _ 
+                "G_MESSAGE] = @Original_IMG_MESSAGE)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "REQUEST_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CLIENT_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CLIENT_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_BRANCH_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_BRANCH_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_USER_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_USER_ID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TRANSACTION_TYPE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TRANSACTION_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CURRENCY_LABEL", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CURRENCY_LABEL", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CURRENCY_CODE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CURRENCY_CODE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_SPREAD_TYPE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SPREAD_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_FOREIGN_AMOUNT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FOREIGN_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_REQUEST_BUYQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_REQUEST_SELLQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_LOCAL_AMOUNT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_LOCAL_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DENOMINATION", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DENOMINATION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_PATH_CERTIFICATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PATH_CERTIFICATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_IMG_MESSAGE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_IMG_MESSAGE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [REQUEST_SETTING] ([CLIENT_ID], [BRANCH_ID], [USER_ID], [TRANSACTION_"& _ 
+                "TYPE], [CURRENCY_LABEL], [CURRENCY_CODE], [SPREAD_TYPE], [FOREIGN_AMOUNT], [REQU"& _ 
+                "EST_BUYQUATE], [REQUEST_SELLQUATE], [TOKEN_XML_BUYQUATE], [TOKEN_XML_SELLQUATE],"& _ 
+                " [TOKEN_ENCODING_BUYQUATE], [TOKEN_ENCODING_SELLQUATE], [FOREIGN_AMOUNT_SELL], ["& _ 
+                "LOCAL_AMOUNT], [DENOMINATION], [PATH_CERTIFICATE], [IMG_MESSAGE]) VALUES (@CLIEN"& _ 
+                "T_ID, @BRANCH_ID, @USER_ID, @TRANSACTION_TYPE, @CURRENCY_LABEL, @CURRENCY_CODE, "& _ 
+                "@SPREAD_TYPE, @FOREIGN_AMOUNT, @REQUEST_BUYQUATE, @REQUEST_SELLQUATE, @TOKEN_XML"& _ 
+                "_BUYQUATE, @TOKEN_XML_SELLQUATE, @TOKEN_ENCODING_BUYQUATE, @TOKEN_ENCODING_SELLQ"& _ 
+                "UATE, @FOREIGN_AMOUNT_SELL, @LOCAL_AMOUNT, @DENOMINATION, @PATH_CERTIFICATE, @IM"& _ 
+                "G_MESSAGE);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT REQUEST_ID, CLIENT_ID, BRANCH_ID, USER_ID, TRANSACTION_TYPE,"& _ 
+                " CURRENCY_LABEL, CURRENCY_CODE, SPREAD_TYPE, FOREIGN_AMOUNT, REQUEST_BUYQUATE, R"& _ 
+                "EQUEST_SELLQUATE, TOKEN_XML_BUYQUATE, TOKEN_XML_SELLQUATE, TOKEN_ENCODING_BUYQUA"& _ 
+                "TE, TOKEN_ENCODING_SELLQUATE, FOREIGN_AMOUNT_SELL, LOCAL_AMOUNT, DENOMINATION, P"& _ 
+                "ATH_CERTIFICATE, IMG_MESSAGE FROM REQUEST_SETTING WHERE (REQUEST_ID = SCOPE_IDEN"& _ 
+                "TITY())"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CLIENT_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BRANCH_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@USER_ID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TRANSACTION_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_LABEL", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_CODE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SPREAD_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LOCAL_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DENOMINATION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PATH_CERTIFICATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IMG_MESSAGE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [REQUEST_SETTING] SET [CLIENT_ID] = @CLIENT_ID, [BRANCH_ID] = @BRANCH_ID, "& _ 
+                "[USER_ID] = @USER_ID, [TRANSACTION_TYPE] = @TRANSACTION_TYPE, [CURRENCY_LABEL] ="& _ 
+                " @CURRENCY_LABEL, [CURRENCY_CODE] = @CURRENCY_CODE, [SPREAD_TYPE] = @SPREAD_TYPE"& _ 
+                ", [FOREIGN_AMOUNT] = @FOREIGN_AMOUNT, [REQUEST_BUYQUATE] = @REQUEST_BUYQUATE, [R"& _ 
+                "EQUEST_SELLQUATE] = @REQUEST_SELLQUATE, [TOKEN_XML_BUYQUATE] = @TOKEN_XML_BUYQUA"& _ 
+                "TE, [TOKEN_XML_SELLQUATE] = @TOKEN_XML_SELLQUATE, [TOKEN_ENCODING_BUYQUATE] = @T"& _ 
+                "OKEN_ENCODING_BUYQUATE, [TOKEN_ENCODING_SELLQUATE] = @TOKEN_ENCODING_SELLQUATE, "& _ 
+                "[FOREIGN_AMOUNT_SELL] = @FOREIGN_AMOUNT_SELL, [LOCAL_AMOUNT] = @LOCAL_AMOUNT, [D"& _ 
+                "ENOMINATION] = @DENOMINATION, [PATH_CERTIFICATE] = @PATH_CERTIFICATE, [IMG_MESSA"& _ 
+                "GE] = @IMG_MESSAGE WHERE (([REQUEST_ID] = @Original_REQUEST_ID) AND ((@IsNull_CL"& _ 
+                "IENT_ID = 1 AND [CLIENT_ID] IS NULL) OR ([CLIENT_ID] = @Original_CLIENT_ID)) AND"& _ 
+                " ((@IsNull_BRANCH_ID = 1 AND [BRANCH_ID] IS NULL) OR ([BRANCH_ID] = @Original_BR"& _ 
+                "ANCH_ID)) AND ((@IsNull_USER_ID = 1 AND [USER_ID] IS NULL) OR ([USER_ID] = @Orig"& _ 
+                "inal_USER_ID)) AND ((@IsNull_TRANSACTION_TYPE = 1 AND [TRANSACTION_TYPE] IS NULL"& _ 
+                ") OR ([TRANSACTION_TYPE] = @Original_TRANSACTION_TYPE)) AND ((@IsNull_CURRENCY_L"& _ 
+                "ABEL = 1 AND [CURRENCY_LABEL] IS NULL) OR ([CURRENCY_LABEL] = @Original_CURRENCY"& _ 
+                "_LABEL)) AND ((@IsNull_CURRENCY_CODE = 1 AND [CURRENCY_CODE] IS NULL) OR ([CURRE"& _ 
+                "NCY_CODE] = @Original_CURRENCY_CODE)) AND ((@IsNull_SPREAD_TYPE = 1 AND [SPREAD_"& _ 
+                "TYPE] IS NULL) OR ([SPREAD_TYPE] = @Original_SPREAD_TYPE)) AND ((@IsNull_FOREIGN"& _ 
+                "_AMOUNT = 1 AND [FOREIGN_AMOUNT] IS NULL) OR ([FOREIGN_AMOUNT] = @Original_FOREI"& _ 
+                "GN_AMOUNT)) AND ((@IsNull_REQUEST_BUYQUATE = 1 AND [REQUEST_BUYQUATE] IS NULL) O"& _ 
+                "R ([REQUEST_BUYQUATE] = @Original_REQUEST_BUYQUATE)) AND ((@IsNull_REQUEST_SELLQ"& _ 
+                "UATE = 1 AND [REQUEST_SELLQUATE] IS NULL) OR ([REQUEST_SELLQUATE] = @Original_RE"& _ 
+                "QUEST_SELLQUATE)) AND ((@IsNull_TOKEN_XML_BUYQUATE = 1 AND [TOKEN_XML_BUYQUATE] "& _ 
+                "IS NULL) OR ([TOKEN_XML_BUYQUATE] = @Original_TOKEN_XML_BUYQUATE)) AND ((@IsNull"& _ 
+                "_TOKEN_XML_SELLQUATE = 1 AND [TOKEN_XML_SELLQUATE] IS NULL) OR ([TOKEN_XML_SELLQ"& _ 
+                "UATE] = @Original_TOKEN_XML_SELLQUATE)) AND ((@IsNull_TOKEN_ENCODING_BUYQUATE = "& _ 
+                "1 AND [TOKEN_ENCODING_BUYQUATE] IS NULL) OR ([TOKEN_ENCODING_BUYQUATE] = @Origin"& _ 
+                "al_TOKEN_ENCODING_BUYQUATE)) AND ((@IsNull_TOKEN_ENCODING_SELLQUATE = 1 AND [TOK"& _ 
+                "EN_ENCODING_SELLQUATE] IS NULL) OR ([TOKEN_ENCODING_SELLQUATE] = @Original_TOKEN"& _ 
+                "_ENCODING_SELLQUATE)) AND ((@IsNull_FOREIGN_AMOUNT_SELL = 1 AND [FOREIGN_AMOUNT_"& _ 
+                "SELL] IS NULL) OR ([FOREIGN_AMOUNT_SELL] = @Original_FOREIGN_AMOUNT_SELL)) AND ("& _ 
+                "(@IsNull_LOCAL_AMOUNT = 1 AND [LOCAL_AMOUNT] IS NULL) OR ([LOCAL_AMOUNT] = @Orig"& _ 
+                "inal_LOCAL_AMOUNT)) AND ((@IsNull_DENOMINATION = 1 AND [DENOMINATION] IS NULL) O"& _ 
+                "R ([DENOMINATION] = @Original_DENOMINATION)) AND ((@IsNull_PATH_CERTIFICATE = 1 "& _ 
+                "AND [PATH_CERTIFICATE] IS NULL) OR ([PATH_CERTIFICATE] = @Original_PATH_CERTIFIC"& _ 
+                "ATE)) AND ((@IsNull_IMG_MESSAGE = 1 AND [IMG_MESSAGE] IS NULL) OR ([IMG_MESSAGE]"& _ 
+                " = @Original_IMG_MESSAGE)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT REQUEST_ID, CLIENT_ID, BRANCH_ID, USER_ID, "& _ 
+                "TRANSACTION_TYPE, CURRENCY_LABEL, CURRENCY_CODE, SPREAD_TYPE, FOREIGN_AMOUNT, RE"& _ 
+                "QUEST_BUYQUATE, REQUEST_SELLQUATE, TOKEN_XML_BUYQUATE, TOKEN_XML_SELLQUATE, TOKE"& _ 
+                "N_ENCODING_BUYQUATE, TOKEN_ENCODING_SELLQUATE, FOREIGN_AMOUNT_SELL, LOCAL_AMOUNT"& _ 
+                ", DENOMINATION, PATH_CERTIFICATE, IMG_MESSAGE FROM REQUEST_SETTING WHERE (REQUES"& _ 
+                "T_ID = @REQUEST_ID)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CLIENT_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BRANCH_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@USER_ID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TRANSACTION_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_LABEL", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_CODE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SPREAD_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LOCAL_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DENOMINATION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PATH_CERTIFICATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IMG_MESSAGE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "REQUEST_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CLIENT_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CLIENT_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_BRANCH_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_BRANCH_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_USER_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_USER_ID", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TRANSACTION_TYPE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TRANSACTION_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CURRENCY_LABEL", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CURRENCY_LABEL", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_CURRENCY_CODE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_CURRENCY_CODE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_SPREAD_TYPE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SPREAD_TYPE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_FOREIGN_AMOUNT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FOREIGN_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_REQUEST_BUYQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_REQUEST_SELLQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_LOCAL_AMOUNT", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_LOCAL_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 2, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_DENOMINATION", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_DENOMINATION", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_PATH_CERTIFICATE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_PATH_CERTIFICATE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_IMG_MESSAGE", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_IMG_MESSAGE", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "REQUEST_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection
+            Me._connection.ConnectionString = Global.MessageExchange.My.MySettings.Default.BOFExchangRateConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(3) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT     REQUEST_ID, CLIENT_ID, BRANCH_ID, USER_ID, TRANSACTION_TYPE, CURRENCY_"& _ 
+                "LABEL, CURRENCY_CODE, SPREAD_TYPE, FOREIGN_AMOUNT, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      REQUE"& _ 
+                "ST_BUYQUATE, REQUEST_SELLQUATE, TOKEN_XML_BUYQUATE, TOKEN_XML_SELLQUATE, TOKEN_E"& _ 
+                "NCODING_BUYQUATE, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      TOKEN_ENCODING_SELLQUATE, FOREIGN_AMOU"& _ 
+                "NT_SELL, LOCAL_AMOUNT, DENOMINATION, PATH_CERTIFICATE, IMG_MESSAGE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM        "& _ 
+                " REQUEST_SETTING"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "DELETE FROM [REQUEST_SETTING] WHERE (([REQUEST_ID] = @Original_REQUEST_ID))"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "REQUEST_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "INSERT INTO REQUEST_SETTING"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      (CLIENT_ID, BRANCH_ID, USER_ID"& _ 
+                ", TRANSACTION_TYPE, CURRENCY_LABEL, CURRENCY_CODE, SPREAD_TYPE, FOREIGN_AMOUNT, "& _ 
+                "REQUEST_BUYQUATE, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      REQUEST_SELLQUATE, TOKEN_XML_BUYQUATE,"& _ 
+                " TOKEN_XML_SELLQUATE, TOKEN_ENCODING_BUYQUATE, TOKEN_ENCODING_SELLQUATE, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"     "& _ 
+                "                 FOREIGN_AMOUNT_SELL, LOCAL_AMOUNT, DENOMINATION, PATH_CERTIFICA"& _ 
+                "TE, IMG_MESSAGE)"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"VALUES     (@CLIENT_ID,@BRANCH_ID,@USER_ID,@TRANSACTION_TYPE,@"& _ 
+                "CURRENCY_LABEL,@CURRENCY_CODE,@SPREAD_TYPE,@FOREIGN_AMOUNT,@REQUEST_BUYQUATE,@RE"& _ 
+                "QUEST_SELLQUATE,@TOKEN_XML_BUYQUATE,@TOKEN_XML_SELLQUATE,@TOKEN_ENCODING_BUYQUAT"& _ 
+                "E,@TOKEN_ENCODING_SELLQUATE,@FOREIGN_AMOUNT_SELL,@LOCAL_AMOUNT,@DENOMINATION,@PA"& _ 
+                "TH_CERTIFICATE,@IMG_MESSAGE);    "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CLIENT_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BRANCH_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@USER_ID", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TRANSACTION_TYPE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_LABEL", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_CODE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SPREAD_TYPE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 500, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 500, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LOCAL_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 2, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DENOMINATION", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PATH_CERTIFICATE", Global.System.Data.SqlDbType.NVarChar, 150, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IMG_MESSAGE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(3).Connection = Me.Connection
+            Me._commandCollection(3).CommandText = "UPDATE    REQUEST_SETTING"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET              CLIENT_ID = @CLIENT_ID, BRANCH_ID = @"& _ 
+                "BRANCH_ID, USER_ID = @USER_ID, TRANSACTION_TYPE = @TRANSACTION_TYPE, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"         "& _ 
+                "             CURRENCY_LABEL = @CURRENCY_LABEL, CURRENCY_CODE = @CURRENCY_CODE, S"& _ 
+                "PREAD_TYPE = @SPREAD_TYPE, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      FOREIGN_AMOUNT = @FOREIGN_AMO"& _ 
+                "UNT, REQUEST_BUYQUATE = @REQUEST_BUYQUATE, REQUEST_SELLQUATE = @REQUEST_SELLQUAT"& _ 
+                "E, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      TOKEN_XML_BUYQUATE = @TOKEN_XML_BUYQUATE, TOKEN_XML_S"& _ 
+                "ELLQUATE = @TOKEN_XML_SELLQUATE, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      TOKEN_ENCODING_BUYQUATE"& _ 
+                " = @TOKEN_ENCODING_BUYQUATE, TOKEN_ENCODING_SELLQUATE = @TOKEN_ENCODING_SELLQUAT"& _ 
+                "E, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      FOREIGN_AMOUNT_SELL = @FOREIGN_AMOUNT_SELL, LOCAL_AMO"& _ 
+                "UNT = @LOCAL_AMOUNT, DENOMINATION = @DENOMINATION, "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"                      PATH_"& _ 
+                "CERTIFICATE = @PATH_CERTIFICATE, IMG_MESSAGE = @IMG_MESSAGE"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE     (REQUEST_"& _ 
+                "ID = @Original_REQUEST_ID);     "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CLIENT_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "CLIENT_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@BRANCH_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "BRANCH_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@USER_ID", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "USER_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TRANSACTION_TYPE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "TRANSACTION_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_LABEL", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_LABEL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@CURRENCY_CODE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "CURRENCY_CODE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SPREAD_TYPE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "SPREAD_TYPE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 500, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@REQUEST_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 500, Global.System.Data.ParameterDirection.Input, 0, 0, "REQUEST_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_XML_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_XML_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_BUYQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_BUYQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TOKEN_ENCODING_SELLQUATE", Global.System.Data.SqlDbType.NVarChar, 200, Global.System.Data.ParameterDirection.Input, 0, 0, "TOKEN_ENCODING_SELLQUATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@FOREIGN_AMOUNT_SELL", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 2, "FOREIGN_AMOUNT_SELL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LOCAL_AMOUNT", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 2, "LOCAL_AMOUNT", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DENOMINATION", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "DENOMINATION", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PATH_CERTIFICATE", Global.System.Data.SqlDbType.NVarChar, 150, Global.System.Data.ParameterDirection.Input, 0, 0, "PATH_CERTIFICATE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IMG_MESSAGE", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "IMG_MESSAGE", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_REQUEST_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "REQUEST_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As DS_Helper.REQUEST_SETTINGDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As DS_Helper.REQUEST_SETTINGDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As DS_Helper.REQUEST_SETTINGDataTable = New DS_Helper.REQUEST_SETTINGDataTable
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As DS_Helper.REQUEST_SETTINGDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As DS_Helper) As Integer
+            Return Me.Adapter.Update(dataSet, "REQUEST_SETTING")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete( _
+                    ByVal Original_REQUEST_ID As Decimal,  _
+                    ByVal Original_CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_USER_ID As String,  _
+                    ByVal Original_TRANSACTION_TYPE As String,  _
+                    ByVal Original_CURRENCY_LABEL As String,  _
+                    ByVal Original_CURRENCY_CODE As String,  _
+                    ByVal Original_SPREAD_TYPE As String,  _
+                    ByVal Original_FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_REQUEST_BUYQUATE As String,  _
+                    ByVal Original_REQUEST_SELLQUATE As String,  _
+                    ByVal Original_TOKEN_XML_BUYQUATE As String,  _
+                    ByVal Original_TOKEN_XML_SELLQUATE As String,  _
+                    ByVal Original_TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal Original_TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal Original_FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_DENOMINATION As String,  _
+                    ByVal Original_PATH_CERTIFICATE As String,  _
+                    ByVal Original_IMG_MESSAGE As String) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_REQUEST_ID,Decimal)
+            If (Original_CLIENT_ID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_CLIENT_ID.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (Original_BRANCH_ID.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_BRANCH_ID.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (Original_USER_ID Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_USER_ID,String)
+            End If
+            If (Original_TRANSACTION_TYPE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(8).Value = CType(Original_TRANSACTION_TYPE,String)
+            End If
+            If (Original_CURRENCY_LABEL Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(9).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(10).Value = CType(Original_CURRENCY_LABEL,String)
+            End If
+            If (Original_CURRENCY_CODE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(11).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(12).Value = CType(Original_CURRENCY_CODE,String)
+            End If
+            If (Original_SPREAD_TYPE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(13).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(14).Value = CType(Original_SPREAD_TYPE,String)
+            End If
+            If (Original_FOREIGN_AMOUNT.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = CType(Original_FOREIGN_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(15).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(16).Value = Global.System.DBNull.Value
+            End If
+            If (Original_REQUEST_BUYQUATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(17).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(18).Value = CType(Original_REQUEST_BUYQUATE,String)
+            End If
+            If (Original_REQUEST_SELLQUATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(19).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(20).Value = CType(Original_REQUEST_SELLQUATE,String)
+            End If
+            If (Original_TOKEN_XML_BUYQUATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(21).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(22).Value = CType(Original_TOKEN_XML_BUYQUATE,String)
+            End If
+            If (Original_TOKEN_XML_SELLQUATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(23).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(24).Value = CType(Original_TOKEN_XML_SELLQUATE,String)
+            End If
+            If (Original_TOKEN_ENCODING_BUYQUATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(25).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(26).Value = CType(Original_TOKEN_ENCODING_BUYQUATE,String)
+            End If
+            If (Original_TOKEN_ENCODING_SELLQUATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(28).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(27).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(28).Value = CType(Original_TOKEN_ENCODING_SELLQUATE,String)
+            End If
+            If (Original_FOREIGN_AMOUNT_SELL.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(30).Value = CType(Original_FOREIGN_AMOUNT_SELL.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(29).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(30).Value = Global.System.DBNull.Value
+            End If
+            If (Original_LOCAL_AMOUNT.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(32).Value = CType(Original_LOCAL_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(31).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(32).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DENOMINATION Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(34).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(33).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(34).Value = CType(Original_DENOMINATION,String)
+            End If
+            If (Original_PATH_CERTIFICATE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(36).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(35).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(36).Value = CType(Original_PATH_CERTIFICATE,String)
+            End If
+            If (Original_IMG_MESSAGE Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(38).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(37).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(38).Value = CType(Original_IMG_MESSAGE,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert( _
+                    ByVal CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal USER_ID As String,  _
+                    ByVal TRANSACTION_TYPE As String,  _
+                    ByVal CURRENCY_LABEL As String,  _
+                    ByVal CURRENCY_CODE As String,  _
+                    ByVal SPREAD_TYPE As String,  _
+                    ByVal FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal REQUEST_BUYQUATE As String,  _
+                    ByVal REQUEST_SELLQUATE As String,  _
+                    ByVal TOKEN_XML_BUYQUATE As String,  _
+                    ByVal TOKEN_XML_SELLQUATE As String,  _
+                    ByVal TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal DENOMINATION As String,  _
+                    ByVal PATH_CERTIFICATE As String,  _
+                    ByVal IMG_MESSAGE As String) As Integer
+            If (CLIENT_ID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(CLIENT_ID.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (BRANCH_ID.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(BRANCH_ID.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (USER_ID Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(USER_ID,String)
+            End If
+            If (TRANSACTION_TYPE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(TRANSACTION_TYPE,String)
+            End If
+            If (CURRENCY_LABEL Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(CURRENCY_LABEL,String)
+            End If
+            If (CURRENCY_CODE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(CURRENCY_CODE,String)
+            End If
+            If (SPREAD_TYPE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(6).Value = CType(SPREAD_TYPE,String)
+            End If
+            If (FOREIGN_AMOUNT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(7).Value = CType(FOREIGN_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (REQUEST_BUYQUATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(8).Value = CType(REQUEST_BUYQUATE,String)
+            End If
+            If (REQUEST_SELLQUATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(REQUEST_SELLQUATE,String)
+            End If
+            If (TOKEN_XML_BUYQUATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(10).Value = CType(TOKEN_XML_BUYQUATE,String)
+            End If
+            If (TOKEN_XML_SELLQUATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(11).Value = CType(TOKEN_XML_SELLQUATE,String)
+            End If
+            If (TOKEN_ENCODING_BUYQUATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(12).Value = CType(TOKEN_ENCODING_BUYQUATE,String)
+            End If
+            If (TOKEN_ENCODING_SELLQUATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(TOKEN_ENCODING_SELLQUATE,String)
+            End If
+            If (FOREIGN_AMOUNT_SELL.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(FOREIGN_AMOUNT_SELL.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (LOCAL_AMOUNT.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(LOCAL_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            If (DENOMINATION Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(16).Value = CType(DENOMINATION,String)
+            End If
+            If (PATH_CERTIFICATE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(PATH_CERTIFICATE,String)
+            End If
+            If (IMG_MESSAGE Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(IMG_MESSAGE,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal USER_ID As String,  _
+                    ByVal TRANSACTION_TYPE As String,  _
+                    ByVal CURRENCY_LABEL As String,  _
+                    ByVal CURRENCY_CODE As String,  _
+                    ByVal SPREAD_TYPE As String,  _
+                    ByVal FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal REQUEST_BUYQUATE As String,  _
+                    ByVal REQUEST_SELLQUATE As String,  _
+                    ByVal TOKEN_XML_BUYQUATE As String,  _
+                    ByVal TOKEN_XML_SELLQUATE As String,  _
+                    ByVal TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal DENOMINATION As String,  _
+                    ByVal PATH_CERTIFICATE As String,  _
+                    ByVal IMG_MESSAGE As String,  _
+                    ByVal Original_REQUEST_ID As Decimal,  _
+                    ByVal Original_CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_USER_ID As String,  _
+                    ByVal Original_TRANSACTION_TYPE As String,  _
+                    ByVal Original_CURRENCY_LABEL As String,  _
+                    ByVal Original_CURRENCY_CODE As String,  _
+                    ByVal Original_SPREAD_TYPE As String,  _
+                    ByVal Original_FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_REQUEST_BUYQUATE As String,  _
+                    ByVal Original_REQUEST_SELLQUATE As String,  _
+                    ByVal Original_TOKEN_XML_BUYQUATE As String,  _
+                    ByVal Original_TOKEN_XML_SELLQUATE As String,  _
+                    ByVal Original_TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal Original_TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal Original_FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_DENOMINATION As String,  _
+                    ByVal Original_PATH_CERTIFICATE As String,  _
+                    ByVal Original_IMG_MESSAGE As String,  _
+                    ByVal REQUEST_ID As Decimal) As Integer
+            If (CLIENT_ID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(CLIENT_ID.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (BRANCH_ID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(BRANCH_ID.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (USER_ID Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(USER_ID,String)
+            End If
+            If (TRANSACTION_TYPE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(TRANSACTION_TYPE,String)
+            End If
+            If (CURRENCY_LABEL Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(CURRENCY_LABEL,String)
+            End If
+            If (CURRENCY_CODE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(CURRENCY_CODE,String)
+            End If
+            If (SPREAD_TYPE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(SPREAD_TYPE,String)
+            End If
+            If (FOREIGN_AMOUNT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(FOREIGN_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (REQUEST_BUYQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(REQUEST_BUYQUATE,String)
+            End If
+            If (REQUEST_SELLQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(REQUEST_SELLQUATE,String)
+            End If
+            If (TOKEN_XML_BUYQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(TOKEN_XML_BUYQUATE,String)
+            End If
+            If (TOKEN_XML_SELLQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(TOKEN_XML_SELLQUATE,String)
+            End If
+            If (TOKEN_ENCODING_BUYQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(TOKEN_ENCODING_BUYQUATE,String)
+            End If
+            If (TOKEN_ENCODING_SELLQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(TOKEN_ENCODING_SELLQUATE,String)
+            End If
+            If (FOREIGN_AMOUNT_SELL.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(FOREIGN_AMOUNT_SELL.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (LOCAL_AMOUNT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(LOCAL_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            If (DENOMINATION Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(16).Value = CType(DENOMINATION,String)
+            End If
+            If (PATH_CERTIFICATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(PATH_CERTIFICATE,String)
+            End If
+            If (IMG_MESSAGE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(IMG_MESSAGE,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(19).Value = CType(Original_REQUEST_ID,Decimal)
+            If (Original_CLIENT_ID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(Original_CLIENT_ID.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(20).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
+            End If
+            If (Original_BRANCH_ID.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(Original_BRANCH_ID.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
+            End If
+            If (Original_USER_ID Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(24).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(Original_USER_ID,String)
+            End If
+            If (Original_TRANSACTION_TYPE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(Original_TRANSACTION_TYPE,String)
+            End If
+            If (Original_CURRENCY_LABEL Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(28).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(29).Value = CType(Original_CURRENCY_LABEL,String)
+            End If
+            If (Original_CURRENCY_CODE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(30).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(31).Value = CType(Original_CURRENCY_CODE,String)
+            End If
+            If (Original_SPREAD_TYPE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(32).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_SPREAD_TYPE,String)
+            End If
+            If (Original_FOREIGN_AMOUNT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = CType(Original_FOREIGN_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(34).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(35).Value = Global.System.DBNull.Value
+            End If
+            If (Original_REQUEST_BUYQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(36).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(37).Value = CType(Original_REQUEST_BUYQUATE,String)
+            End If
+            If (Original_REQUEST_SELLQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(38).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(39).Value = CType(Original_REQUEST_SELLQUATE,String)
+            End If
+            If (Original_TOKEN_XML_BUYQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(40).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(41).Value = CType(Original_TOKEN_XML_BUYQUATE,String)
+            End If
+            If (Original_TOKEN_XML_SELLQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(43).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(42).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(43).Value = CType(Original_TOKEN_XML_SELLQUATE,String)
+            End If
+            If (Original_TOKEN_ENCODING_BUYQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(45).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(44).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(45).Value = CType(Original_TOKEN_ENCODING_BUYQUATE,String)
+            End If
+            If (Original_TOKEN_ENCODING_SELLQUATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(47).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(46).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(47).Value = CType(Original_TOKEN_ENCODING_SELLQUATE,String)
+            End If
+            If (Original_FOREIGN_AMOUNT_SELL.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(49).Value = CType(Original_FOREIGN_AMOUNT_SELL.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(48).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(49).Value = Global.System.DBNull.Value
+            End If
+            If (Original_LOCAL_AMOUNT.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(51).Value = CType(Original_LOCAL_AMOUNT.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(50).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(51).Value = Global.System.DBNull.Value
+            End If
+            If (Original_DENOMINATION Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(53).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(52).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(53).Value = CType(Original_DENOMINATION,String)
+            End If
+            If (Original_PATH_CERTIFICATE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(55).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(54).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(55).Value = CType(Original_PATH_CERTIFICATE,String)
+            End If
+            If (Original_IMG_MESSAGE Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(57).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(56).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(57).Value = CType(Original_IMG_MESSAGE,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(58).Value = CType(REQUEST_ID,Decimal)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal USER_ID As String,  _
+                    ByVal TRANSACTION_TYPE As String,  _
+                    ByVal CURRENCY_LABEL As String,  _
+                    ByVal CURRENCY_CODE As String,  _
+                    ByVal SPREAD_TYPE As String,  _
+                    ByVal FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal REQUEST_BUYQUATE As String,  _
+                    ByVal REQUEST_SELLQUATE As String,  _
+                    ByVal TOKEN_XML_BUYQUATE As String,  _
+                    ByVal TOKEN_XML_SELLQUATE As String,  _
+                    ByVal TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal DENOMINATION As String,  _
+                    ByVal PATH_CERTIFICATE As String,  _
+                    ByVal IMG_MESSAGE As String,  _
+                    ByVal Original_REQUEST_ID As Decimal,  _
+                    ByVal Original_CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_USER_ID As String,  _
+                    ByVal Original_TRANSACTION_TYPE As String,  _
+                    ByVal Original_CURRENCY_LABEL As String,  _
+                    ByVal Original_CURRENCY_CODE As String,  _
+                    ByVal Original_SPREAD_TYPE As String,  _
+                    ByVal Original_FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_REQUEST_BUYQUATE As String,  _
+                    ByVal Original_REQUEST_SELLQUATE As String,  _
+                    ByVal Original_TOKEN_XML_BUYQUATE As String,  _
+                    ByVal Original_TOKEN_XML_SELLQUATE As String,  _
+                    ByVal Original_TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal Original_TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal Original_FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal Original_DENOMINATION As String,  _
+                    ByVal Original_PATH_CERTIFICATE As String,  _
+                    ByVal Original_IMG_MESSAGE As String) As Integer
+            Return Me.Update(CLIENT_ID, BRANCH_ID, USER_ID, TRANSACTION_TYPE, CURRENCY_LABEL, CURRENCY_CODE, SPREAD_TYPE, FOREIGN_AMOUNT, REQUEST_BUYQUATE, REQUEST_SELLQUATE, TOKEN_XML_BUYQUATE, TOKEN_XML_SELLQUATE, TOKEN_ENCODING_BUYQUATE, TOKEN_ENCODING_SELLQUATE, FOREIGN_AMOUNT_SELL, LOCAL_AMOUNT, DENOMINATION, PATH_CERTIFICATE, IMG_MESSAGE, Original_REQUEST_ID, Original_CLIENT_ID, Original_BRANCH_ID, Original_USER_ID, Original_TRANSACTION_TYPE, Original_CURRENCY_LABEL, Original_CURRENCY_CODE, Original_SPREAD_TYPE, Original_FOREIGN_AMOUNT, Original_REQUEST_BUYQUATE, Original_REQUEST_SELLQUATE, Original_TOKEN_XML_BUYQUATE, Original_TOKEN_XML_SELLQUATE, Original_TOKEN_ENCODING_BUYQUATE, Original_TOKEN_ENCODING_SELLQUATE, Original_FOREIGN_AMOUNT_SELL, Original_LOCAL_AMOUNT, Original_DENOMINATION, Original_PATH_CERTIFICATE, Original_IMG_MESSAGE, Original_REQUEST_ID)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, false)>  _
+        Public Overloads Overridable Function DeleteReuestSeting(ByVal Original_REQUEST_ID As Decimal) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
+            command.Parameters(0).Value = CType(Original_REQUEST_ID,Decimal)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
+        Public Overloads Overridable Function InsertNewSetting( _
+                    ByVal CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal USER_ID As String,  _
+                    ByVal TRANSACTION_TYPE As String,  _
+                    ByVal CURRENCY_LABEL As String,  _
+                    ByVal CURRENCY_CODE As String,  _
+                    ByVal SPREAD_TYPE As String,  _
+                    ByVal FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal REQUEST_BUYQUATE As String,  _
+                    ByVal REQUEST_SELLQUATE As String,  _
+                    ByVal TOKEN_XML_BUYQUATE As String,  _
+                    ByVal TOKEN_XML_SELLQUATE As String,  _
+                    ByVal TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal DENOMINATION As String,  _
+                    ByVal PATH_CERTIFICATE As String,  _
+                    ByVal IMG_MESSAGE As String) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(2)
+            If (CLIENT_ID.HasValue = true) Then
+                command.Parameters(0).Value = CType(CLIENT_ID.Value,Decimal)
+            Else
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (BRANCH_ID.HasValue = true) Then
+                command.Parameters(1).Value = CType(BRANCH_ID.Value,Decimal)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (USER_ID Is Nothing) Then
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(2).Value = CType(USER_ID,String)
+            End If
+            If (TRANSACTION_TYPE Is Nothing) Then
+                command.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(3).Value = CType(TRANSACTION_TYPE,String)
+            End If
+            If (CURRENCY_LABEL Is Nothing) Then
+                command.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(4).Value = CType(CURRENCY_LABEL,String)
+            End If
+            If (CURRENCY_CODE Is Nothing) Then
+                command.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(5).Value = CType(CURRENCY_CODE,String)
+            End If
+            If (SPREAD_TYPE Is Nothing) Then
+                command.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(6).Value = CType(SPREAD_TYPE,String)
+            End If
+            If (FOREIGN_AMOUNT.HasValue = true) Then
+                command.Parameters(7).Value = CType(FOREIGN_AMOUNT.Value,Decimal)
+            Else
+                command.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (REQUEST_BUYQUATE Is Nothing) Then
+                command.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(8).Value = CType(REQUEST_BUYQUATE,String)
+            End If
+            If (REQUEST_SELLQUATE Is Nothing) Then
+                command.Parameters(9).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(9).Value = CType(REQUEST_SELLQUATE,String)
+            End If
+            If (TOKEN_XML_BUYQUATE Is Nothing) Then
+                command.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(10).Value = CType(TOKEN_XML_BUYQUATE,String)
+            End If
+            If (TOKEN_XML_SELLQUATE Is Nothing) Then
+                command.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(11).Value = CType(TOKEN_XML_SELLQUATE,String)
+            End If
+            If (TOKEN_ENCODING_BUYQUATE Is Nothing) Then
+                command.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(12).Value = CType(TOKEN_ENCODING_BUYQUATE,String)
+            End If
+            If (TOKEN_ENCODING_SELLQUATE Is Nothing) Then
+                command.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(13).Value = CType(TOKEN_ENCODING_SELLQUATE,String)
+            End If
+            If (FOREIGN_AMOUNT_SELL.HasValue = true) Then
+                command.Parameters(14).Value = CType(FOREIGN_AMOUNT_SELL.Value,Decimal)
+            Else
+                command.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (LOCAL_AMOUNT.HasValue = true) Then
+                command.Parameters(15).Value = CType(LOCAL_AMOUNT.Value,Decimal)
+            Else
+                command.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            If (DENOMINATION Is Nothing) Then
+                command.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(16).Value = CType(DENOMINATION,String)
+            End If
+            If (PATH_CERTIFICATE Is Nothing) Then
+                command.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(17).Value = CType(PATH_CERTIFICATE,String)
+            End If
+            If (IMG_MESSAGE Is Nothing) Then
+                command.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(18).Value = CType(IMG_MESSAGE,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
+        Public Overloads Overridable Function UpdateRequestSetting( _
+                    ByVal CLIENT_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal BRANCH_ID As Global.System.Nullable(Of Decimal),  _
+                    ByVal USER_ID As String,  _
+                    ByVal TRANSACTION_TYPE As String,  _
+                    ByVal CURRENCY_LABEL As String,  _
+                    ByVal CURRENCY_CODE As String,  _
+                    ByVal SPREAD_TYPE As String,  _
+                    ByVal FOREIGN_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal REQUEST_BUYQUATE As String,  _
+                    ByVal REQUEST_SELLQUATE As String,  _
+                    ByVal TOKEN_XML_BUYQUATE As String,  _
+                    ByVal TOKEN_XML_SELLQUATE As String,  _
+                    ByVal TOKEN_ENCODING_BUYQUATE As String,  _
+                    ByVal TOKEN_ENCODING_SELLQUATE As String,  _
+                    ByVal FOREIGN_AMOUNT_SELL As Global.System.Nullable(Of Decimal),  _
+                    ByVal LOCAL_AMOUNT As Global.System.Nullable(Of Decimal),  _
+                    ByVal DENOMINATION As String,  _
+                    ByVal PATH_CERTIFICATE As String,  _
+                    ByVal IMG_MESSAGE As String,  _
+                    ByVal Original_REQUEST_ID As Decimal) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(3)
+            If (CLIENT_ID.HasValue = true) Then
+                command.Parameters(0).Value = CType(CLIENT_ID.Value,Decimal)
+            Else
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (BRANCH_ID.HasValue = true) Then
+                command.Parameters(1).Value = CType(BRANCH_ID.Value,Decimal)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (USER_ID Is Nothing) Then
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(2).Value = CType(USER_ID,String)
+            End If
+            If (TRANSACTION_TYPE Is Nothing) Then
+                command.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(3).Value = CType(TRANSACTION_TYPE,String)
+            End If
+            If (CURRENCY_LABEL Is Nothing) Then
+                command.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(4).Value = CType(CURRENCY_LABEL,String)
+            End If
+            If (CURRENCY_CODE Is Nothing) Then
+                command.Parameters(5).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(5).Value = CType(CURRENCY_CODE,String)
+            End If
+            If (SPREAD_TYPE Is Nothing) Then
+                command.Parameters(6).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(6).Value = CType(SPREAD_TYPE,String)
+            End If
+            If (FOREIGN_AMOUNT.HasValue = true) Then
+                command.Parameters(7).Value = CType(FOREIGN_AMOUNT.Value,Decimal)
+            Else
+                command.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (REQUEST_BUYQUATE Is Nothing) Then
+                command.Parameters(8).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(8).Value = CType(REQUEST_BUYQUATE,String)
+            End If
+            If (REQUEST_SELLQUATE Is Nothing) Then
+                command.Parameters(9).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(9).Value = CType(REQUEST_SELLQUATE,String)
+            End If
+            If (TOKEN_XML_BUYQUATE Is Nothing) Then
+                command.Parameters(10).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(10).Value = CType(TOKEN_XML_BUYQUATE,String)
+            End If
+            If (TOKEN_XML_SELLQUATE Is Nothing) Then
+                command.Parameters(11).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(11).Value = CType(TOKEN_XML_SELLQUATE,String)
+            End If
+            If (TOKEN_ENCODING_BUYQUATE Is Nothing) Then
+                command.Parameters(12).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(12).Value = CType(TOKEN_ENCODING_BUYQUATE,String)
+            End If
+            If (TOKEN_ENCODING_SELLQUATE Is Nothing) Then
+                command.Parameters(13).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(13).Value = CType(TOKEN_ENCODING_SELLQUATE,String)
+            End If
+            If (FOREIGN_AMOUNT_SELL.HasValue = true) Then
+                command.Parameters(14).Value = CType(FOREIGN_AMOUNT_SELL.Value,Decimal)
+            Else
+                command.Parameters(14).Value = Global.System.DBNull.Value
+            End If
+            If (LOCAL_AMOUNT.HasValue = true) Then
+                command.Parameters(15).Value = CType(LOCAL_AMOUNT.Value,Decimal)
+            Else
+                command.Parameters(15).Value = Global.System.DBNull.Value
+            End If
+            If (DENOMINATION Is Nothing) Then
+                command.Parameters(16).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(16).Value = CType(DENOMINATION,String)
+            End If
+            If (PATH_CERTIFICATE Is Nothing) Then
+                command.Parameters(17).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(17).Value = CType(PATH_CERTIFICATE,String)
+            End If
+            If (IMG_MESSAGE Is Nothing) Then
+                command.Parameters(18).Value = Global.System.DBNull.Value
+            Else
+                command.Parameters(18).Value = CType(IMG_MESSAGE,String)
+            End If
+            command.Parameters(19).Value = CType(Original_REQUEST_ID,Decimal)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class SCHEDULETableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "SCHEDULE"
+            tableMapping.ColumnMappings.Add("SCHEDULE_ID", "SCHEDULE_ID")
+            tableMapping.ColumnMappings.Add("START_TIME", "START_TIME")
+            tableMapping.ColumnMappings.Add("END_TIME", "END_TIME")
+            tableMapping.ColumnMappings.Add("INTERVAL", "INTERVAL")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[SCHEDULE] WHERE (([SCHEDULE_ID] = @Original_SCHEDULE_ID) AND ("& _ 
+                "(@IsNull_START_TIME = 1 AND [START_TIME] IS NULL) OR ([START_TIME] = @Original_S"& _ 
+                "TART_TIME)) AND ((@IsNull_END_TIME = 1 AND [END_TIME] IS NULL) OR ([END_TIME] = "& _ 
+                "@Original_END_TIME)) AND ((@IsNull_INTERVAL = 1 AND [INTERVAL] IS NULL) OR ([INT"& _ 
+                "ERVAL] = @Original_INTERVAL)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SCHEDULE_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "SCHEDULE_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_START_TIME", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_START_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_END_TIME", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_END_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_INTERVAL", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "INTERVAL", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_INTERVAL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "INTERVAL", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[SCHEDULE] ([START_TIME], [END_TIME], [INTERVAL]) VALUES (@STAR"& _ 
+                "T_TIME, @END_TIME, @INTERVAL);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SCHEDULE_ID, START_TIME, END_TIME, INTERV"& _ 
+                "AL FROM SCHEDULE WHERE (SCHEDULE_ID = SCOPE_IDENTITY())"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@START_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@END_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@INTERVAL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "INTERVAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[SCHEDULE] SET [START_TIME] = @START_TIME, [END_TIME] = @END_TIME, ["& _ 
+                "INTERVAL] = @INTERVAL WHERE (([SCHEDULE_ID] = @Original_SCHEDULE_ID) AND ((@IsNu"& _ 
+                "ll_START_TIME = 1 AND [START_TIME] IS NULL) OR ([START_TIME] = @Original_START_T"& _ 
+                "IME)) AND ((@IsNull_END_TIME = 1 AND [END_TIME] IS NULL) OR ([END_TIME] = @Origi"& _ 
+                "nal_END_TIME)) AND ((@IsNull_INTERVAL = 1 AND [INTERVAL] IS NULL) OR ([INTERVAL]"& _ 
+                " = @Original_INTERVAL)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT SCHEDULE_ID, START_TIME, END_TIME, INTERVAL FR"& _ 
+                "OM SCHEDULE WHERE (SCHEDULE_ID = @SCHEDULE_ID)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@START_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@END_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@INTERVAL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "INTERVAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SCHEDULE_ID", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "SCHEDULE_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_START_TIME", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_START_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_END_TIME", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_END_TIME", Global.System.Data.SqlDbType.DateTime, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_INTERVAL", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "INTERVAL", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_INTERVAL", Global.System.Data.SqlDbType.[Decimal], 0, Global.System.Data.ParameterDirection.Input, 18, 0, "INTERVAL", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SCHEDULE_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "SCHEDULE_ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection
+            Me._connection.ConnectionString = Global.MessageExchange.My.MySettings.Default.BOFExchangRateConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(2) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT SCHEDULE_ID, START_TIME, END_TIME, INTERVAL FROM dbo.SCHEDULE"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "INSERT INTO [dbo].[SCHEDULE] ([START_TIME], [END_TIME], [INTERVAL]) VALUES (@STAR"& _ 
+                "T_TIME, @END_TIME, @INTERVAL);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@START_TIME", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@END_TIME", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@INTERVAL", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "INTERVAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "UPDATE [dbo].[SCHEDULE] SET [START_TIME] = @START_TIME, [END_TIME] = @END_TIME, ["& _ 
+                "INTERVAL] = @INTERVAL WHERE (([SCHEDULE_ID] = @Original_SCHEDULE_ID));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@START_TIME", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "START_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@END_TIME", Global.System.Data.SqlDbType.DateTime, 8, Global.System.Data.ParameterDirection.Input, 0, 0, "END_TIME", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@INTERVAL", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "INTERVAL", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_SCHEDULE_ID", Global.System.Data.SqlDbType.[Decimal], 9, Global.System.Data.ParameterDirection.Input, 18, 0, "SCHEDULE_ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As DS_Helper.SCHEDULEDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As DS_Helper.SCHEDULEDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As DS_Helper.SCHEDULEDataTable = New DS_Helper.SCHEDULEDataTable
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As DS_Helper.SCHEDULEDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As DS_Helper) As Integer
+            Return Me.Adapter.Update(dataSet, "SCHEDULE")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_SCHEDULE_ID As Decimal, ByVal Original_START_TIME As Global.System.Nullable(Of Date), ByVal Original_END_TIME As Global.System.Nullable(Of Date), ByVal Original_INTERVAL As Global.System.Nullable(Of Decimal)) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_SCHEDULE_ID,Decimal)
+            If (Original_START_TIME.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_START_TIME.Value,Date)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (Original_END_TIME.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_END_TIME.Value,Date)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(4).Value = Global.System.DBNull.Value
+            End If
+            If (Original_INTERVAL.HasValue = true) Then
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_INTERVAL.Value,Decimal)
+            Else
+                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(6).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal START_TIME As Global.System.Nullable(Of Date), ByVal END_TIME As Global.System.Nullable(Of Date), ByVal INTERVAL As Global.System.Nullable(Of Decimal)) As Integer
+            If (START_TIME.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(START_TIME.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (END_TIME.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(END_TIME.Value,Date)
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (INTERVAL.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(INTERVAL.Value,Decimal)
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal START_TIME As Global.System.Nullable(Of Date), ByVal END_TIME As Global.System.Nullable(Of Date), ByVal INTERVAL As Global.System.Nullable(Of Decimal), ByVal Original_SCHEDULE_ID As Decimal, ByVal Original_START_TIME As Global.System.Nullable(Of Date), ByVal Original_END_TIME As Global.System.Nullable(Of Date), ByVal Original_INTERVAL As Global.System.Nullable(Of Decimal), ByVal SCHEDULE_ID As Decimal) As Integer
+            If (START_TIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(START_TIME.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (END_TIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(END_TIME.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (INTERVAL.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(INTERVAL.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_SCHEDULE_ID,Decimal)
+            If (Original_START_TIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_START_TIME.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
+            End If
+            If (Original_END_TIME.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(Original_END_TIME.Value,Date)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(7).Value = Global.System.DBNull.Value
+            End If
+            If (Original_INTERVAL.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_INTERVAL.Value,Decimal)
+            Else
+                Me.Adapter.UpdateCommand.Parameters(8).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
+            End If
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(SCHEDULE_ID,Decimal)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal START_TIME As Global.System.Nullable(Of Date), ByVal END_TIME As Global.System.Nullable(Of Date), ByVal INTERVAL As Global.System.Nullable(Of Decimal), ByVal Original_SCHEDULE_ID As Decimal, ByVal Original_START_TIME As Global.System.Nullable(Of Date), ByVal Original_END_TIME As Global.System.Nullable(Of Date), ByVal Original_INTERVAL As Global.System.Nullable(Of Decimal)) As Integer
+            Return Me.Update(START_TIME, END_TIME, INTERVAL, Original_SCHEDULE_ID, Original_START_TIME, Original_END_TIME, Original_INTERVAL, Original_SCHEDULE_ID)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, false)>  _
+        Public Overloads Overridable Function InsertNewSchedule(ByVal START_TIME As Global.System.Nullable(Of Date), ByVal END_TIME As Global.System.Nullable(Of Date), ByVal INTERVAL As Global.System.Nullable(Of Decimal)) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(1)
+            If (START_TIME.HasValue = true) Then
+                command.Parameters(0).Value = CType(START_TIME.Value,Date)
+            Else
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (END_TIME.HasValue = true) Then
+                command.Parameters(1).Value = CType(END_TIME.Value,Date)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (INTERVAL.HasValue = true) Then
+                command.Parameters(2).Value = CType(INTERVAL.Value,Decimal)
+            Else
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, false)>  _
+        Public Overloads Overridable Function UpdateSchedule(ByVal START_TIME As Global.System.Nullable(Of Date), ByVal END_TIME As Global.System.Nullable(Of Date), ByVal INTERVAL As Global.System.Nullable(Of Decimal), ByVal Original_SCHEDULE_ID As Decimal) As Integer
+            Dim command As Global.System.Data.SqlClient.SqlCommand = Me.CommandCollection(2)
+            If (START_TIME.HasValue = true) Then
+                command.Parameters(0).Value = CType(START_TIME.Value,Date)
+            Else
+                command.Parameters(0).Value = Global.System.DBNull.Value
+            End If
+            If (END_TIME.HasValue = true) Then
+                command.Parameters(1).Value = CType(END_TIME.Value,Date)
+            Else
+                command.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (INTERVAL.HasValue = true) Then
+                command.Parameters(2).Value = CType(INTERVAL.Value,Decimal)
+            Else
+                command.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            command.Parameters(3).Value = CType(Original_SCHEDULE_ID,Decimal)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = command.Connection.State
+            If ((command.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                command.Connection.Open
+            End If
+            Dim returnValue As Integer
+            Try 
+                returnValue = command.ExecuteNonQuery
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    command.Connection.Close
+                End If
+            End Try
+            Return returnValue
+        End Function
+    End Class
+    
+    '''<summary>
+    '''TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0"),  _
+     Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerDesigner, Microsoft.VSD"& _ 
+        "esigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapterManager")>  _
+    Partial Public Class TableAdapterManager
+        Inherits Global.System.ComponentModel.Component
+        
+        Private _updateOrder As UpdateOrderOption
+        
+        Private _rEQUEST_SETTINGTableAdapter As REQUEST_SETTINGTableAdapter
+        
+        Private _sCHEDULETableAdapter As SCHEDULETableAdapter
+        
+        Private _backupDataSetBeforeUpdate As Boolean
+        
+        Private _connection As Global.System.Data.IDbConnection
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property UpdateOrder() As UpdateOrderOption
+            Get
+                Return Me._updateOrder
+            End Get
+            Set
+                Me._updateOrder = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"& _ 
+            "", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property REQUEST_SETTINGTableAdapter() As REQUEST_SETTINGTableAdapter
+            Get
+                Return Me._rEQUEST_SETTINGTableAdapter
+            End Get
+            Set
+                Me._rEQUEST_SETTINGTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"& _ 
+            "", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property SCHEDULETableAdapter() As SCHEDULETableAdapter
+            Get
+                Return Me._sCHEDULETableAdapter
+            End Get
+            Set
+                Me._sCHEDULETableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property BackupDataSetBeforeUpdate() As Boolean
+            Get
+                Return Me._backupDataSetBeforeUpdate
+            End Get
+            Set
+                Me._backupDataSetBeforeUpdate = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public Property Connection() As Global.System.Data.IDbConnection
+            Get
+                If (Not (Me._connection) Is Nothing) Then
+                    Return Me._connection
+                End If
+                If ((Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._rEQUEST_SETTINGTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._rEQUEST_SETTINGTableAdapter.Connection
+                End If
+                If ((Not (Me._sCHEDULETableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._sCHEDULETableAdapter.Connection) Is Nothing)) Then
+                    Return Me._sCHEDULETableAdapter.Connection
+                End If
+                Return Nothing
+            End Get
+            Set
+                Me._connection = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property TableAdapterInstanceCount() As Integer
+            Get
+                Dim count As Integer = 0
+                If (Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._sCHEDULETableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                Return count
+            End Get
+        End Property
+        
+        '''<summary>
+        '''Update rows in top-down order.
+        '''</summary>
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Function UpdateUpdatedRows(ByVal dataSet As DS_Helper, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+            Dim result As Integer = 0
+            If (Not (Me._sCHEDULETableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.SCHEDULE.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._sCHEDULETableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.REQUEST_SETTING.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._rEQUEST_SETTINGTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            Return result
+        End Function
+        
+        '''<summary>
+        '''Insert rows in top-down order.
+        '''</summary>
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Function UpdateInsertedRows(ByVal dataSet As DS_Helper, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+            Dim result As Integer = 0
+            If (Not (Me._sCHEDULETableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.SCHEDULE.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._sCHEDULETableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.REQUEST_SETTING.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._rEQUEST_SETTINGTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            Return result
+        End Function
+        
+        '''<summary>
+        '''Delete rows in bottom-up order.
+        '''</summary>
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Function UpdateDeletedRows(ByVal dataSet As DS_Helper, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
+            Dim result As Integer = 0
+            If (Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.REQUEST_SETTING.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._rEQUEST_SETTINGTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._sCHEDULETableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.SCHEDULE.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._sCHEDULETableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            Return result
+        End Function
+        
+        '''<summary>
+        '''Remove inserted rows that become updated rows after calling TableAdapter.Update(inserted rows) first
+        '''</summary>
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Private Function GetRealUpdatedRows(ByVal updatedRows() As Global.System.Data.DataRow, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Global.System.Data.DataRow()
+            If ((updatedRows Is Nothing)  _
+                        OrElse (updatedRows.Length < 1)) Then
+                Return updatedRows
+            End If
+            If ((allAddedRows Is Nothing)  _
+                        OrElse (allAddedRows.Count < 1)) Then
+                Return updatedRows
+            End If
+            Dim realUpdatedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow) = New Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)
+            Dim i As Integer = 0
+            Do While (i < updatedRows.Length)
+                Dim row As Global.System.Data.DataRow = updatedRows(i)
+                If (allAddedRows.Contains(row) = false) Then
+                    realUpdatedRows.Add(row)
+                End If
+                i = (i + 1)
+            Loop
+            Return realUpdatedRows.ToArray
+        End Function
+        
+        '''<summary>
+        '''Update all changes to the dataset.
+        '''</summary>
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Overridable Function UpdateAll(ByVal dataSet As DS_Helper) As Integer
+            If (dataSet Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("dataSet")
+            End If
+            If (dataSet.HasChanges = false) Then
+                Return 0
+            End If
+            If ((Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._rEQUEST_SETTINGTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            If ((Not (Me._sCHEDULETableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._sCHEDULETableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
+            If (workConnection Is Nothing) Then
+                Throw New Global.System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana"& _ 
+                        "ger TableAdapter property to a valid TableAdapter instance.")
+            End If
+            Dim workConnOpened As Boolean = false
+            If ((workConnection.State And Global.System.Data.ConnectionState.Broken)  _
+                        = Global.System.Data.ConnectionState.Broken) Then
+                workConnection.Close
+            End If
+            If (workConnection.State = Global.System.Data.ConnectionState.Closed) Then
+                workConnection.Open
+                workConnOpened = true
+            End If
+            Dim workTransaction As Global.System.Data.IDbTransaction = workConnection.BeginTransaction
+            If (workTransaction Is Nothing) Then
+                Throw New Global.System.ApplicationException("The transaction cannot begin. The current data connection does not support transa"& _ 
+                        "ctions or the current state is not allowing the transaction to begin.")
+            End If
+            Dim allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow) = New Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)
+            Dim allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow) = New Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)
+            Dim adaptersWithAcceptChangesDuringUpdate As Global.System.Collections.Generic.List(Of Global.System.Data.Common.DataAdapter) = New Global.System.Collections.Generic.List(Of Global.System.Data.Common.DataAdapter)
+            Dim revertConnections As Global.System.Collections.Generic.Dictionary(Of Object, Global.System.Data.IDbConnection) = New Global.System.Collections.Generic.Dictionary(Of Object, Global.System.Data.IDbConnection)
+            Dim result As Integer = 0
+            Dim backupDataSet As Global.System.Data.DataSet = Nothing
+            If Me.BackupDataSetBeforeUpdate Then
+                backupDataSet = New Global.System.Data.DataSet
+                backupDataSet.Merge(dataSet)
+            End If
+            Try 
+                '---- Prepare for update -----------
+                '
+                If (Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._rEQUEST_SETTINGTableAdapter, Me._rEQUEST_SETTINGTableAdapter.Connection)
+                    Me._rEQUEST_SETTINGTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._rEQUEST_SETTINGTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._rEQUEST_SETTINGTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._rEQUEST_SETTINGTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._rEQUEST_SETTINGTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._sCHEDULETableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._sCHEDULETableAdapter, Me._sCHEDULETableAdapter.Connection)
+                    Me._sCHEDULETableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._sCHEDULETableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._sCHEDULETableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._sCHEDULETableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._sCHEDULETableAdapter.Adapter)
+                    End If
+                End If
+                '
+                '---- Perform updates -----------
+                '
+                If (Me.UpdateOrder = UpdateOrderOption.UpdateInsertDelete) Then
+                    result = (result + Me.UpdateUpdatedRows(dataSet, allChangedRows, allAddedRows))
+                    result = (result + Me.UpdateInsertedRows(dataSet, allAddedRows))
+                Else
+                    result = (result + Me.UpdateInsertedRows(dataSet, allAddedRows))
+                    result = (result + Me.UpdateUpdatedRows(dataSet, allChangedRows, allAddedRows))
+                End If
+                result = (result + Me.UpdateDeletedRows(dataSet, allChangedRows))
+                '
+                '---- Commit updates -----------
+                '
+                workTransaction.Commit
+                If (0 < allAddedRows.Count) Then
+                    Dim rows((allAddedRows.Count) - 1) As Global.System.Data.DataRow
+                    allAddedRows.CopyTo(rows)
+                    Dim i As Integer = 0
+                    Do While (i < rows.Length)
+                        Dim row As Global.System.Data.DataRow = rows(i)
+                        row.AcceptChanges
+                        i = (i + 1)
+                    Loop
+                End If
+                If (0 < allChangedRows.Count) Then
+                    Dim rows((allChangedRows.Count) - 1) As Global.System.Data.DataRow
+                    allChangedRows.CopyTo(rows)
+                    Dim i As Integer = 0
+                    Do While (i < rows.Length)
+                        Dim row As Global.System.Data.DataRow = rows(i)
+                        row.AcceptChanges
+                        i = (i + 1)
+                    Loop
+                End If
+            Catch ex As Global.System.Exception
+                workTransaction.Rollback
+                '---- Restore the dataset -----------
+                If Me.BackupDataSetBeforeUpdate Then
+                    Global.System.Diagnostics.Debug.Assert((Not (backupDataSet) Is Nothing))
+                    dataSet.Clear
+                    dataSet.Merge(backupDataSet)
+                Else
+                    If (0 < allAddedRows.Count) Then
+                        Dim rows((allAddedRows.Count) - 1) As Global.System.Data.DataRow
+                        allAddedRows.CopyTo(rows)
+                        Dim i As Integer = 0
+                        Do While (i < rows.Length)
+                            Dim row As Global.System.Data.DataRow = rows(i)
+                            row.AcceptChanges
+                            row.SetAdded
+                            i = (i + 1)
+                        Loop
+                    End If
+                End If
+                Throw ex
+            Finally
+                If workConnOpened Then
+                    workConnection.Close
+                End If
+                If (Not (Me._rEQUEST_SETTINGTableAdapter) Is Nothing) Then
+                    Me._rEQUEST_SETTINGTableAdapter.Connection = CType(revertConnections(Me._rEQUEST_SETTINGTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._rEQUEST_SETTINGTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._sCHEDULETableAdapter) Is Nothing) Then
+                    Me._sCHEDULETableAdapter.Connection = CType(revertConnections(Me._sCHEDULETableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._sCHEDULETableAdapter.Transaction = Nothing
+                End If
+                If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
+                    Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter
+                    adaptersWithAcceptChangesDuringUpdate.CopyTo(adapters)
+                    Dim i As Integer = 0
+                    Do While (i < adapters.Length)
+                        Dim adapter As Global.System.Data.Common.DataAdapter = adapters(i)
+                        adapter.AcceptChangesDuringUpdate = true
+                        i = (i + 1)
+                    Loop
+                End If
+            End Try
+            Return result
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overridable Sub SortSelfReferenceRows(ByVal rows() As Global.System.Data.DataRow, ByVal relation As Global.System.Data.DataRelation, ByVal childFirst As Boolean)
+            Global.System.Array.Sort(Of Global.System.Data.DataRow)(rows, New SelfReferenceComparer(relation, childFirst))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Protected Overridable Function MatchTableAdapterConnection(ByVal inputConnection As Global.System.Data.IDbConnection) As Boolean
+            If (Not (Me._connection) Is Nothing) Then
+                Return true
+            End If
+            If ((Me.Connection Is Nothing)  _
+                        OrElse (inputConnection Is Nothing)) Then
+                Return true
+            End If
+            If String.Equals(Me.Connection.ConnectionString, inputConnection.ConnectionString, Global.System.StringComparison.Ordinal) Then
+                Return true
+            End If
+            Return false
+        End Function
+        
+        '''<summary>
+        '''Update Order Option
+        '''</summary>
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+        Public Enum UpdateOrderOption
+            
+            InsertUpdateDelete = 0
+            
+            UpdateInsertDelete = 1
+        End Enum
+        
+        '''<summary>
+        '''Used to sort self-referenced table's rows
+        '''</summary>
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "2.0.0.0")>  _
+        Private Class SelfReferenceComparer
+            Inherits Object
+            Implements Global.System.Collections.Generic.IComparer(Of Global.System.Data.DataRow)
+            
+            Private _relation As Global.System.Data.DataRelation
+            
+            Private _childFirst As Integer
+            
+            <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+            Friend Sub New(ByVal relation As Global.System.Data.DataRelation, ByVal childFirst As Boolean)
+                MyBase.New
+                Me._relation = relation
+                If childFirst Then
+                    Me._childFirst = -1
+                Else
+                    Me._childFirst = 1
+                End If
+            End Sub
+            
+            <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+            Private Function IsChildAndParent(ByVal child As Global.System.Data.DataRow, ByVal parent As Global.System.Data.DataRow) As Boolean
+                Global.System.Diagnostics.Debug.Assert((Not (child) Is Nothing))
+                Global.System.Diagnostics.Debug.Assert((Not (parent) Is Nothing))
+                Dim newParent As Global.System.Data.DataRow = child.GetParentRow(Me._relation, Global.System.Data.DataRowVersion.[Default])
+
+                Do While ((Not (newParent) Is Nothing)  _
+                            AndAlso ((Object.ReferenceEquals(newParent, child) = false)  _
+                            AndAlso (Object.ReferenceEquals(newParent, parent) = false)))
+                    newParent = newParent.GetParentRow(Me._relation, Global.System.Data.DataRowVersion.[Default])
+
+                Loop
+                If (newParent Is Nothing) Then
+                    newParent = child.GetParentRow(Me._relation, Global.System.Data.DataRowVersion.Original)
+                    Do While ((Not (newParent) Is Nothing)  _
+                                AndAlso ((Object.ReferenceEquals(newParent, child) = false)  _
+                                AndAlso (Object.ReferenceEquals(newParent, parent) = false)))
+                        newParent = newParent.GetParentRow(Me._relation, Global.System.Data.DataRowVersion.Original)
+
+                    Loop
+                End If
+                If Object.ReferenceEquals(newParent, parent) Then
+                    Return true
+                End If
+                Return false
+            End Function
+            
+            <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+            Public Function Compare(ByVal row1 As Global.System.Data.DataRow, ByVal row2 As Global.System.Data.DataRow) As Integer Implements Global.System.Collections.Generic.IComparer(Of Global.System.Data.DataRow).Compare
+                If Object.ReferenceEquals(row1, row2) Then
+                    Return 0
+                End If
+                If (row1 Is Nothing) Then
+                    Return -1
+                End If
+                If (row2 Is Nothing) Then
+                    Return 1
+                End If
+
+                'Is row1 the child or grandchild of row2
+                If Me.IsChildAndParent(row1, row2) Then
+                    Return Me._childFirst
+                End If
+
+                'Is row2 the child or grandchild of row1
+                If Me.IsChildAndParent(row2, row1) Then
+                    Return (-1 * Me._childFirst)
+                End If
+                Return 0
+            End Function
+        End Class
+    End Class
+End Namespace

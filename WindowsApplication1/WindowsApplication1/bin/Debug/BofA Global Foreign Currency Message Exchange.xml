@@ -99,6 +99,11 @@ Used to sort self-referenced table's rows
 	<summary>
 TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
 </summary>
+</member><member name="M:MessageExchange.UCDashbordRequest.SendingRequest">
+	<summary>
+ ''''''''''''''''''
+ </summary>
+	<remarks></remarks>
 </member>
 </members>
 </doc>

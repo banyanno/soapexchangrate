@@ -174,9 +174,6 @@ Public Class ExchangeRate
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-
-
-
     End Sub
 
     Private Sub SslKeyBrowse_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SslKeyBrowse.Click
@@ -253,6 +250,7 @@ Public Class ExchangeRate
 
    
     Function GetValueLocalAmount(ByVal XmlPartRespons As String) As String
+        Dim StrValue As String = ""
         Using reader As XmlReader = XmlReader.Create(XmlPartRespons)
             While reader.Read
                 If reader.IsStartElement Then
@@ -264,14 +262,14 @@ Public Class ExchangeRate
                                     If reader.Name = "p88:localAmount" Then
                                         If reader.Read Then
                                             ' MessageBox.Show("Text Node: {0}" & reader.Value.Trim)
-                                            Return reader.Value.Trim
+                                            StrValue = reader.Value.Trim
                                         End If
                                     End If
                                 End While
-                               
+
                             End If
                             If reader.Value.Trim = "Fail" Then
-                                Return "N.A"
+                                StrValue = "N.A"
                             End If
                         End If
                     End If
@@ -280,5 +278,10 @@ Public Class ExchangeRate
             End While
             reader.Close()
         End Using
+        Return StrValue
     End Function
+
+    Private Sub ClientInfo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClientInfo.Click
+
+    End Sub
 End Class

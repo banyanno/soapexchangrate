@@ -38,10 +38,17 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Janus.Data.v3, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Janus.Windows.ButtonBar.v3, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Janus.Windows.Common.v3, Version=3.5.0.0, Culture=neutral, PublicKeyToken=null" />
+    <Reference Include="Janus.Windows.GridEX.v3, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Janus.Windows.Ribbon.v3, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Janus.Windows.UI.v3, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Services3, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -105,6 +112,13 @@
     <Compile Include="helper\DS_Helper.vb">
       <DependentUpon>DS_Helper.xsd</DependentUpon>
     </Compile>
+    <Compile Include="helper\GlobleVar.vb" />
+    <Compile Include="MainExchangRate.Designer.vb">
+      <DependentUpon>MainExchangRate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MainExchangRate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -125,6 +139,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="SettingSOAPRequest\SetingSOAPMessage.Designer.vb">
+      <DependentUpon>SetingSOAPMessage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingSOAPRequest\SetingSOAPMessage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SettingSOAPRequest\UCDashbordRequest.Designer.vb">
+      <DependentUpon>UCDashbordRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SettingSOAPRequest\UCDashbordRequest.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ExchangeRate.resx">
@@ -139,10 +165,23 @@
       <DependentUpon>FormEncryption.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainExchangRate.resx">
+      <DependentUpon>MainExchangRate.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingSOAPRequest\SetingSOAPMessage.resx">
+      <DependentUpon>SetingSOAPMessage.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SettingSOAPRequest\UCDashbordRequest.resx">
+      <DependentUpon>UCDashbordRequest.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -193,6 +232,8 @@
     <None Include="Resources\1319703246_Gear.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\loading-bar1.gif" />
+    <None Include="Resources\loadingProcessing1.gif" />
     <Content Include="RightLeft2Red.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -23,72 +23,14 @@ Partial Class ExchangeRate
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle33 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ExchangeRate))
-        Dim DataGridViewCellStyle34 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle35 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle36 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.GridClientEnvelopeRequest = New System.Windows.Forms.DataGridView
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.ClientInfo = New System.Windows.Forms.TabPage
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox
-        Me.TxtForeignAmountSell = New System.Windows.Forms.TextBox
-        Me.Label12 = New System.Windows.Forms.Label
-        Me.TxtDenomination = New System.Windows.Forms.TextBox
-        Me.Label11 = New System.Windows.Forms.Label
-        Me.TxtLocalAmount = New System.Windows.Forms.TextBox
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox
-        Me.GroupBox7 = New System.Windows.Forms.GroupBox
-        Me.TxtPlanTextOfGetSell = New System.Windows.Forms.TextBox
-        Me.ChCertificate = New System.Windows.Forms.CheckBox
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.SslKey = New System.Windows.Forms.TextBox
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.TxtPlandTextGetBuyQuot = New System.Windows.Forms.TextBox
-        Me.SslKeyBrowse = New System.Windows.Forms.Button
-        Me.BtnSubRequest = New System.Windows.Forms.Button
-        Me.BtnAddRequest = New System.Windows.Forms.Button
-        Me.TxtForeignAmount = New System.Windows.Forms.TextBox
-        Me.TxtSpreadType = New System.Windows.Forms.TextBox
-        Me.TxtCurrencyCode = New System.Windows.Forms.TextBox
-        Me.TxtUserID = New System.Windows.Forms.TextBox
-        Me.TxtTransactionType = New System.Windows.Forms.TextBox
-        Me.TxtBranchID = New System.Windows.Forms.TextBox
-        Me.TxtClientID = New System.Windows.Forms.TextBox
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.Button1 = New System.Windows.Forms.Button
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.TxtSOAPURL = New System.Windows.Forms.TextBox
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox
-        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Label13 = New System.Windows.Forms.Label
-        Me.TxtIMG = New System.Windows.Forms.TextBox
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.TxtCurrencyLabel = New System.Windows.Forms.TextBox
-        Me.TxtUSD = New System.Windows.Forms.TextBox
         Me.BrandID = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.IMG = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -100,7 +42,65 @@ Partial Class ExchangeRate
         Me.Denomination = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.XmlGetBuyQuote = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.xmlEnvelopgetSellQuate = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.TabControl1 = New System.Windows.Forms.TabControl
+        Me.ClientInfo = New System.Windows.Forms.TabPage
         Me.Label15 = New System.Windows.Forms.Label
+        Me.TxtUSD = New System.Windows.Forms.TextBox
+        Me.TxtIMG = New System.Windows.Forms.TextBox
+        Me.Label13 = New System.Windows.Forms.Label
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox
+        Me.TxtForeignAmountSell = New System.Windows.Forms.TextBox
+        Me.Label12 = New System.Windows.Forms.Label
+        Me.TxtDenomination = New System.Windows.Forms.TextBox
+        Me.Label11 = New System.Windows.Forms.Label
+        Me.TxtLocalAmount = New System.Windows.Forms.TextBox
+        Me.Label9 = New System.Windows.Forms.Label
+        Me.Label3 = New System.Windows.Forms.Label
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox
+        Me.TxtPlanTextOfGetSell = New System.Windows.Forms.TextBox
+        Me.ChCertificate = New System.Windows.Forms.CheckBox
+        Me.Label10 = New System.Windows.Forms.Label
+        Me.SslKey = New System.Windows.Forms.TextBox
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.TxtPlandTextGetBuyQuot = New System.Windows.Forms.TextBox
+        Me.SslKeyBrowse = New System.Windows.Forms.Button
+        Me.BtnSubRequest = New System.Windows.Forms.Button
+        Me.TxtTransactionType = New System.Windows.Forms.TextBox
+        Me.BtnAddRequest = New System.Windows.Forms.Button
+        Me.TxtForeignAmount = New System.Windows.Forms.TextBox
+        Me.TxtSpreadType = New System.Windows.Forms.TextBox
+        Me.TxtCurrencyLabel = New System.Windows.Forms.TextBox
+        Me.TxtCurrencyCode = New System.Windows.Forms.TextBox
+        Me.TxtUserID = New System.Windows.Forms.TextBox
+        Me.TxtBranchID = New System.Windows.Forms.TextBox
+        Me.TxtClientID = New System.Windows.Forms.TextBox
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.Label7 = New System.Windows.Forms.Label
+        Me.Label2 = New System.Windows.Forms.Label
+        Me.Label14 = New System.Windows.Forms.Label
+        Me.Label6 = New System.Windows.Forms.Label
+        Me.Label5 = New System.Windows.Forms.Label
+        Me.Label4 = New System.Windows.Forms.Label
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.Button2 = New System.Windows.Forms.Button
+        Me.Label8 = New System.Windows.Forms.Label
+        Me.TxtSOAPURL = New System.Windows.Forms.TextBox
+        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn6 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn7 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.ErrorProvider1 = New System.Windows.Forms.ErrorProvider(Me.components)
         CType(Me.GridClientEnvelopeRequest, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -114,49 +114,119 @@ Partial Class ExchangeRate
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GridClientEnvelopeRequest
         '
         Me.GridClientEnvelopeRequest.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.GridClientEnvelopeRequest.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle31
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.GridClientEnvelopeRequest.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.GridClientEnvelopeRequest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GridClientEnvelopeRequest.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.BrandID, Me.UserID, Me.IMG, Me.CurrencyLabel, Me.USD, Me.CurrencyCode, Me.ForiegnAmount, Me.LocalAmount, Me.Denomination, Me.XmlGetBuyQuote, Me.xmlEnvelopgetSellQuate})
-        DataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.GridClientEnvelopeRequest.DefaultCellStyle = DataGridViewCellStyle32
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.GridClientEnvelopeRequest.DefaultCellStyle = DataGridViewCellStyle2
         Me.GridClientEnvelopeRequest.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GridClientEnvelopeRequest.Location = New System.Drawing.Point(3, 16)
         Me.GridClientEnvelopeRequest.Name = "GridClientEnvelopeRequest"
-        DataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle33.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.GridClientEnvelopeRequest.RowHeadersDefaultCellStyle = DataGridViewCellStyle33
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.GridClientEnvelopeRequest.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.GridClientEnvelopeRequest.Size = New System.Drawing.Size(1389, 211)
         Me.GridClientEnvelopeRequest.TabIndex = 0
+        '
+        'BrandID
+        '
+        Me.BrandID.DataPropertyName = "BrandID"
+        Me.BrandID.HeaderText = "Brand ID"
+        Me.BrandID.Name = "BrandID"
+        '
+        'UserID
+        '
+        Me.UserID.DataPropertyName = "UserID"
+        Me.UserID.HeaderText = "User ID"
+        Me.UserID.Name = "UserID"
+        '
+        'IMG
+        '
+        Me.IMG.DataPropertyName = "IMG"
+        Me.IMG.HeaderText = "IMG"
+        Me.IMG.Name = "IMG"
+        '
+        'CurrencyLabel
+        '
+        Me.CurrencyLabel.DataPropertyName = "CurrencyLabel"
+        Me.CurrencyLabel.HeaderText = "Currency Label"
+        Me.CurrencyLabel.Name = "CurrencyLabel"
+        Me.CurrencyLabel.Width = 150
+        '
+        'USD
+        '
+        Me.USD.DataPropertyName = "USD"
+        Me.USD.HeaderText = "USD"
+        Me.USD.Name = "USD"
+        '
+        'CurrencyCode
+        '
+        Me.CurrencyCode.DataPropertyName = "CurrencyCode"
+        Me.CurrencyCode.HeaderText = "Currency Code"
+        Me.CurrencyCode.Name = "CurrencyCode"
+        Me.CurrencyCode.Width = 130
+        '
+        'ForiegnAmount
+        '
+        Me.ForiegnAmount.DataPropertyName = "ForeigAmount"
+        Me.ForiegnAmount.HeaderText = "Foriegn Amount"
+        Me.ForiegnAmount.Name = "ForiegnAmount"
+        Me.ForiegnAmount.Width = 130
+        '
+        'LocalAmount
+        '
+        Me.LocalAmount.DataPropertyName = "LocalAmount"
+        Me.LocalAmount.HeaderText = "Local Amount"
+        Me.LocalAmount.Name = "LocalAmount"
+        '
+        'Denomination
+        '
+        Me.Denomination.DataPropertyName = "Denomination"
+        Me.Denomination.HeaderText = "Denomination"
+        Me.Denomination.Name = "Denomination"
+        '
+        'XmlGetBuyQuote
+        '
+        Me.XmlGetBuyQuote.DataPropertyName = "XMLGetBuyQuate"
+        Me.XmlGetBuyQuote.HeaderText = " Get Buy Quote"
+        Me.XmlGetBuyQuote.Name = "XmlGetBuyQuote"
+        Me.XmlGetBuyQuote.Width = 150
+        '
+        'xmlEnvelopgetSellQuate
+        '
+        Me.xmlEnvelopgetSellQuate.DataPropertyName = "XMLGetSellQuate"
+        Me.xmlEnvelopgetSellQuate.HeaderText = " Get Sell Quate"
+        Me.xmlEnvelopgetSellQuate.Name = "xmlEnvelopgetSellQuate"
+        Me.xmlEnvelopgetSellQuate.Width = 150
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.TabControl1)
-        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(1395, 316)
@@ -207,6 +277,42 @@ Partial Class ExchangeRate
         Me.ClientInfo.Tag = "Client Info"
         Me.ClientInfo.Text = "Client In formation With Buy Quat"
         Me.ClientInfo.UseVisualStyleBackColor = True
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(3, 113)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(93, 13)
+        Me.Label15.TabIndex = 13
+        Me.Label15.Text = "Transaction Type:"
+        '
+        'TxtUSD
+        '
+        Me.TxtUSD.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtUSD.Location = New System.Drawing.Point(542, 10)
+        Me.TxtUSD.Name = "TxtUSD"
+        Me.TxtUSD.Size = New System.Drawing.Size(33, 23)
+        Me.TxtUSD.TabIndex = 5
+        Me.TxtUSD.Text = "1"
+        Me.TxtUSD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TxtIMG
+        '
+        Me.TxtIMG.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtIMG.Location = New System.Drawing.Point(453, 130)
+        Me.TxtIMG.Name = "TxtIMG"
+        Me.TxtIMG.Size = New System.Drawing.Size(122, 23)
+        Me.TxtIMG.TabIndex = 9
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(417, 135)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(30, 13)
+        Me.Label13.TabIndex = 11
+        Me.Label13.Text = "IMG:"
         '
         'GroupBox6
         '
@@ -274,6 +380,15 @@ Partial Class ExchangeRate
         Me.Label9.Size = New System.Drawing.Size(75, 13)
         Me.Label9.TabIndex = 14
         Me.Label9.Text = "Local Amount:"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(295, -13)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(93, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Transaction Type:"
         '
         'GroupBox5
         '
@@ -385,6 +500,14 @@ Partial Class ExchangeRate
         Me.BtnSubRequest.Text = "-"
         Me.BtnSubRequest.UseVisualStyleBackColor = True
         '
+        'TxtTransactionType
+        '
+        Me.TxtTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtTransactionType.Location = New System.Drawing.Point(102, 103)
+        Me.TxtTransactionType.Name = "TxtTransactionType"
+        Me.TxtTransactionType.Size = New System.Drawing.Size(161, 23)
+        Me.TxtTransactionType.TabIndex = 3
+        '
         'BtnAddRequest
         '
         Me.BtnAddRequest.Cursor = System.Windows.Forms.Cursors.Hand
@@ -412,6 +535,14 @@ Partial Class ExchangeRate
         Me.TxtSpreadType.Size = New System.Drawing.Size(196, 23)
         Me.TxtSpreadType.TabIndex = 7
         '
+        'TxtCurrencyLabel
+        '
+        Me.TxtCurrencyLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TxtCurrencyLabel.Location = New System.Drawing.Point(379, 10)
+        Me.TxtCurrencyLabel.Name = "TxtCurrencyLabel"
+        Me.TxtCurrencyLabel.Size = New System.Drawing.Size(142, 23)
+        Me.TxtCurrencyLabel.TabIndex = 4
+        '
         'TxtCurrencyCode
         '
         Me.TxtCurrencyCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -427,14 +558,6 @@ Partial Class ExchangeRate
         Me.TxtUserID.Name = "TxtUserID"
         Me.TxtUserID.Size = New System.Drawing.Size(201, 23)
         Me.TxtUserID.TabIndex = 2
-        '
-        'TxtTransactionType
-        '
-        Me.TxtTransactionType.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtTransactionType.Location = New System.Drawing.Point(102, 103)
-        Me.TxtTransactionType.Name = "TxtTransactionType"
-        Me.TxtTransactionType.Size = New System.Drawing.Size(161, 23)
-        Me.TxtTransactionType.TabIndex = 3
         '
         'TxtBranchID
         '
@@ -479,6 +602,15 @@ Partial Class ExchangeRate
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Branch ID:"
         '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(288, 20)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(81, 13)
+        Me.Label14.TabIndex = 4
+        Me.Label14.Text = "Currency Label:"
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -487,15 +619,6 @@ Partial Class ExchangeRate
         Me.Label6.Size = New System.Drawing.Size(71, 13)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Spread Type:"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(295, -13)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(93, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Transaction Type:"
         '
         'Label5
         '
@@ -518,7 +641,6 @@ Partial Class ExchangeRate
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.GridClientEnvelopeRequest)
-        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(1395, 230)
@@ -612,48 +734,44 @@ Partial Class ExchangeRate
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox4.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(1395, 88)
+        Me.GroupBox4.Size = New System.Drawing.Size(150, 46)
         Me.GroupBox4.TabIndex = 4
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "SOAP Response"
         '
-        'ErrorProvider1
-        '
-        Me.ErrorProvider1.ContainerControl = Me
-        '
         'DataGridView1
         '
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle34
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
-        DataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle35.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle35
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle5
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(3, 16)
         Me.DataGridView1.Name = "DataGridView1"
-        DataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle36.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle36
-        Me.DataGridView1.Size = New System.Drawing.Size(1389, 69)
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.RowHeadersDefaultCellStyle = DataGridViewCellStyle6
+        Me.DataGridView1.Size = New System.Drawing.Size(144, 27)
         Me.DataGridView1.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
@@ -710,129 +828,9 @@ Partial Class ExchangeRate
         Me.DataGridViewTextBoxColumn8.Name = "DataGridViewTextBoxColumn8"
         Me.DataGridViewTextBoxColumn8.Width = 150
         '
-        'Label13
+        'ErrorProvider1
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(417, 135)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(30, 13)
-        Me.Label13.TabIndex = 11
-        Me.Label13.Text = "IMG:"
-        '
-        'TxtIMG
-        '
-        Me.TxtIMG.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtIMG.Location = New System.Drawing.Point(453, 130)
-        Me.TxtIMG.Name = "TxtIMG"
-        Me.TxtIMG.Size = New System.Drawing.Size(122, 23)
-        Me.TxtIMG.TabIndex = 9
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(288, 20)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(81, 13)
-        Me.Label14.TabIndex = 4
-        Me.Label14.Text = "Currency Label:"
-        '
-        'TxtCurrencyLabel
-        '
-        Me.TxtCurrencyLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtCurrencyLabel.Location = New System.Drawing.Point(379, 10)
-        Me.TxtCurrencyLabel.Name = "TxtCurrencyLabel"
-        Me.TxtCurrencyLabel.Size = New System.Drawing.Size(142, 23)
-        Me.TxtCurrencyLabel.TabIndex = 4
-        '
-        'TxtUSD
-        '
-        Me.TxtUSD.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TxtUSD.Location = New System.Drawing.Point(542, 10)
-        Me.TxtUSD.Name = "TxtUSD"
-        Me.TxtUSD.Size = New System.Drawing.Size(33, 23)
-        Me.TxtUSD.TabIndex = 5
-        Me.TxtUSD.Text = "1"
-        Me.TxtUSD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'BrandID
-        '
-        Me.BrandID.DataPropertyName = "BrandID"
-        Me.BrandID.HeaderText = "Brand ID"
-        Me.BrandID.Name = "BrandID"
-        '
-        'UserID
-        '
-        Me.UserID.DataPropertyName = "UserID"
-        Me.UserID.HeaderText = "User ID"
-        Me.UserID.Name = "UserID"
-        '
-        'IMG
-        '
-        Me.IMG.DataPropertyName = "IMG"
-        Me.IMG.HeaderText = "IMG"
-        Me.IMG.Name = "IMG"
-        '
-        'CurrencyLabel
-        '
-        Me.CurrencyLabel.DataPropertyName = "CurrencyLabel"
-        Me.CurrencyLabel.HeaderText = "Currency Label"
-        Me.CurrencyLabel.Name = "CurrencyLabel"
-        Me.CurrencyLabel.Width = 150
-        '
-        'USD
-        '
-        Me.USD.DataPropertyName = "USD"
-        Me.USD.HeaderText = "USD"
-        Me.USD.Name = "USD"
-        '
-        'CurrencyCode
-        '
-        Me.CurrencyCode.DataPropertyName = "CurrencyCode"
-        Me.CurrencyCode.HeaderText = "Currency Code"
-        Me.CurrencyCode.Name = "CurrencyCode"
-        Me.CurrencyCode.Width = 130
-        '
-        'ForiegnAmount
-        '
-        Me.ForiegnAmount.DataPropertyName = "ForeigAmount"
-        Me.ForiegnAmount.HeaderText = "Foriegn Amount"
-        Me.ForiegnAmount.Name = "ForiegnAmount"
-        Me.ForiegnAmount.Width = 130
-        '
-        'LocalAmount
-        '
-        Me.LocalAmount.DataPropertyName = "LocalAmount"
-        Me.LocalAmount.HeaderText = "Local Amount"
-        Me.LocalAmount.Name = "LocalAmount"
-        '
-        'Denomination
-        '
-        Me.Denomination.DataPropertyName = "Denomination"
-        Me.Denomination.HeaderText = "Denomination"
-        Me.Denomination.Name = "Denomination"
-        '
-        'XmlGetBuyQuote
-        '
-        Me.XmlGetBuyQuote.DataPropertyName = "XMLGetBuyQuate"
-        Me.XmlGetBuyQuote.HeaderText = " Get Buy Quote"
-        Me.XmlGetBuyQuote.Name = "XmlGetBuyQuote"
-        Me.XmlGetBuyQuote.Width = 150
-        '
-        'xmlEnvelopgetSellQuate
-        '
-        Me.xmlEnvelopgetSellQuate.DataPropertyName = "XMLGetSellQuate"
-        Me.xmlEnvelopgetSellQuate.HeaderText = " Get Sell Quate"
-        Me.xmlEnvelopgetSellQuate.Name = "xmlEnvelopgetSellQuate"
-        Me.xmlEnvelopgetSellQuate.Width = 150
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(3, 113)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(93, 13)
-        Me.Label15.TabIndex = 13
-        Me.Label15.Text = "Transaction Type:"
+        Me.ErrorProvider1.ContainerControl = Me
         '
         'ExchangeRate
         '
@@ -867,8 +865,8 @@ Partial Class ExchangeRate
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
-        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

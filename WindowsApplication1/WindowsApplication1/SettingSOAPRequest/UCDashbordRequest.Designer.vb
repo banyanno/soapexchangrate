@@ -31,11 +31,16 @@ Partial Class UCDashbordRequest
         Me.TxtResult = New System.Windows.Forms.TextBox
         Me.TimerSending = New System.Windows.Forms.Timer(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
+        Me.BtnFindCertificate = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.GridSOAPRequstSetting, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'SplitContainer1
@@ -47,6 +52,7 @@ Partial Class UCDashbordRequest
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.ToolStrip1)
         Me.SplitContainer1.Panel1.Controls.Add(Me.GroupBox3)
         '
         'SplitContainer1.Panel2
@@ -62,9 +68,9 @@ Partial Class UCDashbordRequest
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.GridSOAPRequstSetting)
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 43)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(1143, 324)
+        Me.GroupBox3.Size = New System.Drawing.Size(1143, 284)
         Me.GroupBox3.TabIndex = 5
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "SOAP Request Setting"
@@ -83,7 +89,7 @@ Partial Class UCDashbordRequest
         Me.GridSOAPRequstSetting.Name = "GridSOAPRequstSetting"
         Me.GridSOAPRequstSetting.RecordNavigator = True
         Me.GridSOAPRequstSetting.RowHeaders = Janus.Windows.GridEX.InheritableBoolean.[True]
-        Me.GridSOAPRequstSetting.Size = New System.Drawing.Size(1137, 305)
+        Me.GridSOAPRequstSetting.Size = New System.Drawing.Size(1137, 265)
         Me.GridSOAPRequstSetting.TabIndex = 1
         '
         'TxtResult
@@ -103,6 +109,38 @@ Partial Class UCDashbordRequest
         'BackgroundWorker1
         '
         '
+        'ToolStrip1
+        '
+        Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(25, 25)
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BtnFindCertificate, Me.ToolStripSeparator1, Me.ToolStripButton2})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(1149, 32)
+        Me.ToolStrip1.TabIndex = 6
+        Me.ToolStrip1.Text = "ToolStrip1"
+        '
+        'BtnFindCertificate
+        '
+        Me.BtnFindCertificate.Image = CType(resources.GetObject("BtnFindCertificate.Image"), System.Drawing.Image)
+        Me.BtnFindCertificate.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.BtnFindCertificate.Name = "BtnFindCertificate"
+        Me.BtnFindCertificate.Size = New System.Drawing.Size(86, 29)
+        Me.BtnFindCertificate.Text = "Certificate"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 32)
+        '
+        'ToolStripButton2
+        '
+        Me.ToolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton2.Image = CType(resources.GetObject("ToolStripButton2.Image"), System.Drawing.Image)
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(29, 29)
+        Me.ToolStripButton2.Text = "ToolStripButton2"
+        '
         'UCDashbordRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -111,11 +149,14 @@ Partial Class UCDashbordRequest
         Me.Name = "UCDashbordRequest"
         Me.Size = New System.Drawing.Size(1149, 579)
         Me.SplitContainer1.Panel1.ResumeLayout(False)
+        Me.SplitContainer1.Panel1.PerformLayout()
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.Panel2.PerformLayout()
         Me.SplitContainer1.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         CType(Me.GridSOAPRequstSetting, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -125,5 +166,9 @@ Partial Class UCDashbordRequest
     Friend WithEvents GridSOAPRequstSetting As Janus.Windows.GridEX.GridEX
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents TxtResult As System.Windows.Forms.TextBox
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents BtnFindCertificate As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
 
 End Class

@@ -12,7 +12,7 @@
       <foreignAmount>0.00</foreignAmount>
       <localAmount>0.00</localAmount>
       <denominationMix>0</denominationMix>
-      <requestSecToken>KbptBXZuykAPj9lFyMaK/nLzmN5e0/zlnPv84ZFRffb1PX4exhxF4lmVvompD+1weV0FTJwG9nRuFXXbaMbsKruqrR1n7xAUXC3camNWagY+En7vOMQxsuMIkk022JMnuYMQFwDkbbd03q9scWTOCsxv/WbTSBCjGHcW/1KqBULenqF9UR53lLFR3tAmXOhRpqDd9cQlz3oo402A3WFCyr79q8a4UZzVl5LTNWQGBZciuII1BODcJMLFf58l608pPhqPpBPw9xFcvuxpp0mNmrvupWPkzqcT6rhFqzjpuVs=</requestSecToken>
+      <requestSecToken>KbptBXZuykAPj9lFyMaK/nLzmN5e0/zlnPv84ZFRffZcB98UTalWi3WZRvryquryeV0FTJwG9nRuFXXbaMbsKruqrR1n7xAUXC3camNWagY+En7vOMQxsuMIkk022JMnuYMQFwDkbbd03q9scWTOCsxv/WbTSBCjGHcW/1KqBULenqF9UR53lLFR3tAmXOhRpqDd9cQlz3oo402A3WFCyr79q8a4UZzVl5LTNWQGBZciuII1BODcJMLFf58l608pPhqPpBPw9xFcvuxpp0mNmrvupWPkzqcT6rhFqzjpuVs=</requestSecToken>
     </getSellQuote>
   </soap:Body>
 </soap:Envelope>

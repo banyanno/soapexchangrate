@@ -1,0 +1,20 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header />
+  <soapenv:Body>
+    <p798:getBuyQuoteResponse xmlns:p798="http://api.ws.ba.com">
+      <p798:getBuyQuoteReturn xmlns:p88="http://bean.ws.ba.com">
+        <p88:fail xsi:nil="true" />
+        <p88:msgName>getBuyQuoteResponse</p88:msgName>
+        <p88:msgResult>Ok</p88:msgResult>
+        <p88:ok>
+          <p88:localAmount>1158.34</p88:localAmount>
+          <p88:rate>1.2193</p88:rate>
+          <p88:foreignAmount>0.00</p88:foreignAmount>
+          <p88:shippingInfo xsi:nil="true" />
+          <p88:shipCharge>0.0</p88:shipCharge>
+        </p88:ok>
+        <p88:responseToken>HDeQ3/hhJ5NiJaf7/nCtL1Xz1cA1i1GOpvpt5hT5ovTQPmg10rJeDjRcHtcJOi0H9naJK+ZznF2IcMVas7wsvS808Vjdp3PicMzI7H+AFuPIyWrNeAgyslOQYLID9nSamlDHCR/xsh4G7yIwsKYWjA4oCNkfVE2+3WKR6POb52ZOYlYeJdLa91h5sIyqunw3</p88:responseToken>
+      </p798:getBuyQuoteReturn>
+    </p798:getBuyQuoteResponse>
+  </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,17 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header />
+  <soapenv:Body>
+    <p798:getSellQuoteResponse xmlns:p798="http://api.ws.ba.com">
+      <p798:getSellQuoteReturn xmlns:p88="http://bean.ws.ba.com">
+        <p88:fail>
+          <p88:errMsgID>GFC0180</p88:errMsgID>
+          <p88:errMsgText>Unable to determine Denomination Mix requested.</p88:errMsgText>
+        </p88:fail>
+        <p88:msgName>getSellQuoteResponse</p88:msgName>
+        <p88:msgResult>Fail</p88:msgResult>
+        <p88:ok xsi:nil="true" />
+        <p88:responseToken xsi:nil="true" />
+      </p798:getSellQuoteReturn>
+    </p798:getSellQuoteResponse>
+  </soapenv:Body>
+</soapenv:Envelope>
